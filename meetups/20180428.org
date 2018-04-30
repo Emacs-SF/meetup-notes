@@ -1,0 +1,45 @@
+* Emacs-SF/meetup-notes/meetups/20180428.org
+** Attendees Michael, Mike, Scott, Tim
+** Topics:
+*** debugging spacemacs init error on Mac
+run gui emacs from Applications directory with --init-debug flag to see traceback
+*** saving/restoring/switching-between different layouts
+**** Perspective Emacs mode - tagged workspaces
+- https://github.com/nex3/perspective-el
+**** persp-projectile mode - switch to a projectile project and create a perspective
+- https://github.com/bbatsov/persp-projectile
+**** built-in Emacs desktop saving
+- https://www.gnu.org/software/emacs/manual/html_node/elisp/Desktop-Save-Mode.html
+**** Emacs Window Layout
+- https://github.com/kiwanami/emacs-window-layout
+*** Atomic Chrome - Edit text area on Chrome with Emacs
+https://github.com/alpha22jp/atomic-chrome
+*** Emacs Anywhere - Edit text input for any application with Emacs
+- https://github.com/zachcurry/emacs-anywhere
+*** Clojure/ClojureScript repls in Emacs
+**** Cider - Clojure(Script) Interactive Development Environment that Rocks!
+- https://github.com/clojure-emacs/cider
+**** inf-clojure - Inferior Lisp for Clojure/ClojureScript
+- https://github.com/clojure-emacs/inf-clojure
+**** unrepl - A common ground for better Clojure REPLs
+- https://github.com/unrepl/unrepl
+**** spiral - Emacs Clojure IDE based on UNREPL
+- https://github.com/Unrepl/spiral
+*** Non-Emacs Discussions
+**** Secure Scuttlebutt - A database of unforgeable append-only feeds, optimized for efficient replication for peer to peer protocols 
+- https://github.com/ssbc/secure-scuttlebutt
+**** Graal - (faster) virtual machine (for polyglots)
+- https://www.graalvm.org/
+- https://github.com/oracle/graal
+*** Other Emacs topics
+**** multiple cursors mode
+- https://github.com/magnars/multiple-cursors.el
+- http://emacsrocks.com/e13.html
+**** modeline tweaks
+- no links - customizing how some packages display in the mode-line,
+- e.g., magit, projectile, time, battery status shortened using unicode icons 
+**** BART mode - BART arrivals/departures by station
+- https://github.com/mschuldt/bart-mode
+**** wttrin mode - Weather by city name
+- https://github.com/bcbcarl/emacs-wttrin
+- http://wttr.in/
