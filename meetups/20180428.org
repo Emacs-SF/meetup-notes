@@ -1,5 +1,6 @@
 * Emacs-SF/meetup-notes/meetups/20180428.org
-** Attendees Michael, Mike, Scott, Tim
+** Meetup: https://www.meetup.com/Emacs-SF/events/250011147/
+** Attendees: Michael, Mike, Scott, Tim
 ** Topics:
 *** debugging spacemacs init error on Mac
 run gui emacs from Applications directory with --init-debug flag to see traceback

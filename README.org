@@ -41,7 +41,7 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 *** 2018-03-31 Sat 13:00-15:00 Cafe La Scala, 1655 N. Main St., Walnut Creek
 **** Coffee and Emacs in Walnut Creek - general discussion
 *** 2018-04-28 Sat 13:00-15:00 Tierra Mia Coffee, 2001 Broadway Oakland
-**** coffee.el - general discusison - see notes: file:meetups/20180428.org   
+**** coffee.el - general discusison - see notes: meetups/20180428.org   
 *** (Scheduled) 2018-05-02 19:00-21:00 Triplebyte, 188 King St., San Francisco
 **** Math in Emacs: The Basics (and Not-So-Basics) of Calc - Harry Schwartz
 *** (Scheduled) 2018-05-12 19:00-21:00 Cafe La Scala, 1655 N. Main St., Walnut Creek
