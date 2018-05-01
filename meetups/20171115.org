@@ -1,0 +1,187 @@
+#+TITLE: Lightning Talks
+#+EMAIL: edaskel@att.net
+#+DATE: 15 November 2017
+#+AUTHOR:
+
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+LATEX_HEADER: \RequirePackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+
+#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+OPTIONS: H:2
+
+#+BEAMER_THEME: PaloAlto [width=2cm]
+
+# work around disappearing sidebar subsections
+#+BEAMER_HEADER: \usepackage{lmodern}
+
+# my preferred code font
+#+BEAMER_HEADER: \usepackage{inconsolata}
+
+#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
+#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+
+* Tech Check
+*** Wifi is "Workshop Cafe", no password                            :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+* Introduction and Introductions
+** Introduction and Introductions
+* Lightning Talks
+** Lightning Talks
+** Jeff Trull
+*** Jeff Trull, Dynamic Modules                                     :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+*** Dynamic (Loadable) modules                                      :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- introduced in Emacs 25.1
+- a common feature in scripting languages
+- a way to call C/C++ from Elisp and vice versa
+*** Many uses                                                       :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- a way to bind to other languages via C
+- a way to control hardware
+- a way to use preexisting C/C++ libraries
+*** Some examples                                                   :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+#+ATTR_BEAMER: :overlay <+->
+- [[https://github.com/jkitchin/emacs-modules][Scientific computing, linear algebra]]
+- [[http://nullprogram.com/blog/2016/11/05/][Joystick input]]
+- [[https://github.com/syohex/emacs-sqlite3][sqlite3]]
+- [[https://github.com/syohex/emacs-parson][JSON parsing]]
+- YCMD (well, it should exist)
+- Whatever you want!
+*** Making your own module                                          :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+You need a recent copy of the Emacs source.  I used 25.2.
+
+The "src" directory must be in your include path for =emacs-module.h=.
+
+You can follow my example at https://github.com/jefftrull/emacs-plugin-experiment.
+*** The gory details                                                :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+#+Beamer: \framesubtitle{Basics}
+#+BEGIN_SRC c++
+// signal to Emacs that we are libre
+void *plugin_is_GPL_compatible = nullptr;
+
+emacs_env * eenv;   // for use by our code
+
+// API we want to bind
+int  unary_int_fn(int i) { return 2*i; }
+
+// module registration code
+int emacs_module_init(struct emacs_runtime *ert) {
+    // store environment
+    eenv = ert->get_environment(ert);
+...
+}
+#+END_SRC
+*** The gory details                                                :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+#+Beamer: \framesubtitle{Function Registration}
+#+BEGIN_SRC c++
+emacs_value fn =
+    eenv->make_function(eenv, 1, 1,
+        [](emacs_env *env, ptrdiff_t, emacs_value args[] , void*) {
+            int result = unary_int_fn(env->extract_integer(env, args[0]));
+            return env->make_integer(env, result);
+        },
+        "An example binary int function bound from C++,"
+        " that doubles its argument",
+        nullptr);
+#+END_SRC
+**** Note
+Functions in Emacs only accept and return =emacs_value= objects.
+
+*** The gory details                                                :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+#+Beamer: \framesubtitle{Calling Functions}
+#+BEGIN_SRC c++
+// We can call it immediately
+emacs_value args[]{eenv->make_integer(eenv, 3)};
+retval = eenv->funcall(eenv, fn2, 1, args);        // Elisp "funcall"
+assert(eenv->extract_integer(eenv, retval) == 6);  // doubled
+
+// It has no name, though
+#+END_SRC
+*** The gory details                                                :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+#+Beamer: \framesubtitle{Calling Functions}
+#+BEGIN_SRC c++
+// first, create a symbol we want to associate with the function
+emacs_value fname2 = eenv->intern(eenv, "dymod-sample-unary-int-fn");
+
+// next get the fset function from Emacs
+emacs_value fset = eenv->intern(eenv, "fset");
+
+// call fset
+emacs_value args2[]{fname2, fn2};
+eenv->funcall(eenv, fset, 2, args2);
+#+END_SRC
+
+*** Loading your module                                             :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+#+BEGIN_SRC sh
+emacs -l ./libdymod.so \
+--eval='(message "computed %d" (dymod-sample-unary-int-fn 8))'
+#+END_SRC
+
+** Ag Ibragimov
+*** Ag Ibragimov, Org Mode                                          :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+SO MANY THINGS. I was unable to keep up. Here are just two:
+- Rainer König's Youtube channel: https://www.youtube.com/channel/UCfbGTpcJyEOMwKP-eYz3_fg
+- He may have also brought up the Orgzly Android app: http://www.orgzly.com/
+** Jeffrey DeLeo
+*** Jeffrey DeLeo, Gnus                                             :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+His slides are up at https://www.dropbox.com/s/6bljqvue08b29wt/GnusTalk.pdf?dl=0
+** Others
+Time has faded my memory but here are the remaining notes I (Jeff Trull) have:
+- Michael Schuldt's elisp-lua code: https://github.com/mschuldt/luamacs
+- Daniel de Haas' online org editor with Dropbox integration: https://org-web.org/
+- Hydra, for making bindings with a common prefix: https://github.com/abo-abo/hydra
+- StumpWM, a Common Lisp based window manager: http://stumpwm.github.io
+
+* Wrap Up
+*** Wrapping Up                                                     :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+** Plea for ideas
+*** Plea for ideas
+- Topics
+- Venues
+- Co-Organizers
+** Conclusion
+*** Directions to bar
+South on Montgomery and across Market to 39 New Montgomery.

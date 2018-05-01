@@ -21,7 +21,8 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 *** 2017-08-26 Tierra Mia Coffee, 2001 Broadway Oakland
 *** 2017-09-30 Tierra Mia Coffee, 2001 Broadway Oakland
 *** 2017-10-28 San Francisco
-*** 2017-11-15 San Francisco
+*** 2017-11-15 San Francisco, Workshop Cafe FiDi
+**** Lightning Talks
 *** 2017-12-02 Tierra Mia Coffee, 2001 Broadway Oakland
 ** 2018 Meetups
 *** 2018-01-17 Wed 18:30-20:30 Workshop Cafe FiDi, 180 Montgomery St., San Francisco
