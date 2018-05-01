@@ -25,13 +25,13 @@
 #+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
 
 * Tech Check
-*** Wifi is "Workshop Cafe", no password                            :B_frame:
+*** Wifi is "Workshop Cafe", no password
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
 
 * Introduction
-*** Call for Co-Organizers :B_frame:
+*** Call for Co-Organizers
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
@@ -39,7 +39,7 @@
 - If you're an organizer you can create any meeting you like
   - Emacs and Clojure?
   - Meetings in South/East/North Bay?
-*** Future Topics :B_frame:
+*** Future Topics
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
@@ -47,7 +47,7 @@
 - Other IDEs
 - Ideas?
 * Presentations
-*** Presentations :B_frame:
+*** Presentations
     :PROPERTIES:
     :BEAMER_env: frame
     :END:

@@ -25,7 +25,7 @@
 #+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
 
 * Tech Check
-*** Wi-Fi                                                           :B_frame:
+*** Wi-Fi
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
@@ -33,7 +33,7 @@
 - SSID "Triplebyte Guest"
 - Password "welcome01"
 * Introduction
-*** Call for Co-Organizers :B_frame:
+*** Call for Co-Organizers
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
@@ -42,7 +42,7 @@
   - Emacs and Clojure?
   - Meetings in South/East/North Bay?
   - More convenient times?
-*** Future Topics :B_frame:
+*** Future Topics
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
@@ -53,14 +53,15 @@
 - Specific celebrity guests?
 - Please LMK or post ideas in group
 * New Sponsor
-*** New Sponsor                                                     :B_frame:
+*** New Sponsor
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
 [[file:../images/triplebyte_logo.png]]
+Thank you, Triplebyte.
 # JET: I hacked the output .tex file to make this less ugly... in the org generated pdf you cannot see the company name
 * Presenter
-*** Daniel Colascione                                               :B_frame:
+*** Daniel Colascione
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
