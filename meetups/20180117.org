@@ -1,0 +1,157 @@
+#+TITLE: All About Org-Mode
+#+EMAIL: edaskel@att.net
+#+DATE: 17 January 2017
+#+AUTHOR:
+
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+LATEX_HEADER: \RequirePackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+
+#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+OPTIONS: H:3
+
+#+BEAMER_THEME: PaloAlto [width=2cm]
+
+# work around disappearing sidebar subsections
+#+BEAMER_HEADER: \usepackage{lmodern}
+
+# my preferred code font
+#+BEAMER_HEADER: \usepackage{inconsolata}
+
+#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
+#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+
+* Tech Check
+*** Wifi is "Workshop Cafe", no password                            :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+
+* Introduction
+*** Call for Co-Organizers :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- Not sustainable in current state. Sponsor with venue needed for larger groups.
+- If you're an organizer you can create any meeting you like
+  - Emacs and Clojure?
+  - Meetings in South/East/North Bay?
+*** Future Topics :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- Python and Emacs
+- Other IDEs
+- Ideas?
+* Presentations
+*** Presentations :B_frame:
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- John Wiegley, mystery Org-related topic
+- Tim Howes, data analysis in R -> HTML report via knitr
+- Ag Ibragimov, another Org topic
+- Jeff Trull, generating slide decks from Org
+- Anyone else?
+** John Wiegley (extensive description of personal flow)
+*** John Wiegley
+He gathers tasks from many sources - including his watch (?!) - and consolidates them into Org-agenda, rsyncing between devices as needed. He uses tags and filtering to bring tasks he is in a position to perform (i.e., home or not, with/without an internet connection, etc.) to the top. He also likes org-babel and used it to automate testing a REST API
+*** Other Takeaways
+- org-tables is super powerful
+- pandoc can import and export Org
+- Github has a renderer for Org files
+- Projectile understands a TODO.org file and will add tasks there for you
+- There is a Jira plugin for Org
+*** Video
+we don't have recording equipment yet but he talks about his flow a bit in this interview with Sacha Chua:
+https://www.youtube.com/watch?v=nUjgKoOYxos, starting around 15:25
+
+** Tim Howes: ravel/knitr for R
+*** Tim Howes
+Tim is a biologist who does a lot of data analysis using R and is a strong believer in literate programming. He demonstrated an org "ravel" exporter whose output can be consumed by "knitr", an R package for literate programming. He demonstrated some cool plots. He briefly mentioned "ReadTheOrg", an HTML style package for Org similar to ReadTheDocs. Us Emacs people don't normally go in for visual aesthetics but this is pretty cool https://github.com/fniessen/org-html-themes.
+
+** Jeff Trull: Creating Slides with Org-Mode
+*** Creating Slides with Org-Mode
+#+Beamer: \framesubtitle{Basic Usage}
+- You can get some OK slides just by exporting to "Beamer" ( C-c C-e l O )
+- Frame vs. outline level determined by a single setting:
+#+BEGIN_SRC 
+,#+OPTIONS: H:3
+#+END_SRC
+- Most customization requires knowing some LaTeX
+  - Settings in the org file become LaTeX configuration
+  - Reach for native Org stuff first
+
+*** Setup
+#+Beamer: \framesubtitle{Org header}
+#+BEGIN_SRC 
+,#+startup: beamer
+,#+LATEX_CLASS: beamer
+,#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+,#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+,#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+,#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+END_SRC
+
+#+BEGIN_SRC latex
+\documentclass[aspectratio=169]{beamer}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+\definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+\definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+END_SRC
+
+*** Setup
+#+Beamer: \framesubtitle{.emacs}
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'org-latex-packages-alist '("" "listings"))
+(add-to-list 'org-latex-packages-alist '("" "inconsolata"))
+(add-to-list 'org-latex-packages-alist '("" "tikz"))
+#+END_SRC
+
+#+BEGIN_SRC latex
+\usepackage{listings}
+\usepackage{inconsolata}
+\usepackage{tikz}
+#+END_SRC
+
+*** Setup
+#+Beamer: \framesubtitle{.emacs}
+#+BEGIN_SRC emacs-lisp
+(setq org-latex-listings-options
+      '(("keywordstyle" "\\color{keywordcolor}")
+        ("basicstyle" "\\footnotesize\\ttfamily")
+        ("showstringspaces" "false")))
+#+END_SRC
+
+#+BEGIN_SRC latex
+\lstset{keywordstyle=\color{keywordcolor},
+        basicstyle=\scriptsize\ttfamily,
+        showstringspaces=false}
+#+END_SRC
+
+*** Overlays
+#+ATTR_BEAMER: :overlay <+->
+- sometimes you want
+- to incrementally reveal
+- your ideas
+**** The code
+     :PROPERTIES:
+     :BEAMER_act: <4->
+     :END:
+#+BEGIN_SRC 
+,#+ATTR_BEAMER: :overlay <+->
+- sometimes you want
+- to incrementally reveal
+- your ideas
+#+END_SRC
+
+*** Wrapup
+Basic tutorial at:
+https://orgmode.org/worg/exporters/beamer/tutorial.html
+
+** Eddie Banner: Jupyter, Emacs iPython Notebook, PYNT
+*** Eddie Banner
+Eddie was a committed vim user but turned to the dark side after reading SICP, and especially, discovering Spacemacs. For more on his package see github.com/ebanner/pynt or his youtube video https://www.youtube.com/watch?v=OkdkJ2fu_Oc.
