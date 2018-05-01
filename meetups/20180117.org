@@ -1,6 +1,6 @@
 #+TITLE: All About Org-Mode
 #+EMAIL: edaskel@att.net
-#+DATE: 17 January 2017
+#+DATE: 17 January 2018
 #+AUTHOR:
 
 #+startup: beamer
@@ -78,8 +78,8 @@ Tim is a biologist who does a lot of data analysis using R and is a strong belie
 #+Beamer: \framesubtitle{Basic Usage}
 - You can get some OK slides just by exporting to "Beamer" ( C-c C-e l O )
 - Frame vs. outline level determined by a single setting:
-#+BEGIN_SRC 
-,#+OPTIONS: H:3
+#+BEGIN_SRC org
+#+OPTIONS: H:3
 #+END_SRC
 - Most customization requires knowing some LaTeX
   - Settings in the org file become LaTeX configuration
@@ -87,13 +87,13 @@ Tim is a biologist who does a lot of data analysis using R and is a strong belie
 
 *** Setup
 #+Beamer: \framesubtitle{Org header}
-#+BEGIN_SRC 
-,#+startup: beamer
-,#+LATEX_CLASS: beamer
-,#+LATEX_CLASS_OPTIONS: [aspectratio=169]
-,#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
-,#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
-,#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+BEGIN_SRC org
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
 #+END_SRC
 
 #+BEGIN_SRC latex
@@ -141,8 +141,8 @@ Tim is a biologist who does a lot of data analysis using R and is a strong belie
      :PROPERTIES:
      :BEAMER_act: <4->
      :END:
-#+BEGIN_SRC 
-,#+ATTR_BEAMER: :overlay <+->
+#+BEGIN_SRC org
+#+ATTR_BEAMER: :overlay <+->
 - sometimes you want
 - to incrementally reveal
 - your ideas
