@@ -1,0 +1,70 @@
+#+TITLE: Special Guest: Daniel Colascione
+#+DATE: 14 March 2018
+#+AUTHOR: Jeff Trull
+
+* Tech Check
+*** Wi-Fi
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+
+- SSID "Triplebyte Guest"
+- Password "welcome01"
+* Introduction
+*** Call for Co-Organizers
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- More venues are always good
+- If you're an "event organizer" you can create any meeting you like
+  - Emacs and Clojure?
+  - Meetings in South/East/North Bay?
+  - More convenient times?
+*** Future Topics
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- Python and Emacs
+- Clojure/CIDER?
+- Elisp programming?
+- Minor modes?
+- Specific celebrity guests?
+- Please LMK or post ideas in group
+* New Sponsor
+*** New Sponsor
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+[[file:../images/triplebyte_logo.png]]
+Thank you, Triplebyte.
+# JET: I hacked the output .tex file to make this less ugly... in the org generated pdf you cannot see the company name
+* Presenter
+*** Daniel Colascione
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+Dan's slides may be found at https://dancol.org/pdumperpres.pdf
+
+* Export Configuration                                     :ARCHIVE:noexport:
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+LATEX_HEADER: \RequirePackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+
+#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+OPTIONS: H:3 toc:nil
+
+#+BEAMER_THEME: PaloAlto [width=2cm]
+
+# work around disappearing sidebar subsections
+#+BEAMER_HEADER: \usepackage{lmodern}
+
+# my preferred code font
+#+BEAMER_HEADER: \usepackage{inconsolata}
+
+#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
+#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+
+
