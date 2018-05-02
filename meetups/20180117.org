@@ -1,28 +1,6 @@
 #+TITLE: All About Org-Mode
-#+EMAIL: edaskel@att.net
 #+DATE: 17 January 2018
-#+AUTHOR:
-
-#+startup: beamer
-#+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [aspectratio=169]
-#+LATEX_HEADER: \RequirePackage{fancyvrb}
-#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
-
-#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
-#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
-#+OPTIONS: H:3
-
-#+BEAMER_THEME: PaloAlto [width=2cm]
-
-# work around disappearing sidebar subsections
-#+BEAMER_HEADER: \usepackage{lmodern}
-
-# my preferred code font
-#+BEAMER_HEADER: \usepackage{inconsolata}
-
-#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
-#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+#+AUTHOR: Jeff Trull
 
 * Tech Check
 *** Wifi is "Workshop Cafe", no password
@@ -155,3 +133,27 @@ https://orgmode.org/worg/exporters/beamer/tutorial.html
 ** Eddie Banner: Jupyter, Emacs iPython Notebook, PYNT
 *** Eddie Banner
 Eddie was a committed vim user but turned to the dark side after reading SICP, and especially, discovering Spacemacs. For more on his package see github.com/ebanner/pynt or his youtube video https://www.youtube.com/watch?v=OkdkJ2fu_Oc.
+
+* Export Configuration                                     :ARCHIVE:noexport:
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+LATEX_HEADER: \RequirePackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+
+#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+OPTIONS: H:3
+
+#+BEAMER_THEME: PaloAlto [width=2cm]
+
+# work around disappearing sidebar subsections
+#+BEAMER_HEADER: \usepackage{lmodern}
+
+# my preferred code font
+#+BEAMER_HEADER: \usepackage{inconsolata}
+
+#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
+#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+
+

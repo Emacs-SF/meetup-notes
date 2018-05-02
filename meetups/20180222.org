@@ -1,28 +1,6 @@
 #+TITLE: Our Favorite Modes
-#+EMAIL: edaskel@att.net
 #+DATE: 22 February 2018
-#+AUTHOR:
-
-#+startup: beamer
-#+LATEX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [aspectratio=169]
-#+LATEX_HEADER: \RequirePackage{fancyvrb}
-#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
-
-#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
-#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
-#+OPTIONS: H:3
-
-#+BEAMER_THEME: PaloAlto [width=2cm]
-
-# work around disappearing sidebar subsections
-#+BEAMER_HEADER: \usepackage{lmodern}
-
-# my preferred code font
-#+BEAMER_HEADER: \usepackage{inconsolata}
-
-#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
-#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+#+AUTHOR: Jeff Trull
 
 * Tech Check
 *** Wifi is "Workshop Cafe", no password
@@ -171,14 +149,18 @@ That in turn will load parts of your installed packages, including the "autoload
 The best reference is the Github repo: https://github.com/jwiegley/use-package
 
 ** Raimon Grau: helm-dash
+*** Raimon Grau: helm-dash
 https://github.com/areina/helm-dash
 ** Trevor: evil
 ** Young-Il: many things
 ** Ag: magit
+*** Ag: magit
 Notes https://gist.github.com/agzam/9a6534011724ce08bd8dafa45e919f2c
 ** Daniel: multiple-cursors
+*** Daniel: multiple-cursors
 https://melpa.org/#/multiple-cursors
 ** Edward: pynt
+*** Edward: pynt
 Github repo here: https://github.com/ebanner/pynt
 He also talked about the spacemacs hybrid editing mode: http://spacemacs.org/doc/DOCUMENTATION.html#hybrid
 ** Projectile
@@ -203,3 +185,27 @@ It utilizes whatever version control system is in effect.
 | C-c p a   | switch between header and implementation |
 | C-c p c   | compile (shortcut for M-x compile)       |
 | C-c p r   | query-replace on project                 |
+* Export Configuration                                     :ARCHIVE:noexport:
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+LATEX_HEADER: \RequirePackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+
+#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+OPTIONS: H:3
+
+#+BEAMER_THEME: PaloAlto [width=2cm]
+
+# work around disappearing sidebar subsections
+#+BEAMER_HEADER: \usepackage{lmodern}
+
+# my preferred code font
+#+BEAMER_HEADER: \usepackage{inconsolata}
+
+#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
+#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+
+
+
