@@ -36,6 +36,16 @@ https://github.com/Emacs-SF/meetup-notes
 - Elisp programming?
 - Minor modes?
 - Please LMK or post ideas in group
+*** org-reveal
+#+NAME: Setup
+#+BEGIN_SRC emacs-lisp
+(use-package ox-reveal
+  :config
+  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3.6.0")
+)
+#+END_SRC
+
+Export with C-c C-e R R, then load file in browser
 * Sponsor
 *** Many thanks to
     :PROPERTIES:
