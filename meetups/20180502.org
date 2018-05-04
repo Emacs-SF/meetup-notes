@@ -50,7 +50,7 @@ Export with C-c C-e R R, then load file in browser
     :PROPERTIES:
     :BEAMER_env: frame
     :END:
-[[file:./triplebyte_logo.png]]
+[[file:../images/triplebyte_logo.png]]
 * Presenter
 *** Harry Schwartz
     :PROPERTIES:
@@ -97,6 +97,13 @@ Export with C-c C-e R R, then load file in browser
 - "screenkey" was the tool used to display keys being pressed
 - Harry couldn't find the info files for calc; it turns out they are in a separate package ("emacs25-common-non-dfsg") on Debian (and thus Ubuntu) for license reasons.
 
+*** Harry's Notes
+**** page 1
+[[../images/20180502/calc-talk-speaker-notes-scan-1.jpeg]]
+**** page 2
+[[../images/20180502/calc-talk-speaker-notes-scan-2.jpeg]]
+**** page 3
+[[../images/20180502/calc-talk-speaker-notes-scan-3.jpeg]]
 ** Post-Presentation Discussion
 - We veered off pretty far, into math and category theory
 - Session Idea: how to write an org-mode exporter
