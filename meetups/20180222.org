@@ -64,7 +64,7 @@ You can consolidate all your loading and customization for a package into a sing
      :PROPERTIES:
      :BEAMER_act: <2->
      :END:
-#+begin_src elisp
+#+begin_src emacs-lisp
 (use-package magit
   :bind ("C-x g" . magit-status))
 #+end_src

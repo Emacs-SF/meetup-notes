@@ -1,0 +1,153 @@
+#+TITLE: Math in Emacs: The Basics (and Not-so-basics) of Calc
+#+DATE: 2 May 2018
+#+AUTHOR: with special guest Harry Schwartz
+
+* Tech Check
+*** Wi-Fi
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+
+- SSID "Triplebyte Guest"
+* Introduction
+*** Call for Engagement
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- More venues are always good
+- If you're an "event organizer" you can create any meeting you like
+  - Emacs and Clojure?
+  - Meetings in South/East/North Bay?
+  - More convenient times?
+*** Github Repo
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+https://github.com/Emacs-SF/meetup-notes
+*** Future Topics
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+- Specific guest speakers?
+  - I've run out for now
+  - Maybe one of us has a full-length talk in them?
+- Programming Languages: Python, Clojure, C++
+- Elisp programming?
+- Minor modes?
+- How to write an org-mode exporter
+- Please LMK or post ideas in group
+*** org-reveal
+#+NAME: Setup
+#+BEGIN_SRC emacs-lisp
+(use-package ox-reveal
+  :config
+  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js@3.6.0")
+)
+#+END_SRC
+
+Export with C-c C-e R R, then load file in browser
+* Sponsor
+*** Many thanks to
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+[[file:../images/triplebyte_logo.png]]
+* Presenter
+*** Harry Schwartz
+    :PROPERTIES:
+    :BEAMER_env: frame
+    :END:
+
+** Introduction
+- Harry does a lot of arithmetic at work
+- Today we will all stop opening terminals to calculate numbers
+** Calc
+*** Overview
+- An RPN-based calculator
+- M-x calc
+- online docs at https://www.gnu.org/software/emacs/manual/html_mono/calc.html
+*** Basic usage
+- type numbers to add them onto the stack
+- type operators (+-*/^) to perform the operation and replace the top of the stack with it
+- need to quote minus sign to enter negative. Use single quote
+- capital U to undo
+- TAB rotates top 2 numbers on stack
+- M-TAB rotates the top 3
+- Harry notes you can do arbitrary manipulations with those two alone
+- ?hh for help
+*** Vectors
+- Used for numeric vectors but also things like sets
+- can do inner and outer products, LU decomposition
+
+*** Algebra
+- The same single quote that introduced negative numbers introduces algebra
+- macsyma format
+- many commands introduced by "a" to do manipulations
+  - expansion, factoring, substitutions (with parens introduced where needed)
+
+*** Integration with External Tools
+- gnuplot
+  - [-10..10] inclusive range
+  - x^2
+  - "gf" will now graph x^2 over the range
+  - you can also do range intersections (attempted live!)
+  - "gn" chooses number of points to plot
+  - "gF" does a 3D plot!
+
+*** Other things that came up
+- there is a macro called defmath you can define your own calc functions with
+- "screenkey" was the tool used to display keys being pressed: https://github.com/wavexx/screenkey
+- Harry couldn't find the info files for calc; it turns out they are in a separate package ("emacs25-common-non-dfsg") on Debian (and thus Ubuntu), for license reasons.
+
+*** Harry's Notes
+**** page 1
+[[../images/20180502/calc-talk-speaker-notes-scan-1.jpeg]]
+**** page 2
+[[../images/20180502/calc-talk-speaker-notes-scan-2.jpeg]]
+**** page 3
+[[../images/20180502/calc-talk-speaker-notes-scan-3.jpeg]]
+** Post-Presentation Discussion
+We veered off pretty far, into math and category theory
+*** Mike's notes:
+**** Category theory
+https://en.wikipedia.org/wiki/Category_theory
+
+**** Intuitionistic logic
+sometimes more generally called constructive logic
+
+https://en.wikipedia.org/wiki/Intuitionistic_logic
+
+**** Software foundations book
+https://softwarefoundations.cis.upenn.edu/
+
+**** From Mathematics to Generic Programming
+The philosophy behind the algorithms in C++'s Standard Template Library
+
+http://www.fm2gp.com/
+
+* Export Configuration                                     :ARCHIVE:noexport:
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+LATEX_HEADER: \RequirePackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\footnotesize}
+
+#+BEAMER_HEADER: \definecolor{backcolor}{rgb}{0.90,0.90,0.87}
+#+BEAMER_HEADER: \definecolor{keywordcolor}{rgb}{0.31,0.53,0.23}
+#+OPTIONS: H:3 toc:nil
+
+#+BEAMER_THEME: PaloAlto [width=2cm]
+
+# work around disappearing sidebar subsections
+#+BEAMER_HEADER: \usepackage{lmodern}
+
+# my preferred code font
+#+BEAMER_HEADER: \usepackage{inconsolata}
+
+#+BEAMER_HEADER: \setbeamerfont{section in sidebar}{size=\scriptsize}
+#+BEAMER_HEADER: \setbeamerfont{subsection in sidebar}{size=\tiny}
+
+# black background so Triplebyte logo looks right
+#+LATEX_HEADER: \setbeamercolor{sponsorbackground}{bg=black,fg=black}
+#+OPTIONS: num:nil
+
