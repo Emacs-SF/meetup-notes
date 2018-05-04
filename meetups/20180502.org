@@ -9,7 +9,6 @@
     :END:
 
 - SSID "Triplebyte Guest"
-- Password "welcome01"
 * Introduction
 *** Call for Engagement
     :PROPERTIES:
