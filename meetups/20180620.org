@@ -1,0 +1,94 @@
+#+TITLE: lsp-mode: IDE features for 30+ languages in one minor mode
+#+DATE: 20 June 2018
+#+AUTHOR: with speaker George Pittarelli
+
+* Introduction
+*** Call for Engagement
+- Location update: Oakland on 7/7, Walnut Creek on hiatus, Mountain View may happen
+- coffee.el in SF now Haus Coffee on 24th
+- More venues always welcome
+*** Future Topics
+- Specific guest speakers?
+  - I've run out for now
+  - Maybe one of us has a full-length talk in them?
+    - (Thanks George!)
+- Emacs and Clojure?
+- Minor modes?
+- Writing a mode?
+- R/ESS (Emacs Speaks Statistics)
+- More lightning talks?
+- Hackathon?
+- Your idea here
+  - Please LMK or post ideas in group
+*** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+* Sponsor
+*** Many thanks to Triplebyte
+* Presenter
+*** George Pittarelli
+** Intro
+His slides are at https://www.gjp.cc/lsp/
+*** language-specific solutions
+*** simple generalizations
+- textmate
+- tags
+- ycmd
+*** solution: LSP
+- https://langserver.org
+- RPC with JSON
+- https://github.com/Microsoft/language-server-protocol
+- symchronize file and project state efficiently (send/receive deltas)
+- refactoring: server supplies text changes to apply
+*** lsp-mode
+- minor mode that implements an LSP client
+- also provides an API for defining clients
+**** features
+imenu, xref, completion-at-point, eldoc, flycheck (via lsp-ui addon), company (via company-lsp)
+company can use completion-at-point but it uses a synchronous API so company-lsp is preferred
+(general discussion) Emacs threads are not what you think
+*** demo (Rust)
+Setup:
+#+BEGIN_SRC elisp
+(require 'lsp-mode)
+(require 'lsp-rust)
+(defun my-rust-setup ()
+    (lsp-rust-enable)      ; spawns lsp server
+    (lsp-ui-mode)
+    (company-mode)
+    (eldoc-mode t)
+    (flycheck-mode))
+(add-hook 'rust-mode-hook #'my-rust-mode-setup)
+#+END_SRC
+- using Rust
+- status msg indicates LSP server in operation
+- symbol highlighting
+- eldoc
+  - the built-in documentation display
+- imenu
+- xref (M-. to jump to definition, xref-find-references, others)
+- completion-at-point (C-M-i C-M-i) is "built-in completion". Slow?
+- lsp-ui-mode shows types of everything on the screen and docs for the identifier at point, off to the right
+  - as well as documentation
+- flycheck (requires lsp-ui-mode) errors on right, with selectable proposed fixes
+- company
+  - You need company-lsp on the list of company backends in your config
+  - Gives completions
+*** Defining a client
+- ~lsp-define-stdio-client~
+*** Testing
+- distributed development and ambiguities in spec make this important
+- ert: emacs unit test runner
+- (aside: multibyte parsing bottleneck is string copying!)
+- demonstrated a way of checking the LSP output produced for every offset in a file
+*** Protocol Parsing
+- hacky and slow
+- alternative: just use buffers
+*** Client code tour: lsp-java.el
+- language servers are frequently written in their own language
+- LSP servers can provide their own special methods, like "build"
+- Java probably most complex client; CSS is a particularly simple one if you want to look
+*** Future Goal: Autosetup
+George wants to make configuration much easier with good defaults. M-x ide-mode
+*** Other Discussion
+- Closest alternative: eglot
+- Emacs has a nice profiler with (of course) a profile report viewing mode where you can expand the call graph
