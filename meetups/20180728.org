@@ -1,0 +1,48 @@
+#+TITLE: Lightning talks
+#+DATE: 28 July 2018
+#+AUTHOR: Jeff Trull and Harry Schwartz
+
+* LSP Mode
+Jeff Trull takes about config [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]] for C++.
+- package for c++
+- generate compilation database (eg. by CMake)
+- company-mode ([[https://github.com/tigersoldier/company-lsp][company-lsp]])
+
+* Writing prose in Emacs
+[[https://github.com/hrs/dotfiles]]
+** Dictionary blog post
+[[jsomers.net/blog/dictionary]]
+** ~sdcv~ shell command
+** github hrs/dotfiles
+** Synosaurus or thresues
+** proselint
+- proselint.rc in github repo
+** Deft for Emacs
+- Quickly explore the notes
+- deft.el
+- =M-SPC= and =cycle-spacing=
+- C-x C-o delete blank lines
+
+* Misc discussions
+** Pretty org-mode bullet
+Check package [[https://github.com/sabof/org-bulletsc][org-bullets]]
+** ARandR
+[[https://christian.amsuess.com/tools/arandr/][ARandR]] is a GUI for xRandR
+** C-x 8 RET
+for inserting unifode characters
+
+** emacs-which-key
+[[https://github.com/justbur/emacs-which-key][emacs-which-key]] display available keybindings in popup.
+
+** export orgmode
+- pandoc for org-mode
+- latex
+- *slidy*
+- Jeff's talk [[file:20180117.org::Jeff Trull: Creating Slides with Org-Mode][on January]]
+
+** Learn elisp
+- browse packages
+- info pages
+
+** Guy Steele
+[[https://www.youtube.com/watch?v=_ahvzDzKdB][Growing the language]] talk
