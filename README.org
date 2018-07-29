@@ -22,39 +22,37 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 *** 2017-09-30 Tierra Mia Coffee, 2001 Broadway Oakland
 *** 2017-10-28 San Francisco
 *** 2017-11-15 San Francisco, Workshop Cafe FiDi
-**** Lightning Talks
+**** [[file:meetups/20171115.org][Lightning Talks]]
 *** 2017-12-02 Tierra Mia Coffee, 2001 Broadway Oakland
 ** 2018 Meetups
 *** 2018-01-17 Wed 18:30-20:30 Workshop Cafe FiDi, 180 Montgomery St., San Francisco
-**** Getting Organized with Org-Mode
+**** [[file:meetups/20180117.org][Getting Organized with Org-Mode]]
 *** 2018-01-27 Sat 13:00-15:00 Coffee Bar, 1890 Bryant St., San Francisco
 **** Back to the City - general discussion
 *** 2018-02-17 Sat 13:00-15:00 Tierra Mia Coffee, 2001 Broadway Oakland
 **** Live from Oakland - general discussion
 *** 2018-02-22 Thu 18:30-20:30 Workshop Cafe FiDi, 180 Montgomery St., San Francisco
-**** A Few of Our Favorite Modes
+**** [[file:meetups/20180222.org][A Few of Our Favorite Modes]]
 *** 2018-03-10 Sat 13:00-15:00 Coffee Bar, 1890 Bryant St., San Francisco
 **** Byte-Compiled in SF
 *** 2018-03-14 Wed 19:00-21:00 Triplebyte, 188 King St., San Francisco
-**** Portable Dumper - Daniel Colascione
+**** [[file:meetups/20180314.org][Portable Dumper - Daniel Colascione]]
 *** 2018-03-24 Sat 13:00-15:00 Tierra Mia Coffee, 2001 Broadway Oakland
 **** coffee.el - general discusison
 *** 2018-03-31 Sat 13:00-15:00 Cafe La Scala, 1655 N. Main St., Walnut Creek
 **** Coffee and Emacs in Walnut Creek - general discussion
 *** 2018-04-28 Sat 13:00-15:00 Tierra Mia Coffee, 2001 Broadway Oakland
-**** coffee.el - general discusison - see notes: meetups/20180428.org   
+**** [[file:meetups/20180428.org][coffee.el - general discusison]]
 *** 2018-05-02 19:00-21:00 Triplebyte, 188 King St., San Francisco
-**** Math in Emacs: The Basics (and Not-So-Basics) of Calc - Harry Schwartz
-- see notes: meetups/20180502.org
+**** [[file:meetups/20180502.org][Math in Emacs: The Basics (and Not-So-Basics) of Calc - Harry Schwartz]]
 *** (Rescheduled) 2018-05-19 19:00-21:00 Cafe La Scala, 1655 N. Main St., Walnut Creek
 **** Emacs and Wine in Walnut Creek - general discussion
 *** 2018-06-09 13:00-15:00 Haus Coffee, 3086 24th St., San Francisco
 **** coffee.el - general discussion
 *** 2018-06-20 Wed 19:00-21:00 Triplebyte, 188 King St., San Francisco
-**** lsp-mode: IDE features for 30+ languages in one minor mode
-- see notes: meetups/20180620.org
-*** [[file:meetups/20180728.org][2018-07-28 Sat 13:00-15:00 Olympus Caffe/Pure Storage, Mountain View]]
-- see notes: meetups/20180728.org
+**** [[file:meetups/20180620.org][lsp-mode: IDE features for 30+ languages in one minor mode]]
+*** 2018-07-28 Sat 13:00-15:00 Olympus Caffe/Pure Storage, Mountain View
+[[file:meetups/20180728.org][general discussion]]
 
 *** (Proposed) (date/time TBD) (location TBD)
 **** (Topic TBD) - (Speaker TBD)
