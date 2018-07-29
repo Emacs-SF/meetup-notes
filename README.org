@@ -48,9 +48,14 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - see notes: meetups/20180502.org
 *** (Rescheduled) 2018-05-19 19:00-21:00 Cafe La Scala, 1655 N. Main St., Walnut Creek
 **** Emacs and Wine in Walnut Creek - general discussion
+*** 2018-06-09 13:00-15:00 Haus Coffee, 3086 24th St., San Francisco
+**** coffee.el - general discussion
+*** 2018-06-20 Wed 19:00-21:00 Triplebyte, 188 King St., San Francisco
+**** lsp-mode: IDE features for 30+ languages in one minor mode
+- see notes: meetups/20180620.org
+*** 2018-07-28 Sat 13:00-15:00 Olympus Caffe/Pure Storage, Mountain View
+- see notes: meetups/20180728.org
+
 *** (Proposed) (date/time TBD) (location TBD)
 **** (Topic TBD) - (Speaker TBD)
 
-
-*** 2018-04-21
-**** org-babel
