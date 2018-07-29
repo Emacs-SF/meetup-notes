@@ -51,6 +51,9 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 *** (Proposed) (date/time TBD) (location TBD)
 **** (Topic TBD) - (Speaker TBD)
 
-
 *** 2018-04-21
 **** org-babel
+
+*** [[file:meetups/20180728.org][2018-07-28]] Lightning talks
+- LSP Mode for C++ - Jeff Trull
+- Writing prose in Emacs - Harry Schwartz
