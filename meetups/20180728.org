@@ -1,0 +1,75 @@
+#+TITLE: coffee.el in Mountain View
+#+DATE: 28 July 2018
+* General Discussion and coffee
+at Olympus Caffe
+* Lightning Talks
+at 444 Castro
+** Jeff Trull on lsp mode
+*** his config
+#+BEGIN_SRC elisp
+(use-package lsp-mode
+  :after projectile
+  :config
+  (lsp-define-stdio-client
+   lsp-clangd-c++
+   "cpp"
+   'projectile-project-root   ;; let Projectile supply the root directory
+   nil                        ;; command line calculated at runtime below
+   :ignore-regexps
+   '("^Error -[0-9]+: .+$")   ;; ?? - was in lsp-clangd
+   :command-fn                ;; ensure clangd gets CDB
+   (lambda ()
+     (list "clangd-6.0"       ;; clangd executable
+           (concat "--compile-commands-dir="
+                   (projectile-project-root)
+                   "build"))))
+  :hook
+  ((c++-mode . lsp-clangd-c++-enable)))
+#+END_SRC
+*** config for company/helm completion
+#+BEGIN_SRC elisp
+(use-package company
+  :config
+  (setq company-idle-delay nil)    ;; disable "idle" completion (when you pause)
+  :hook                            ;; which uses the standard company mode UI
+  ((c++-mode . company-mode)))
+  
+;; Using the helm narrowing style because it's more familiar
+;; interestingly this is not a company "front end" but something else
+(use-package helm-company
+  :after company
+  :bind (:map company-mode-map     ;; suggestions from helm-company docs
+         ("C-:" . helm-company)    ;; we'll manually activate help completion
+         :map company-active-map
+         ("C-:" . helm-company)))
+
+;; use LSP as code completion server
+(use-package company-lsp
+  :after company
+  :config
+  (push 'company-lsp company-backends))
+#+END_SRC
+*** general discussion
+- LSP is a protocol from Microsoft
+- clangd is the magic ingredient, implements the protocol using the Clang compiler
+- You need a compilation database (json with build recipes)
+- he disables automatic completion in favor of a key binding
+- speed and resource usage very acceptable
+** Harry Schwartz on prose writing
+https://github.com/hrs
+org-bullets makes the "pretty bullets"
+*** Webster's 1913 and sdcv
+*** Proselint
+set up with flycheck!
+*** Deft
+fuzzy searching on file contents
+*** arandr for monitor settings
+https://christian.amsuess.com/tools/arandr/
+** Harry describes his Org flow
+- uses "7 Habits" quadrants (important/unimportant vs urgent/not urgent axes)
+- inbox emptied every morning
+** Other
+- The NYC Emacs meetup group has a good list of potential talk topics: http://emacsnyc.org/giving-a-talk.html
+- Emacspeak for visually impaired users: http://emacspeak.sourceforge.net/
+- Moving ahead with this new venue, speakers needed! Please contact Jeff or Gaurav.
+- There is now one Emacs-SF Hangout online: https://www.youtube.com/watch?v=H17PtDCxWmE. Anyone who wants to can make and post an Emacs-related video there, or run a Hangout. Let Jeff know.
