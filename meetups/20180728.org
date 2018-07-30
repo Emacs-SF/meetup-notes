@@ -57,19 +57,35 @@ at 444 Castro
 - speed and resource usage very acceptable
 ** Harry Schwartz on prose writing
 https://github.com/hrs
-org-bullets makes the "pretty bullets"
-*** Webster's 1913 and sdcv
+- org-bullets makes the "pretty bullets"
+*** Dictionary blog post
+[[jsomers.net/blog/dictionary]]
+*** Webster's 1913 and ~sdcv~
+*** [[https://github.com/hpdeifel/synosaurus][Synosaurus]] for thesaurus
 *** Proselint
 set up with flycheck!
 *** Deft
 fuzzy searching on file contents
+*** =M-SPC= and =cycle-spacing=
+- Removes extra spaces
+- C-x C-o removes extra blank lines
 *** arandr for monitor settings
 https://christian.amsuess.com/tools/arandr/
 ** Harry describes his Org flow
 - uses "7 Habits" quadrants (important/unimportant vs urgent/not urgent axes)
 - inbox emptied every morning
 ** Other
+*** Export orgmode
+- pandoc for org-mode
+- latex
+- *slidy*
+- Jeff's talk [[file:20180117.org::Jeff Trull: Creating Slides with Org-Mode][on January]]
+*** Miscs
 - The NYC Emacs meetup group has a good list of potential talk topics: http://emacsnyc.org/giving-a-talk.html
 - Emacspeak for visually impaired users: http://emacspeak.sourceforge.net/
 - Moving ahead with this new venue, speakers needed! Please contact Jeff or Gaurav.
 - There is now one Emacs-SF Hangout online: https://www.youtube.com/watch?v=H17PtDCxWmE. Anyone who wants to can make and post an Emacs-related video there, or run a Hangout. Let Jeff know.
+- ~C-x 8 RET~ insert unifode characters
+- [[https://github.com/justbur/emacs-which-key][emacs-which-key]] display available keybindings in popup.
+- Guy Steele [[https://www.youtube.com/watch?v=_ahvzDzKdB][Growing the language]] talk
+- Learn elisp by reading the info pages and read sources of popular packages
