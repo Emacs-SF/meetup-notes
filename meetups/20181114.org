@@ -93,6 +93,11 @@ Key ones I use:
 [[mailto:tasshinfogleman@gmail.com][tasshinfogleman@gmail.com]]
 ** Course
 
+* Organizer Notes
+After the presentation ended we talked about many things; I recall in particular two related to capture:
+- John Wiegley uses [[https://getdrafts.com/][Drafts]] on his watch to capture new org items and sync them via iCloud to his main system.
+- There is some excitement around a new app called [[https://www.reddit.com/r/orgmode/comments/84xyg8/building_an_org_modecompatible_web_app_with/][Neat Draft]]
+
 * Export Configuration                                     :ARCHIVE:noexport:
 # reveal stuff
 #+OPTIONS: num:nil toc:nil ^:nil
