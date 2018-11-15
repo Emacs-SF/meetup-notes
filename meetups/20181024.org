@@ -1,0 +1,60 @@
+#+TITLE: Joint Meetup with PDX
+#+DATE: 24 October 2018
+#+AUTHOR: Hosts Gaurav Jain and Howard Abrams
+* Local Introduction
+** Call for Engagement
+- Still doing coffee.el in SF (Haus) and Oakland (Tierra Mia)
+  - Will put next ones on the calendar soon
+- More venues needed. Know someone who can host in SF or Oakland?
+** Future Topics
+- Tasshin Fogleman on org-mode 11/14, Mountain View
+- Your idea here
+  - Please LMK or post ideas in group
+** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+** Youtube Channel
+https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
+** Possible EmacsConf next year
+- https://www.reddit.com/r/emacs/comments/9kb94m
+- Associated with StrangeLoop
+- contact Ag Ibragimov a.k.a "M-x tips" (@iLemming)
+** New venue: Pure Storage
+- Very happy to have this excellent new space. Thanks Gaurav Jain for arranging.
+- Let's go online!
+* C++ in Emacs
+** BoF at CppCon
+- over 50 attendees
+- Will try to get notes online soon and post link on Meetup
+** IDE assist
+- C++ is hard to parse (and slow) interactively. Needs help.
+- Tags
+  - Relies on index that must be regenerated on changes
+- compiler server
+  - put smarts into separate process
+*** Alternatives
+- LSP based
+  - clangd
+  - cquery
+  - ccls
+    - a fork of cquery!
+- custom protocol
+  - rtags
+    - an indexer, but uses Clang to do it
+  - ycmd
+*** My preference: lsp-mode with clangd
+- lsp-clangd is a light wrapper around ~lsp-define-stdio-client~, may work for you
+  - I need a slightly more complicated setup
+- cquery has possibilities
+  - like clangd based on clang but own lsp etc. implementation
+  - looks like it is a drop-in replacement for clangd
+  - Jennifer Wilcox presentatation at CppCon
+  - [[https://github.com/cquery-project/cquery/wiki/Emacs][wiki]]
+- [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/20180728.org][more specifics on my setup from prior meetup]]
+- The above notwithstanding I think we need to do a shootout!
+
+* Export Configuration                                     :ARCHIVE:noexport:
+# reveal stuff
+#+OPTIONS: num:nil toc:nil ^:nil
+#+REVEAL_TRANS: None
+#+REVEAL_EXTRA_CSS: ./local.css
+

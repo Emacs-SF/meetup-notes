@@ -1,0 +1,101 @@
+#+TITLE: Building a Second Brain in Emacs and Org-Mode
+#+DATE: 14 November 2018
+#+AUTHOR: Tasshin Fogleman
+* Introduction
+** Call for Engagement
+- Still doing coffee.el in SF (Haus) and Oakland (Tierra Mia)
+  - Oakland this Saturday
+  - Will schedule SF soon, probably December
+- More venues needed. Know someone who can host in SF or Oakland?
+** Future Topics
+- How about Python-related lightning talks?
+- Your idea here
+  - Please LMK or post ideas in group
+- Need speakers!
+  - I am cold emailing Emacs gurus I see online
+  - It can be a member, too
+** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+** Youtube Channel
+https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
+
+Exciting news: we now have *two* videos!
+
+** Possible EmacsConf next year
+- https://www.reddit.com/r/emacs/comments/9kb94m
+- Associated with StrangeLoop
+- contact Ag Ibragimov a.k.a "M-x tips" (@iLemming)
+** New venue: Pure Storage
+- Very happy to have this excellent new space. Thanks Gaurav Jain for arranging.
+* Speaker: Tasshin Fogleman
+** Building a Second Brain in Emacs and Org-Mode
+** Hi, I'm Tasshin
+- MAPLE, OAK, W/L/P
+- Would love to talk with people more about this after the talk, at a later date
+** [[https://www.buildingasecondbrain.com][BASB]]
+Disclosure: I work with Tiago and Forte Labs
+** Before
+Before: Many emacs org files (20? 30?), some empty or just placeholders, headers under headers under headers, many long lines of files, emacs functions taking noticeably / prohibitively long time to run (e.g. search, refile- some people can’t even use these)
+** After
+After: One main task file, a few auxiliary files with specific purposes, ~4000 notes in Evernote and other locations (Dropbox, Google Drive), filed neatly
+** Pros and Cons of Minimal/Maximal approaches
+** PARA
+A lot of this talk will focus in particular on PARA which stands for Projects, Areas, Resources, Archives. It is a universal system for organizing digital information: both tasks and reference
+
+Projects: Complete app mockup; Develop project plan; Execute business development campaign; Write blog post; Finalize product specifications; Attend conference
+
+Areas: Health; Finances, Professional Development; Travel; Hobbies; Friends; Apartment; Car; Productivity; Direct reports; Product Development; Writing
+
+Resources: habit formation; project management; transhumanism; coffee; music; gardening; online marketing; SEO; interior design; architecture; note-taking
+
+Archives: projects that have been completed or become inactive; areas that you are no longer committed to maintaining; resources that you are no longer interested in
+
+No resources in task manager
+** Demos
+
+Most people have the first one
+** Files I have
+- inbox.org: entry point, from laptop (capture templates) and mobile (Beorg, via Dropbox)
+- todo.org: tasks, filed in Projects or Areas
+- somedaymaybe.org: tracking SOMEDAY / MAYBE tasks
+- agendas.org: lists of items to discuss with specific people when I see them next
+- goals.org: tracking long-term goals, which Tasks, Projects, and Areas move towards.
+** Project / Area Overview
+Project-overview
+Area-overview
+Uses column view
+** Stuck Projects
+** Regular Reviews
+Procedures, processes
+Cynefin: Complicated domain
+** Template Expansion
+Capture templates can be based in files
+
+Key ones I use:
+%^{prompt
+%^{prop}p, prompt for a value for property prop
+%t, Timestamp, date only
+%u inactive timestamps
+** Important Packages
+[[https://github.com/kidd/org-gcal.el][org-gcal]] (new maintainers!): self-explanatory
+[[https://github.com/rexim/org-cliplink][org-cliplink]]: insert org-mode links from clipboard
+[[https://github.com/jkitchin/ox-clip][ox-clip]]: copy formatted content out of Org-Mode and into other programs
+[[https://github.com/mwfogleman/org-randomnote][org-randomnote]]: by yours truly, implements the RandomNote idea in Emacs Org-Mode
+** Reference
+- [[https://www.buildingasecondbrain.com][BASB]]: the seminal course
+- [[https://praxis.fortelabs.co/][Praxis]]: Tiago Forte’s blog on productivity
+- [[https://praxis.fortelabs.co/building-a-second-brain-in-emacs-and-org-mode-faa20ae06fc/][BASB in Emacs + Org]] and [[https://praxis.fortelabs.co/building-a-second-brain-in-emacs-and-org-mode-faa20ae06fc/][IASB in Emacs + Org]]: my original posts about this workflow
+- [[https://github.com/mwfogleman/.emacs.d/][Gist with GTD templates]]: try-them-at-home templates for your own use + adaptation
+- [[https://github.com/mwfogleman/.emacs.d/][My configuration]]: I share most of my configuration online, feel free to read + reuse
+** Contact Information
+[[https://twitter.com/tasshinfogleman][@tasshinfogleman]] on Twitter
+[[https://refactorcamp.org/@tasshin][@tasshin@refactorcamp.org]] on Mastodon
+[[mailto:tasshinfogleman@gmail.com][tasshinfogleman@gmail.com]]
+** Course
+
+* Export Configuration                                     :ARCHIVE:noexport:
+# reveal stuff
+#+OPTIONS: num:nil toc:nil ^:nil
+#+REVEAL_TRANS: None
+#+REVEAL_EXTRA_CSS: ./local.css
+
