@@ -97,6 +97,7 @@ Key ones I use:
 After the presentation ended we talked about many things; I recall in particular two related to capture:
 - John Wiegley uses [[https://getdrafts.com/][Drafts]] on his watch to capture new org items and sync them via iCloud to his main system.
 - There is some excitement around a new app called [[https://www.reddit.com/r/orgmode/comments/84xyg8/building_an_org_modecompatible_web_app_with/][Neat Draft]]
+- Abhishek mentioned Rainer König has [[https://www.youtube.com/playlist?list=PLVtKhBrRV_ZkPnBtt_TD1Cs9PJlU0IIdE][a great series of org-mode videos]], each fairly digestible.
 
 * Export Configuration                                     :ARCHIVE:noexport:
 # reveal stuff
