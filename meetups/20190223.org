@@ -1,0 +1,34 @@
+#+TITLE: coffee.el
+#+DATE: 23 February 2019
+Tierra Mia, Oakland, CA
+
+* Learning Emacs Lisp
+
+Helpful?
+
+* Magit + Forge
+* Completion frameworks
+
+Structure of Ivy/Counsel/Swiper
+
+* Package managers
+
+Straight
+
+* Multishell
+* Boolmarks
+* Tramp
+* Avy
+
+Jumping to any visible buffer in any frame
+And how abo-abo is a genius programmer
+
+* Ergodox
+* Category Theory
+
+SF Types meetup
+
+
+* Export Configuration                                     :ARCHIVE:noexport:
+#+OPTIONS: num:nil toc:nil ^:nil
+
