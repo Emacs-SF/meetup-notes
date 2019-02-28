@@ -1,0 +1,76 @@
+#+TITLE: Emacs as a Python IDE
+#+DATE: 27 February 2019
+#+AUTHOR: Sean Farley
+* Introduction
+** Call for Engagement
+- As of today we have two evening venues: Pure Storage (Mountain View) and Noisebridge (SF)
+- Still doing coffee.el in SF (Haus) and Oakland (Tierra Mia)
+- Walnut Creek coffee.el may be revived
+- Helps to have a backup, so please let me know if your organization can host
+** Future Topics
+- Emacs as a C++ IDE
+- One more by Sean?
+- Your idea here
+  - Please LMK or post ideas in group
+- Need speakers!
+  - I am cold emailing Emacs gurus I see online
+  - We have had several members speak
+** Possible EmacsConf
+- Last one was in SF, 2015
+- U Waterloo, near Toronto, summer?
+- Contact me if you want to be involved in planning
+** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+** YouTube Channel
+"Emacs SF"
+
+
+https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
+
+** New/Old Venue: Noisebridge
+- It's great to be back! Thanks Jay Querie for arranging and hosting.
+* Speaker: Sean Farley
+** Introduction
+- tutorial, basically
+- all code on Bitbucket
+  [[bitbucket.org/seanfarley/dotfiles]]
+*** LSP
+- Wanted completion in Emacs
+- Previous stuff was ad hoc, wanted something unified
+- saw George Pittarelli's presentation on LSP
+*** New LSP
+- recent big (breaking) refactoring
+- kitchen sink included now instead of separate packages
+- from Microsoft, but don't worry
+*** Mercurial
+- git alternative, written in Python
+- speaker was/is a Mercurial developer
+- tested code completion on the Mercurial codebase
+- demand (lazy) importing got in the way
+*** Demo
+- looking at betterbib (some kind of BibTeX helper) code
+*** Microsoft's python language server
+- open source, on Github
+- written in C#/.NET (!)
+- MS very responsive on bugs
+- someone made a LSP client for it: lsp-python-ms
+*** dap-mode
+- "Debug Adapter Protocol"
+*** flycheck via flake8
+- pep8 + pyflakes
+*** autoformatter: black
+- named for Henry Ford's famous quotation
+- thus highly opinionated
+*** Elpy comparison
+- "no luck" in his projects
+- LSP via MS worked much better for him, same features
+*** Palantir has an LSP server for Python too
+- but Sean likes MS better
+- several in the audience note the ewww factor
+
+* Export Configuration                                     :ARCHIVE:noexport:
+# reveal stuff
+#+OPTIONS: num:nil toc:nil ^:nil
+#+REVEAL_TRANS: None
+#+REVEAL_EXTRA_CSS: ./local.css
+#+REVEAL_MARGIN: 0.1
