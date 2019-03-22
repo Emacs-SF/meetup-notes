@@ -61,6 +61,8 @@ https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
 *** autoformatter: black
 - named for Henry Ford's famous quotation
 - thus highly opinionated
+*** projectile integration
+Sean notes that [[https://github.com/pwalsh/pipenv.el][pipenv]] from Melpa has useful functionality here
 *** Elpy comparison
 - "no luck" in his projects
 - LSP via MS worked much better for him, same features
