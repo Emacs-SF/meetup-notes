@@ -1,0 +1,182 @@
+#+TITLE: Emacs as a C++ IDE
+#+AUTHOR:
+#+DATE: 3 April 2019
+#+OPTIONS: H:3 toc:nil ^:nil
+#+STARTUP: beamer
+#+LATEX_HEADER: \usepackage{tikz}
+#+BEAMER_HEADER: \usecolortheme{owl}
+#+BEAMER_THEME: PaloAlto
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169,10pt]
+#+LATEX_HEADER: \usetikzlibrary{arrows.meta, patterns, decorations.pathreplacing}
+# this disables those annoying little gray things on the bottom line
+#+LATEX_HEADER: \setbeamertemplate{navigation symbols}{}
+
+# attempt to get colors right
+# If I don't put them here (i.e. if I use BEGIN_EXPORT) they end up after the title
+# page, leaving it uncolored
+#+BEAMER_HEADER: \setbeamercolor*{frametitle}{bg=blue!60!black}
+#+BEAMER_HEADER: \setbeamercolor*{sidebar}{bg=blue!60!black}
+#+BEAMER_HEADER: \setbeamercolor*{logo}{bg=blue!40!black}
+
+# global styles and reusable drawings
+#+BEGIN_EXPORT beamer
+\tikzset{
+  pathpair/.pic = {
+    % two potential orientations making a 90 turn into one
+    \draw[>={Latex[length=3mm]},>-] (-1, 1) arc [start angle=90, end angle=0, radius=1] ;
+    \draw[>={Latex[length=3mm]},>-] (1, 1) arc [start angle=90, end angle=180, radius=1] ;
+  },
+  comp/.style = {rectangle,draw=#1,minimum width=4cm,minimum height=1cm,rounded corners=3pt,anchor=south west},
+  bc/.style = {comp=#1,minimum width=8cm,minimum height=2cm},
+  wc/.style = {comp=#1,minimum width=8cm},
+  pics/smallcomp/.style n args={2}{
+    code={
+      \node (0, 0) [comp=#2,label={[yshift=-0.8cm]#1}] {} ;
+    }
+  },
+  pics/widecomp/.style n args={2}{
+    code={
+      \node (0, 0) [wc=#2,label={[yshift=-0.8cm]#1}] {} ;
+    }
+  },
+  pics/bigcomp/.style n args={2}{
+    code={
+      \node (0, 0) [bc=#2,label={[yshift=-0.9cm]#1}] {} ;
+    }
+  },
+  highlight/.style = {fill=white!10!black,text opacity=1,very thick,draw=green},
+  % for style control in overlays
+  onslide/.code args={<#1>#2}{%
+      \only<#1>{\pgfkeysalso{#2}} % \pgfkeysalso doesn't change the path
+  }
+}
+#+END_EXPORT
+
+
+* Introduction
+** Call for Engagement
+*** Call for Engagement
+- As of today we have two evening venues: Pure Storage (Mountain View) and Noisebridge (SF)
+- Still doing coffee.el in SF (Haus) and Oakland (Tierra Mia)
+- Walnut Creek coffee.el may be revived
+- Helps to have a backup, so please let me know if your organization can host
+** Future Topics
+*** Future Topics
+- One more by Sean Farley in Mountain View on 4/17
+- Your idea here
+  - Please LMK or post ideas in group
+- Still need speakers!
+** Possible EmacsConf
+*** Possible EmacsConf
+- Last one was in SF, 2015
+- U Waterloo, near Toronto, summer?
+- Contact me if you want to be involved in planning
+** Github Repo
+*** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+** YouTube Channel
+*** YouTube Channel
+"Emacs SF"
+
+
+https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
+
+** Acknowledgements
+*** Acknowledgements
+Thanks to Pure Storage for providing a fantastic meeting space, with recording facilities!
+
+* Lightning Talks
+** Jeff Trull: IDE Support in Emacs
+*** Jeff Trull: IDE Support in Emacs
+*** Introduction
+The diversity of packages and options for supporting C/C++ in Emacs is a bit
+bewildering to me and after a few years of messing with it I've decided it's
+easiest to understand from a component level. So this is "IDE from the Bottom Up".
+*** Begin at the Beginning
+Emacs was first an editor for Lisp and it shows
+- Command names reflect Lisp editing legacy
+- Every programming mode author is writing Emacs Lisp
+- IDE features also reflect the Elisp history
+  - Let's investigate starting there
+*** Two Features
+For the purpose of understand the components of the system I'll focus on two IDE features:
+- Jump to Definition
+- Symbol Completion
+*** Demo: Plain Emacs
+- Elisp works fine if all files are loaded into Emacs
+- C++ needs help from tags
+- completion hook: =completion-at-point-functions=
+- xref hook: =xref-backend-functions=
+*** Demo: Add Company
+This mode does a lot but we will handicap it by forcing it to use tags
+*** Demo: Add a Company Backend
+When you add Clang into the mix Company knows about a lot more stuff
+*** Demo: Add a Company Frontend
+Well, sort of. Helm is a "narrowing" (or "selection") framework we can use in conjunction with Company
+though it does not technically provide a Company frontend. I guess the API was inadequate?
+*** System Structure
+#+BEGIN_EXPORT beamer
+% I hadn't figured out the style animation by the time of the talk so the video
+% only reflects a static view of components
+
+\framesubtitle<1>{different packages are structured differently}
+\framesubtitle<2>{LSP + clangd}
+\framesubtitle<3>{ccls}
+\framesubtitle<4>{rtags}
+\framesubtitle<5>{irony}
+\framesubtitle<6>{YCM}
+#+END_EXPORT
+
+\begin{tikzpicture}[text height=1.5ex, text depth=0.25ex, thick]
+  \pic at (0, 0) {widecomp={Clang C++}{green!70!black,onslide=<2->{highlight}}} ;
+  \pic at (0, 1) {bigcomp={Server}{green!70!black,onslide=<2->{highlight}}} ;
+  \pic at (0, 1) {smallcomp={libClang}{green!70!black,onslide=<4->{highlight}}} ;
+  \pic at (0, 3) {smallcomp={LSP}{green!70!black,onslide=<2-3>{highlight}}} ;
+  \pic at (4, 3) {smallcomp={Custom Protocol}{green!70!black,onslide=<4->{highlight}}} ;
+  \pic at (0, 4) {widecomp={Emacs Backend}{green!70!black,onslide=<2->{highlight}}} ;
+  \pic at (0, 5) {widecomp={UI}{green!70!black,onslide=<2->{highlight}}} ;
+  \pic at (0, 6) {smallcomp={Selection Framework}{green!70!black}} ;
+\end{tikzpicture}
+
+** Ben Deane
+*** Ben Deane
+(notes by Jeff Trull)
+
+Ben has been an Emacs user for 10 years and a C++ developer for 20. He joined us from Denver via Zoom.
+
+You can find his Emacs config [[https://github.com/elbeno/dotemacs/blob/master/.emacs.d/cpp-modes.el][here]].
+
+*** A Smorgasbord of Features
+
+- [[https://github.com/ludwigpacifici/modern-cpp-font-lock][modern-cpp-font-lock]] for coloring the latest keywords etc.
+- [[https://github.com/elbeno/dotemacs/blob/master/.emacs.d/site-lisp/cpp-auto-include.el][cpp-auto-include]], created by Syohei Yoshida and updated by Ben for standard library updates
+- [[https://github.com/kumar8600/flycheck-clangcheck][flycheck-clangcheck]] adds basic static analysis to syntax checking
+- Runs [[https://github.com/sonatard/clang-format][clang-format]] on save via hook
+- Has code to transpose function arguments (not just words) based on some code from Reddit
+  - and also recommends the weekly "Tips and Tricks" thread from [[https://www.reddit.com/r/emacs/][the Emacs subreddit]].
+- "Rotate Text" to cycle among related strings (North/South/East/West, True/False, etc.)
+
+*** CMake Features
+
+- [[https://github.com/Lindydancer/cmake-font-lock][cmake-font-lock]] for more readable code
+- [[https://github.com/elbeno/dotemacs/blob/master/.emacs.d/site-lisp/cmake-format.el][His own custom code]] to call =cmake-format= (an external program) on save
+- Company has [[https://github.com/company-mode/company-mode/blob/master/company-cmake.el][a CMake backend]]
+
+*** =Boost.SML= editing mode
+
+This C++ library provides a DSL for editing state machines; Ben made [[https://github.com/elbeno/dotemacs/blob/master/.emacs.d/site-lisp/boost-sml.el][a special formatter]] for it.
+
+*** Debugging
+
+Ben asked for a group discussion here but it seems like the gdb integration is not well loved.
+
+Jeff brought up [[https://github.com/emacs-lsp/dap-mode][DAP]] which he heard about while configuring [[https://github.com/emacs-lsp/lsp-mode][lsp-mode]].
+
+Kat was impressed by the Python-based gdb UI called [[https://github.com/cyrus-and/gdb-dashboard][GDB Dashboard]], which though not Emacs was still pretty cool. Why can't we have this?
+
+** Dirk Jagdmann
+*** Dirk Jagdmann
+Dirk shared some of his "modeline" (also called [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][File Variables]]) configs as well as his =flymake= setup.
+
+You can find his slides [[https://www.dropbox.com/s/koid4li35ink1ua/emacs-cpp.pdf?dl=0][here]].
