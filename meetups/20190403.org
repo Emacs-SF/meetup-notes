@@ -126,7 +126,6 @@ though it does not technically provide a Company frontend. I guess the API was i
 \framesubtitle<4>{rtags}
 \framesubtitle<5>{irony}
 \framesubtitle<6>{YCM}
-#+END_EXPORT
 
 \begin{tikzpicture}[text height=1.5ex, text depth=0.25ex, thick]
   \pic at (0, 0) {widecomp={Clang C++}{green!70!black,onslide=<2->{highlight}}} ;
@@ -138,6 +137,7 @@ though it does not technically provide a Company frontend. I guess the API was i
   \pic at (0, 5) {widecomp={UI}{green!70!black,onslide=<2->{highlight}}} ;
   \pic at (0, 6) {smallcomp={Selection Framework}{green!70!black}} ;
 \end{tikzpicture}
+#+END_EXPORT
 
 ** Ben Deane
 *** Ben Deane
