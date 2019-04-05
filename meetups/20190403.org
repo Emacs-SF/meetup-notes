@@ -180,3 +180,7 @@ Kat was impressed by the Python-based gdb UI called [[https://github.com/cyrus-a
 Dirk shared some of his "modeline" (also called [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Specifying-File-Variables.html][File Variables]]) configs as well as his =flymake= setup.
 
 You can find his slides [[https://www.dropbox.com/s/koid4li35ink1ua/emacs-cpp.pdf?dl=0][here]].
+* General Discussion
+** Q&A
+- Rich had an issue related to lexical scoping (possibly) but we couldn't figure it out for him.
+- There was some discussion regarding "advising" functions. This is [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html][an Emacs feature]] similar to the Decorator pattern.
