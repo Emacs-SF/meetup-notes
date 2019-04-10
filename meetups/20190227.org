@@ -33,7 +33,7 @@ https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
 ** Introduction
 - tutorial, basically
 - all code on Bitbucket
-  [[bitbucket.org/seanfarley/dotfiles]]
+  [[https://bitbucket.org/seanfarley/dotfiles]]
 *** LSP
 - Wanted completion in Emacs
 - Previous stuff was ad hoc, wanted something unified
