@@ -6,7 +6,7 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 *** Schedule: https://www.meetup.com/Emacs-SF/events/
 *** Organizers:
 - Jeff Trull
-- Daniel de Haas
+- Gaurav Jain
 - Mike Wright
 *** Topics:
 - emacs usage
