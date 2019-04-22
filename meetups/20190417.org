@@ -1,0 +1,103 @@
+#+TITLE: A Hodgepodge of Emacs
+#+AUTHOR:
+#+DATE: 17 April 2019
+#+OPTIONS: H:3 toc:nil ^:nil
+#+STARTUP: beamer
+#+LATEX_HEADER: \usepackage{tikz}
+#+BEAMER_HEADER: \usecolortheme{owl}
+#+BEAMER_THEME: PaloAlto
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [aspectratio=169,10pt]
+#+LATEX_HEADER: \usetikzlibrary{arrows.meta, patterns, decorations.pathreplacing}
+# this disables those annoying little gray things on the bottom line
+#+LATEX_HEADER: \setbeamertemplate{navigation symbols}{}
+# actually "owl" disables them as well...
+
+# attempt to get colors right
+# If I don't put them here (i.e. if I use BEGIN_EXPORT) they end up after the title
+# page, leaving it uncolored
+#+BEAMER_HEADER: \setbeamercolor*{frametitle}{bg=blue!60!black}
+#+BEAMER_HEADER: \setbeamercolor*{sidebar}{bg=blue!60!black}
+#+BEAMER_HEADER: \setbeamercolor*{logo}{bg=blue!40!black}
+
+
+* Introduction
+** Call for Engagement
+*** Call for Engagement
+- As of today we have two evening venues: Pure Storage (Mountain View) and Noisebridge (SF)
+- Still doing coffee.el in SF (Haus) and Oakland (Tierra Mia)
+- Helps to have a backup, so please let me know if your organization can host
+** Future Topics
+*** Future Topics
+- Org Mode x2?
+- Your idea here
+  - Please LMK or post ideas in group
+- Still need speakers!
+** Github Repo
+*** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+** YouTube Channel
+*** YouTube Channel
+"Emacs SF"
+
+
+https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
+
+** Acknowledgements
+*** Acknowledgements
+Thanks to Pure Storage for providing a fantastic meeting space, with recording facilities!
+
+* Sean Farley
+** Pre-emacs config
+ MacOS specific (sorry); please let me
+ know the equivalents for linux!
+
+ Must haves mapped keys:
+ - caps lock -> control
+ - shift -> opt / alt
+ - fn -> hyper
+
+** Old config:
+ First version was =init.el=
+
+** Old config:
+ First version was =init.el=
+ which became randomly scattered
+
+** Old config (second version):
+ Started with 2396 lines...
+
+** Old config (second version):
+ Grew to over 10k!
+
+** Old config (second version):
+ This was a problem for many reasons:
+
+ - quickly became unmanageable
+ - most of the code bitrot
+ - random settings I
+   wasn't sure even
+   applied anymore
+
+** Enter doom
+ There are many alternatives:
+
+ - spacemacs
+ - prelude
+ - centaur
+ - etc
+
+** Choose one that fits with you
+
+ And takes the burden off from understanding all those thousands of
+ tuning knobs
+
+** Demo time
+ - ivy / ivy-posframe
+ - email
+ - chat
+ - modeline
+ - emacsclient + tramp
+ - pdf-tools
+ - passwords
+
