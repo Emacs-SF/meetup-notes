@@ -54,6 +54,30 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 *** 2018-07-28 Sat 13:00-15:00 Olympus Caffe/Pure Storage, Mountain View
 [[file:meetups/20180728.org][general discussion]]
 
-*** (Proposed) (date/time TBD) (location TBD)
-**** (Topic TBD) - (Speaker TBD)
-
+*** 2018-10-24 Wed 18:30-20:30 Pure Storage, Mountain View
+**** Hack and Meet with Emacs PDX
+- see video at https://www.youtube.com/watch?v=6VFrX6I4tAI&t=21s
+*** 2018-11-14 Wed 18:30-20:30 Pure Storage, Mountain View
+**** Building a Second Brain in Emacs and Org-Mode
+- presenter Tasshin Fogleman
+- [[https://www.youtube.com/watch?v=Bpmkeh4D98s&t=1s][see video]]
+- [[file:meetups/20181114.org][meeting notes]]
+*** 2018-12-11 Tue 18:30-20:30 Pure Storage, Mountain View
+**** Introduction to Magit
+- presenter John Wiegley
+- [[https://www.youtube.com/watch?v=j-k-lkilbEs&t=44s][video]]
+*** 2019-02-23 Sat 13:00-15:00 Tierra Mia Coffee, Oakland
+**** General Discussion
+- another one of our roundtables
+- [[file:meetups/20190223.org][Jeff's notes]]
+*** 2019-02-27 Wed 19:00-21:00 Noisebridge, SF
+**** Sean Farley: Emacs as a Python IDE
+- [[file:meetups/20190227.org][Jeff's notes]]
+- [[https://www.youtube.com/watch?v=GxMAPW9_LsA&t=5s][video]]
+*** 2019-04-03 Wed 18:30-20:30 Pure Storage, Mountain View
+**** Emacs as a C++ IDE
+- [[file:meetups/20190403.org][Jeff's notes]]
+- video pending
+*** 2019-04-17 Wed 18:30-20:30 Pure Storage, Mountain View
+- [[file:meetups/20190417.org][Jeff's notes]]
+- video pending
