@@ -66,6 +66,7 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 **** Introduction to Magit
 - presenter John Wiegley
 - [[https://www.youtube.com/watch?v=j-k-lkilbEs&t=44s][video]]
+** 2019 Meetups
 *** 2019-02-23 Sat 13:00-15:00 Tierra Mia Coffee, Oakland
 **** General Discussion
 - another one of our roundtables
@@ -79,5 +80,5 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - [[file:meetups/20190403.org][Jeff's notes]]
 - video pending
 *** 2019-04-17 Wed 18:30-20:30 Pure Storage, Mountain View
-- [[file:meetups/20190417.org][Jeff's notes]]
+- [[file:meetups/20190417.org][meeting notes]]
 - video pending
