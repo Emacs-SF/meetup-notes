@@ -1,0 +1,78 @@
+#+TITLE: All Things Org-Mode
+#+AUTHOR:
+#+DATE: 24 July 2019
+* Introduction
+** Sponsor
+*** Pure Storage
+** Call for Engagement
+- Right now we just one consistent evening venue: Pure Storage (Mountain View)
+- Still doing afternoon coffee.el in SF (Haus) and Oakland (Tierra Mia)
+- Very glad to have alternatives so please let me know if your organization can host
+** Future Topics
+- Tweaking appearance (fonts, colors, etc.) ?
+- Your idea here
+  - Please LMK or post ideas in group
+- Need speakers!
+  - I am cold emailing Emacs gurus I see online
+  - We have had several members speak
+  - Walk-ins
+** Possible EmacsConf
+- Last one was in SF, 2015
+- U Waterloo, near Toronto, summer?
+- IRC channel #emacsconf on Freenode
+** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+** YouTube Channel
+"Emacs SF"
+
+https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
+
+* Featured Presenter
+** John Wiegley
+*** John Wiegley
+(Your Organizer's notes)
+- his phone app is called drafts
+- all captured stuff (via capture templates) goes into inbox
+- captures /constantly/
+- shift-tab changes visibility for entire file (collapse, then L1...)
+- custom sorting function org-sort-all
+- reviews the result in its entirety
+- mark "defer" to remove from list of TODO and make it 6+ months away
+- there is also "someday" which is very low priority
+- some of the TODO items will get scheduled today or this week with C-c C-s
+- he likes pair programming
+- C-c a a to look at agenda
+- a "deadline" should not be done after its date vs. a schedule which is a prompt
+- each scheduled task is A, B, or C priority
+- f in agenda view to move the task into the future
+- m to mark then B f to bulk schedule in the future
+- C-c a n makes a custom report showing the first TODO in every project
+  - shows the "next action" a la GTD
+- C-a h "hot projects" next actions list
+  - probably more valuable than the schedule!
+- C-c C-z to quickly add notes
+  - easy historical log notes are a feature entirely missing from paid phone apps
+  - helpful for following up with bureaucracies
+- "meter" showing how far behind on work
+- org-habit to track recurring tasks
+  - each time it's marked "done" it comes back but remembers he did it
+  - colors indicate the frequency of completion
+  - helps with happy spouse
+
+After this point we had questions and I had to pass around the microphone, so I didn't capture them...
+* Lightning Talks
+** Tikhon Jelvis
+Tikhon showed some really beautiful slides he generated from org into Reveal.js.
+
+I believe the talk whose code he focused on may be found [[https://github.com/TikhonJelvis/talks/blob/master/bob-2019/slides.org][here]]
+** Jeff Trull
+Jeff demonstrated several literate programming features in Python and C++. His code can be found [[https://gist.github.com/jefftrull/996422d082e8dd3b58530a24fc21163d][here]].
+** John Kitchin
+Prof. Kitchin is from the CMU Chemical Engineering department and has developed some advanced methods for producing publisher-ready journal papers via org and LaTeX. He is the author of [[https://github.com/jkitchin/org-ref][org-ref]].
+
+* Export Configuration                                     :ARCHIVE:noexport:
+# reveal stuff
+#+OPTIONS: num:nil toc:nil ^:nil
+#+REVEAL_TRANS: None
+#+REVEAL_EXTRA_CSS: ./local.css
+#+REVEAL_MARGIN: 0.1
