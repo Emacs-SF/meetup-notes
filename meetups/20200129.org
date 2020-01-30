@@ -1,0 +1,110 @@
+#+TITLE: org-mode and restclient
+#+AUTHOR: Mackenzie Bligh
+#+DATE: 29 January 2020
+* Introduction
+** Sponsor
+*** Trull Consulting, LLC
+(me)
+** Call for Engagement
+- RIP Workshop Cafe, hello Mechanics Institute
+- Still doing afternoon coffee.el in SF (Haus) and Oakland (Tierra Mia)
+- Very glad to have alternatives so please let me know if your organization can host
+** Future Topics
+- Tweaking appearance (fonts, colors, etc.) ?
+- Config (use-package, org-mode, spacemacs layers?)
+- Support for a specific programming language
+  - Clojure?
+  - we've already done Python and C++
+  - maybe joint with another meetup?
+- Your idea here
+  - Please LMK or post ideas in group
+- Need speakers!
+  - I am cold emailing Emacs gurus I see online
+  - We have had several members speak (tonight, for example!)
+** Github Repo
+https://github.com/Emacs-SF/meetup-notes
+** YouTube Channel
+"Emacs SF"
+
+https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ
+
+* Featured Presenter: Mackenzie Bligh
+** About Me
+- I’m from Edmonton, Alberta, Canada
+- I did my undergraduate degree at the University of Alberta
+  - I started out my software career/education as a Vim user
+  - Lots of C, Python, and a little bit of Ruby during school
+- The org-mode plugin for Vim was nice for writing documentation
+- I am not good at remembering my TODOs
+  - I tried many different software systems (Apple Notes/Reminders, Google Keep,
+    ect.) but I could never get one to stick
+- I didn’t have a good system in place for organizing tasks or knowledge
+- This lead me to org-mode
+- I’ve been using Emacs daily for the last ~1.5 years
+- Currently I am Back-end Software Engineer work at Turo, a Peer-to-Peer car sharing platform
+** My Emacs Setup
+- [[https://develop.spacemacs.org/][Spacemacs]]
+  - Develop branch is heavily recommended
+  - Installs easily
+  - Easy to configure, low learning curve (for Emacs), virtually no
+    configuration needed to get started
+  - GNU Emacs 26.3 (build 1, x86_64-apple-darwin18.5.0, NS appkit-1671.40
+    Version 10.14.4 (Build 18E226)) of 2019-08-30
+- Ivy
+- Org mode version 9.3.2
+- https://github.com/mack1070101/dotfiles/blob/master/.spacemacs
+  - All my config files can be found in this repo
+** Restclient
+- [[https://github.com/pashky/restclient.el][Restclient]] is a Domain Specific Language (DSL)
+  - “A programming language designed for a specific application domain”
+  - In plain english: a language to do one thing really well
+  - Famous examples: Dot, PlantUML, Gradle, HTML, ect.
+- Org mode support for Restclient: [[https://github.com/alf/ob-restclient.el/blob/master/ob-restclient.el][ob-restclient]]
+- You can replace Restclient with any programming language that supports network
+  calls and has a package for org-mode
+- Analogous tools: Postman, cURL, ect.
+** On to the Good Stuff
+The example document and a small server program can be found here
+
+https://github.com/mack1070101/emacs-conf-2019
+** How I use Org Mode
+- I use my own sloppy variant of GTD
+  - Tasks are dumped into an Inbox.org, then moved to their respective homes with ~org-refile~
+  - ~org-capture~ gets used heavily
+  - I manage my day/tasks out of ~org-agenda~ + tagged TODO lists
+- I try to move everything into a handful of files (as opposed to many files)
+  because managing things with tags is easier
+- Archiving headings is great, but I try not to
+- ~org-add-note~ is good to capture quick notes for a heading
+- ~counsel-jump-in-buffer~ is a great way to move around
+
+** Org Mode - Tips and Tricks
+- Restclient has a bug for Spacemacs/develop
+  - You can hack around this by using ~org-babel-after-execute-hook~ (see my
+    .spacemacs file)
+- [[https://beorgapp.com/][Beorg]] for iOS is awesome, because I can dump tasks into my Inbox.org file while I’m on the go
+  - Bidirectional sync with computers via iCloud, Box, Dropbox, and WebDAV
+  - This was really the missing piece that has allowed org-mode to consume my life
+  - Basically I just use it as “capture” device
+- ~kill-emacs-hook~: take actions on “shutdown” of Emacs
+
+** Other Emacs Stuff
+- [[https://github.com/mack1070101/fotingo-emacs][fotingo-emacs]]: my first Emacs package
+  - Very much a work in progress
+  - A wrapper for an open source tool ([[https://github.com/tagoro9/fotingo][fotingo]]) for automating interactions with
+    Jira and Github made by another Turo engineer
+  - Aims to integrate well with magit via transient
+  - I’d like to get to a point where it’s full functionality has been implemented in Emacs
+- Magit is amazing
+- [[https://github.com/dajva/rg.el][rg.el]] is also great for searching for stuff
+** Questions
+https://github.com/mack1070101
+
+https://www.linkedin.com/in/mackenziebligh/
+
+* Export Configuration                                     :ARCHIVE:noexport:
+# reveal stuff
+#+OPTIONS: num:nil toc:nil ^:nil
+#+REVEAL_TRANS: None
+#+REVEAL_EXTRA_CSS: ./local.css
+#+REVEAL_MARGIN: 0.1
