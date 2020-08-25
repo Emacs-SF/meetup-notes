@@ -1,0 +1,54 @@
+* Rough Transcript
+** Some discussion of whether jitsi screen share works with various browsers
+- consensus seems to be Firefox works, Safari does not
+** Ligatures
+- a popular feature. jwiegley likes prettify-symbols-mode, though see Emacs 27 for new approach
+  - his config for Haskell is  https://github.com/jwiegley/dot-emacs/blob/master/init.el#L1989
+  - he uses DejaVu Sans Mono (as does your organizer): https://dejavu-fonts.github.io/
+** Emacs 27 features
+  - Harfbuzz for font rendering (supports ligatures among other things)
+  - jwiegley passes on the following feature list:
+    - Built-in support for arbitrary-size integers
+    - Text shaping with HarfBuzz
+    - Native support for JSON parsing
+    - Better support for Cairo drawing
+    - Portable dumping used instead of unexec
+    - Support for XDG conventions for init files
+    - Additional early-init initialization file
+    - Lexical-binding is used by default
+    - Built-in support for tab bar and tab-line
+    - Support for resizing and rotating of images without ImageMagick
+  - also see [[https://www.masteringemacs.org/article/whats-new-in-emacs-27-1][an annotated feature list from the author of Mastering Emacs]]
+** gccemacs
+  - [[https://akrl.sdf.org/gccemacs.html][native compilation of emacs lisp]] is moving along at a rapid clip
+    - several attendees have used and enjoyed
+  - for MacOS users [[http://xenodium.com/trying-out-gccemacs-on-macos/][this blog post]] has proven useful
+** grip-mode
+  - [[https://github.com/seagle0128/grip-mode][a previewer for Github-flavored Markdown]]
+** org-roam
+  - An implementation of some of the ideas behind [[https://roamresearch.com/][Roam]] in Emacs
+  - a sort of graph-structured note-taking tool
+  - Ag suggests a couple of videos:
+    - [[https://www.youtube.com/watch?v=A_7_8AAkV7M][Beginner's Guide to Roam Research]]
+    - [[https://www.youtube.com/watch?v=QGRCDm1H4IQ][Roam Research in Emacs (Zetteldeft Comparison)]]
+** organice
+  - This is a browser-based implementation of org-mode (no Emacs)
+  - https://github.com/200ok-ch/organice
+  - (suggestion from Brian Wood)
+** emacs-tree-sitter
+  - [[https://github.com/ubolonton/emacs-tree-sitter/][Emacs bindings (via Rust) to the tree-sitter incremental parsing framework]]
+  - intended to improve language features in Emacs
+  - some good discussion [[https://www.reddit.com/r/emacs/comments/dqcbtp/a_few_comments_on_treesitter_for_emacs_via_rust/][on Reddit]]
+** Emacs clients for chat apps
+  - some discussion re: how unfriendly Slack and Discord can be to non-native clients
+  - Telegram client recommended (or good old IRC)
+** Helm vs Ivy
+  - most of us are Ivy users, one or two (including your organizer) use Helm
+  - There is a new selection framework called [[https://github.com/raxod502/selectrum][Selectrum]]
+** Emacs on MacOS
+  - many of us are using it successfully
+  - Davide Restivo (not present) is maintaining a Homebrew recipe [[https://github.com/daviderestivo/homebrew-emacs-head][here]]
+  - We had a sidebar on [[http://www.hammerspoon.org/][Hammerspoon]], a system control tool/scripting for Macs
+    - A good post by Alvaro Ramirez () is [[http://xenodium.com/emacs-utilities-for-your-os/][here]]
+    - Our very own Ag Ibragimov created a set of Lisp (not Elisp!) bindings reminiscent of Spacemacs [[https://github.com/agzam/spacehammer][here]]
+    - Linux may in theory be able to support something like this but you'd need a window manager that exposed the right APIs
