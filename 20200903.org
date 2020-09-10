@@ -1,0 +1,193 @@
+#+TITLE: Online meetup 9/3/2020
+#+epresent_frame_level: 3
+#+EPRESENT_FACE_ATTRIBUTES: :height 200
+
+* Introduction
+  - Topic ideas
+  - FSF offers a private jitsi server that members can use for hosting
+* Overlay lightning talk
+** Introduction
+***  Overlays are associated with regions of text
+ - have a start and end point
+ - can control how inserted text is handled
+ - may overlap
+   - can find what overlays are active at a particular point
+   - a priority scheme to resolve conflicts
+***  Overlays are views
+ - No change to underlying buffer
+ - Only display is affected
+   - can /appear/ to modify or replace text
+   - can change fonts and colors
+ - Content (buffer) vs. presentation (overlay)
+ - Reminds me of CSS
+   - defaults from "category" (like class)
+** Basic Operations
+*** Creating Overlays
+    #+begin_src elisp
+      (with-current-buffer "test.org"
+        (setq ov (make-overlay (mark) (point))))
+        ;; we can also decide what happens to inserted text here
+    #+end_src
+
+*** Deleting Overlays
+    #+begin_src elisp :results value silent
+      (with-current-buffer "test.org"
+        (dolist (ov (overlays-in (point-min) (point-max)))
+          (delete-overlay ov)))
+    #+end_src
+
+*** Querying Overlays
+    #+begin_src elisp
+      (with-current-buffer "test.org"
+        (overlays-at (point)))
+    #+end_src
+
+** Properties
+*** Faces
+    #+begin_src elisp :results value silent
+    (overlay-put ov 'face 'homoglyph)
+    #+end_src
+
+    #+begin_src elisp :results value silent
+    (overlay-put ov 'face 'bold-italic)
+    #+end_src
+
+*** Invisibility
+    #+begin_src elisp
+      (overlay-put ov 'invisible t)
+      (with-current-buffer "test.org"
+        (buffer-substring (overlay-start ov) (overlay-end ov)))
+    #+end_src
+
+*** Adding Text
+    #+begin_src elisp
+      (overlay-put ov 'before-string "left ")
+      (with-current-buffer "test.org"
+        (buffer-substring (overlay-start ov) (overlay-end ov)))
+    #+end_src
+
+*** Specifying Windows
+    #+begin_src elisp :results value silent
+    ;; restrict overlay to an arbitrary window on test.org
+    (overlay-put ov 'window (get-buffer-window "test.org" t))
+    #+end_src
+
+*** A way to hook changes
+ - changes to the buffer contents, that is
+ - =modification-hooks=, =insert-in-front-hooks=, =insert-behind-hooks=
+*** A way to change keymaps
+ - =keymap=, =local-map=
+*** Your own properties
+ - a sort of metadata
+   - e.g. syntax information
+*** And Many More
+ Strongly recommend reviewing [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Overlay-Properties.html][the manual]] to get an idea of the possibilities.
+** Overlays in Common Use
+*** Count overlays in test buffer
+ #+NAME: count-overlays
+ #+begin_src elisp
+   (defun jet-overlay-count ()
+     (with-current-buffer "test.org"
+       (length (overlays-in (point-min) (point-max)))))
+   (jet-overlay-count)
+ #+end_src
+
+*** Get properties of overlays in test buffer
+ #+NAME: show-overlay-properties
+ #+begin_src elisp
+   (defun jet-overlay-properties ()
+     (with-current-buffer "test.org"
+       (mapcar
+        (lambda (ov)
+          ;; gather all properties for this overlay
+          (cl-loop
+           ;; two at a time
+           for (pname pval)
+           ;; by cons cell, skipping every other
+           on (overlay-properties ov) by 'cddr
+           ;; producing a list of dotted pairs
+           collect (cons pname pval)))
+        ;; for all overlays in the buffer
+        (overlays-in (point-min) (point-max)))))
+   (jet-overlay-properties)
+ #+end_src
+** Questions
+  - Ag: how do we get the contents of the overlays as well? (i.e. for output)
+    - no immediate resolution on this question
+  - Presentation software used was [[https://github.com/dakrone/epresent][epresent]], which works with org-mode; allows code blocks execution and editing but still looks "slide-like"
+  - the "fancy bullets" in the presentation is by [[https://melpa.org/#/org-bullets][org-bullets]]
+    - Yisrael Dov and Ag figured out this is implemented by using different faces, not by ligatures or overlays
+    - One face hides the first N-1 bullets, the second changes the final asterisk to something prettier
+  - Ag: magit must use overlays for some columns, because they don't get included in the region
+    - Wants to be able to copy or export what he sees, including the effects of overlays
+    - Tried several options including using the print menu
+  - Can overlays display images?
+    - yes, and emacs-emojify uses it to replace sequences of characters with an emoji image
+
+* Yisrael Dov: bidirectional text
+  * Many challenges
+    - Mixed l2r and r2l
+    - what does "forward word" do?
+    - how do you match parens - does a right paren start or end an expression?
+  * vi does not support bidirectional text :)
+  * Recommended settings
+  * See [[https://yisraeldov.gitlab.io/emacs-d/#orgfc5d745][his config]] and [[https://lbry.tv/@yisraeldov:d/emacs-is-great-ep-40-hebrew:1?r=A4CYfYh7EVK7XfZjhXq1bEHxCDL7Y5U1][this other video he did]] for more details and explanation
+
+* Mac OS builds
+  - People arrived at different times wanting to talk about this. It generally seems to work.
+  - If your startup is broken you can use --debug-init to use the debugger during the init process
+  - Homebrew's "Emacs plus" is nice and adds a bunch of stuff our members like vs. the basic package
+  - Some people struggle with Homebrew on Catalina, but others have no problem at all...
+* Text rendering generally
+  - ligatures
+    - Arthur: [[https://blog.janestreet.com/commas-in-big-numbers-everywhere/][someone used ligatures to insert commas into numbers that lack them]]. A "real cool hack".
+  - trivia re: origins of printed characters in English. Dutch, German, etc.
+  - digraphs: a way to get accented and other characters in Emacs without using the normal Unicode
+    input mechanisms like the Compose key etc. Appears to be part of Evil mode and taken from vi.
+* General Topics
+** Running emacs in server (or daemon) mode
+  - via systemd is one option offered by NixOS
+  - Henrik of Doom runs his as a daemon
+  - Kayvan runs via systemctl, finds the Emacs daemon dies 2-3 times per day
+    - shared his stack trace. Everyone shrugged - using 28 so maybe a bug
+** gnus
+  - Kayvan has an issue with it as well
+  - General agreement that it's a big, complex package though very powerful
+    - You have to use it every day to really understand it
+    - One of the oldest packages and shows its age a bit
+    - Written by the EWW author
+** Emacs "profiles" (Ag)
+  - a way to have different configs/init directories with different setting
+  - many of us liked the idea of being able to experiment with new configurations easily
+  - some of the challenges involved with changing configuration can be found [[https://emacs.stackexchange.com/questions/4253/how-to-start-emacs-with-a-custom-user-emacs-directory][here]]
+  - package chemacs
+** org-babel: do people use it for coding? (Xah Lee)
+   - many use it for their dotfiles (Yisrael Dov, Ag)
+   - Jeff uses it only for presentations
+   - Ag is very enthusiastic and took us through his process
+     - all of his configuration files are generated by a single =dotfiles.org=
+     - =:tangle= option to the source block will condition execution on an elisp predicate
+       - e.g. for system type
+   - Yisrael has some good links
+     - [[https://yewtu.be/watch?v=BLomb52wjvE][org-mode detangle]]
+   - Jeff recommends this [[https://www.jstatsoft.org/article/view/v046i03][good literate programming paper]]
+** EmacsConf CFP is out
+   - check it out at https://emacsconf.org/2020/cfp/
+   - what kind of talk do people like to watch/give?
+     - prerecorded talks with questions after vs. live?
+     - formal vs. casual (with frequent questions)?
+** Emacs as IDE
+   - Clojure
+   - [[https://www.youtube.com/watch?v=_gZK0tW8EhQ][Using a REPL for a distant spacecraft]] - hosted by Arthur
+   - Arthur runs his web server in Scheme and stores errors as (living) continuations he
+     can analyze later
+   - Smalltalk also has this "exploratory programming" feel (see Ag video)
+     - Ag rant: OO was a mistake, Math is the right abstraction, we've gone in the
+       wrong direction, Electron etc. etc.
+     - Ag suggests looking at [[https://www.youtube.com/watch?v=baxtyeFVn3w][this video]] for a perspective on Smalltalk
+** Arthur's Replication package
+  - sort of an alternative to Dropbox
+  - https://github.com/arthurgleckler/replication
+  - commits and pushes any file change as they happen
+  - magit has a "WIP" mode like this
+
