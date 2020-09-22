@@ -1,0 +1,125 @@
+#+TITLE: Online meetup 9/17/2020
+#+epresent_frame_level: 3
+#+EPRESENT_FACE_ATTRIBUTES: :height 200
+* Introduction
+  - Topic ideas/Presentations?
+  - [[https://sachachua.com/blog/2020/09/2020-09-14-emacs-news/][Emacs Weekly News]], thanks Sacha as always
+  - [[https://emacsconf.org/2020/cfp/][EmacsConf 2020 Call for Presentations]] is up now
+* Lightning Talk: Syntax Tables (Jeff Trull)
+** Introduction
+ - Syntax tables are maps from characters to their syntactic function
+   - e.g., comment, space, string, paren, word, punctuation
+ - One is active in every buffer
+ - Motion commands and font-lock use them
+ - The lowest level of "parsing" in Emacs
+   - implemented in C, so very fast
+** Using Syntax Tables
+*** Getting the function ("syntax") of a character
+    #+begin_src elisp
+      (string (char-syntax ?,))
+    #+end_src
+
+    #+begin_src elisp
+      ;; let's make this more useful
+      (defun jet-get-readable-syntax-class (ch)
+        (cond
+         ((eq (char-syntax ch) ? ) "whitespace")
+         ((eq (char-syntax ch) ?w) "word")
+         ((eq (char-syntax ch) ?.) "punctuation")
+         ((eq (char-syntax ch) ?_) "symbol")
+         ((eq (char-syntax ch) ?\() "open paren")
+         ((eq (char-syntax ch) ?\)) "close paren")
+         ((eq (char-syntax ch) ?\") "string delimiter")
+         ((eq (char-syntax ch) ?<) "comment starter")
+         (t "uncategorized")))
+
+      (jet-get-readable-syntax-class ?_)
+
+    #+end_src
+
+*** Different modes, different syntax tables
+    #+begin_src elisp
+      (with-current-buffer "test.cpp"
+                   (jet-get-readable-syntax-class ?;))
+    #+end_src
+
+    #+begin_src elisp
+      (with-current-buffer "test.el"
+                   (jet-get-readable-syntax-class ?;))
+    #+end_src
+
+*** You can temporarily switch syntax tables
+    #+begin_src elisp
+      (with-syntax-table c-mode-syntax-table
+        (jet-get-readable-syntax-class ?-))
+    #+end_src
+
+    #+begin_src elisp
+      (with-syntax-table lisp-mode-syntax-table
+        (jet-get-readable-syntax-class ?-))
+    #+end_src
+
+*** You can modify a syntax table
+    #+begin_src elisp
+      (let ((my-syntax-table (copy-syntax-table c-mode-syntax-table)))
+        ;; make % a "comment introducer" in my-syntax-table
+        (modify-syntax-entry ?% "<" my-syntax-table))
+    #+end_src
+** Cursor Motion
+*** Forward/Backward Word
+ M-f (=forward-word=) and M-b (=backward-word=) move by a "word" at a time,
+ which means a sequence of word characters.
+
+ #+begin_src elisp
+   (with-syntax-table c-mode-syntax-table
+     (jet-get-readable-syntax-class ?_))
+ #+end_src
+
+ Let's make a new movement command that treats underscore as a word component
+
+ #+begin_src elisp :results value silent
+   (defun jet-forward-word ()
+     (interactive)
+     (let ((my-syntax-table (copy-syntax-table c-mode-syntax-table)))
+       (modify-syntax-entry ?_ "w" my-syntax-table)
+       (with-syntax-table my-syntax-table
+         (forward-word))))
+ #+end_src
+
+*** Forward/Backward sexp
+ C-M-f (=forward-sexp=) and (C-M-b) (=backward-sexp=) move by an s-expression,
+  an old Lisp term - the manual prefers "balanced expression".
+ These are parenthesized expressions in lisp, and in C, also word/symbol sequences.
+ As before, they rely on syntax tables. Let's remove the colon from the "symbol" class:
+ #+begin_src elisp
+   (defun jet-forward-sexp ()
+     (interactive)
+     (let ((my-syntax-table (copy-syntax-table c-mode-syntax-table)))
+       (modify-syntax-entry ?: "." my-syntax-table)
+       (with-syntax-table my-syntax-table
+         (forward-sexp))))
+ #+end_src
+** Font-lock
+ =font-lock= uses syntax table information to locate strings and comments to give them
+ the appropriate appearance. For more information see [[http://ergoemacs.org/emacs/elisp_font_lock_mode.html][Xah Lee's informative post]].
+ 
+
+* Lightning Talk: Making Emacs Beautiful (Young-Il Choo)
+- All aspects of Emacs appearance
+** A tour of setting custom colors and faces
+*** How to explore what is available
+** Picking different styles for different types of files in dired
+** Getting current font etc. in a buffer: what-cursor-position
+** The connection between syntax tables and font-lock
+** Presentation text is [[https://gitlab.com/youngil/emacs-cezanne/-/blob/master/beautiful.org][here]]
+** [[https://emacsthemes.com/popular/index.html][A list of popular themes]]
+** [[https://unix.stackexchange.com/questions/24295/meaning-of-different-tokens-in-a-font-config-string][Interpreting font config strings]]
+* Org Roam
+- this one keeps coming up. I guess Roam is popular.
+- https://github.com/org-roam/org-roam
+* Two new LSP mode tutorials
+- one [[https://emacs-lsp.github.io/lsp-mode/tutorials/how-to-turn-off/][explaining what function of every UI element visible in LSP mode and how to enable/disable]]
+- the other on [[https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/][C++ config]]
+* Which-key
+- a minor mode to see what key combinations can complete the current sequence
+* Some discussion of NixOS, use-package, and chemacs
