@@ -1,0 +1,93 @@
+#+TITLE: Online meetup 10/10/2020
+#+EPRESENT_FACE_ATTRIBUTES: :height 200
+* Introduction
+  - Meeting day/time?
+  - We have three lightning talks, any others?
+  - [[Y][Emacs Weekly News]], thanks Sacha as always
+  - Welcome back Sid, who gave us a [[https://www.youtube.com/watch?v=a5s1ScTx8Zk][great presentation]] in pre-pandemic times
+  - Give some love to our friends at [[https://www.meetup.com/EmacsATX/][EmacsATX]] sometime
+* Favorite Fonts
+  - Jeff is reading a book called [[https://www.amazon.com/Why-Fonts-Matter-Sarah-Hyndman/dp/1584236310][Why Fonts Matter]] which has revived his interest in typefaces
+  - Kat, Jeff: [[https://dejavu-fonts.github.io/][Deja Vu Sans Mono]]
+  - Kremor: [[https://fonts.adobe.com/fonts/source-code-pro][Source Code Pro]]
+  - Neil: [[https://www.nerdfonts.com/][Nerd Fonts]], [[https://devblogs.microsoft.com/commandline/cascadia-code/][Cascadia Code]], [[https://github.com/i-tu/Hasklig][Hasklig]]
+    - also suggests test driving fonts at https://www.programmingfonts.org/
+  - Ag: [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]], [[https://fonts.google.com/specimen/Open+Sans#about][Open Sans]]
+
+* Lightning Talk: mu4e privacy hack (Sean Farley)
+** The Hack
+- People send HTML email, which can be frustrating to read
+- mu4e can display those in an external browser or directly using XWidgets
+  - unfortunately, some images are used for tracking
+- Sean wrote some new C code for the Emacs internals that gives control over content loading
+- he then (in elisp) "advised" some mu4e viewing functions so his C code can intercept requests
+- passing Lisp strings to C is pretty scary
+- Sean's branch of Emacs with the content blocking support is [[https://github.com/seanfarley/emacs][here]]
+** Ag's mu4e hack
+- looking up messages with messageId
+  - can show stuff from mailing lists in the associated web page (like gmane?)
+  - and the same for GMail
+  - [[https://gist.github.com/agzam/7c7a1faea2df66ef593ec3ab47c0157f][the code]]
+  - Sean suggests looking into "list search operator" [[https://www.djcbsoftware.nl/code/mu/mu4e/Queries.html#Queries][here]]
+    - Ag responds that his code "is useful for when you are reading a message in the list (in mu4e), but the previous messages in the thread got deleted (locally) and you want to find it in the mailing list archive (remote)"
+- Also notes that Sean had a hack to syntax highlight code inside patches in emails
+  - Suggests Sean should do an mu4e talk
+- Sean prefers mu4e to notmuch (after using the latter for 2 years) because it's "too opinionated"
+  - also some issue with label/folder syncing
+- Sean self-hosts his own email
+  - try MailCal (Docker based)
+  - also syncs org stuff to NextCloud
+** Arthur has a mixed mu4e/GMail usage model
+   - mu4e faster for searching but struggles with things like lists
+   - mu4e can also serve as a backup for GMail
+     - Sean: org-message-mode can help you send HTML messages using org.
+       Arthur finds that does not work, but he has a custom flow to edit a message in
+       an org buffer, then export it as rich text (RTF) to be pasted into GMail.
+       He calls it [[https://speechcode.com/blog/org-to-clipboard][org-to-clipboard]].
+* Lightning Talk: Emacs for Non-programmers: Org-mode and Friends (Noorah Alhasan)
+- Uses org-mode for tasks/agenda and for writing (note-taking, documents) and less
+  literate programming (babel), where the R and ESS support she finds lacking
+- org-super-agenda, org-gcal, org-inlinetask
+- org-roam has been transformative for her
+  - very influential [[https://www.amazon.com/How-Take-Smart-Notes-Nonfiction-ebook/dp/B06WVYW33Y][book]] on the Zettelkasten method
+  - has been using it since it first appeared, never a Roam Research user
+    - there are active Slack and Discourse channels, she is on both
+  - [[https://github.com/nobiot/org-transclusion][org-transclusion]] (also a Roam Research feature)
+  - has tried org-brain but not org-mindmap, prefers org-roam
+  - org-roam-server to visualize notes
+- a big fan of capture templates (there is a custom one for org-roam)
+- org-noter to annotate PDFs and take notes
+- org-ref plus [[https://www.zotero.org/][zotero]] with two different plugins
+** Q&A
+   - Ag wants to know about her capture templates. It's possible to attach a note to the currently
+     clocked-in task, but wants to make a note on a specific heading instead.
+   - Sean asks about recording useful information you encounter along with the time and location,
+     and how she would file that. org-protocol is Noorah's suggestion though she hasn't set it up,
+     seemingly due to Windows issues. What she mostly uses is org-noter/org-roam (we missed a bit
+     of the presentation here due to Dropbox issues).
+   - org-roam-server demo, big knowledge graph
+** Slides
+   Noorah uploaded them [[https://www.dropbox.com/s/xk32b0hkih0f4ec/2020-03-28-1033%20Org-mode.pdf?dl=0][here]]
+
+* Lightning Talk: HTML validator (Arthur Gleckler)
+- As editor of the RFIs (Requests for Implementation) for Scheme he receives a lot of
+  not-always-well-formatted HTML and needed a way to automatically validate it first.
+- W3 has an [[https://validator.w3.org/][online validator]]
+- Arthur uses compilation-mode to send the HTML to the validator and process the errors with
+  nice jump-to-error features that mode offers.
+- It's now a MELPA package, [[https://speechcode.com/blog/validate-html][validate-html]]
+  - The MELPA process is very impressive, did a great job of checking code and turned around
+    submission quickly.
+
+* General Discussion
+  - Oracle vs. Google
+  - Sid and Noorah may have submissions for EmacsConf
+  - CRDT: an algorithm for guaranteeing merge results are the same despite differences in the
+    order of application. simple diffs do not have this property. Google Docs uses this.
+    - discussion triggered by [[https://lists.gnu.org/archive/html/emacs-devel/2020-10/msg00238.html][an item in Sacha Chua's weekly news roundup]]
+  - Arthur: Is there a rich text format in Emacs? RMS has been interested for decades.
+    Org tries to do this but also other things.
+    Sean: Maybe given Harfbuzz it can be done? Would have to dive into C code.
+    Some discussion of Edwin, an old fork of Emacs done at MIT, written in Scheme. Very clean code.
+  - Arthur: EWW is "surprisingly good". General agreement that JS-heavy web pages are ubiquitous
+    and often look wrong, though. Killer app: viewing documentation.
