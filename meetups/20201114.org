@@ -1,0 +1,85 @@
+#+TITLE: 2020-11-14 meetup
+
+* MELPA and package management
+* Emacs history and the 80s
+** Gosling Emacs (1981)
+   - (Unix, by *that* James Gosling)
+** Epsilon (1984)
+   - (DOS originally but astonishingly still sold - for $250 - and getting updates)
+** at least two of us have 35 *years* Emacs experience
+* gcc jit
+** the global lock/lack of "real" multithreading may be a bigger issue for performance
+*** side effects - why so much setq? This is not ideal functional programming.
+*** dynamic binding performance impact - may require global lookup
+** Edwin vs. Guile Emacs
+* Young-Il poll: Does Emacs make us Luddites?
+** Sean: yes, by definition :)
+** Greg: but Luddites destroyed "labor saving machinery" which is what Emacs is
+   - we need a new word
+** Michael Winslow: InfoBlox has about 5% Emacs users
+** Jeff: what drives the youngest Emacs users to start?
+*** our newer members suggest packages, like org-mode, magit, and LSP
+* crdt.el
+** A new mode for collaborative editing using the eponymous algorithm
+   - safe asynchronous editing with conflict avoidance
+   - Author Qiantan Hong gave a demo at Emacs NYC 11/2
+   - there is also a discussion on emacs-devel
+** What is the use?
+   - agile (Sean)?
+* Anki?
+** Greg wants to know if anyone uses it
+   - Sean has used it
+   - useful for learning languages
+** It looks like there are some Emacs packages for this now, see for example [[https://yiufung.net/post/anki-org/][this post]]
+* Sean talks about his thesis, now in progress at Argonne
+** laminar flow of immiscible liquids
+** Numerical methods and why physicists use obsolete ones from 70s textbooks
+** IP issues in the very popular [[https://news.ycombinator.com/item?id=13512036][Numerical Recipes]], see [[https://news.ycombinator.com/item?id=13512036][hacker news]] for some of the debate
+** Sean may add a feature to mu4e
+* sachac and jwiegley appear
+* Emacs keybindings in other tools
+** Sean really wants scriptable UI
+   - If he can use it from a CLI he can script it
+   - like [[https://www.hammerspoon.org/][Hammerspoon]]
+** Sacha points out [[https://github.com/autokey/autokey][autokey]] (Linux/X11 only)
+** scripting browser
+* Tiling window managers
+** Ethan uses [[https://github.com/baskerville/bspwm][bspwm]]
+** elessar likes [[https://github.com/ianyh/Amethyst][amethyst]] (MacOS, based on xmonad)
+** Prashant Tak mentions [[http://stumpwm.github.io/][StumpWM]] (Common Lisp)
+** and of course there's Emacs-based [[https://github.com/ch11ng/exwm][EXWM]]
+* Funny packages (sachac)
+** [[https://github.com/stardiviner/emacs-rainbow-fart][Rainbow Fart Mode]] - (Chinese slang) compliments you excessively while you type
+** [[https://github.com/oitofelix/cpu-sos][cpu-sos]] - suspend processes in hidden buffers
+* Beautification
+** Ethan: Doom themes are great
+** jwiegley: [[https://github.com/rolandwalker/unicode-fonts][different fonts/sizes for different Unicode pages]]
+   - e.g. you could make math particularly large
+** sachac:
+*** [[https://protesilaos.com/codelog/2020-09-14-modus-themes-review-blues/][Protesilaos Stavrou puts a lot of thought into appearance]]
+*** [[https://www.reddit.com/r/emacs/comments/hnf3cw/my_orgmode_agenda_much_better_now_with_category/][Category Icons in org-mode]]
+*** [[https://www.reddit.com/r/emacs/comments/iemo44/wysiwygified_org_mode/][WYSIWYGified org-mode]]
+*** [[https://www.reddit.com/r/emacs/comments/iv8ecs/i_was_inspired_to_make_my_agenda_more_elegant/][more elegant agenda]]
+** Prashant Tak:
+*** [[https://github.com/jcaw/theme-magic][Apply your Emacs theme to the rest of Linux/MacOS]]
+*** [[https://github.com/rougier/elegant-emacs][A very minimal but elegant Emacs]]
+*** [[https://www.typetasting.com/portfolio][Type Tasting]] - Sarah Hyndman's site
+* Repos of dot files
+** [[https://github.com/JosephFerano/dotfiles][Joseph Ferano]]
+** [[https://github.com/brongulus/.doom.d][Prashant Tak]]
+** [[https://gitlab.com/ethancedwards/emacs-config/-/blob/master/README.org][Ethan]]
+*** keeps his in git as recommended [[https://wiki.archlinux.org/index.php/Dotfiles#Tracking_dotfiles_directly_with_Git][here]] and [[https://www.atlassian.com/git/tutorials/dotfiles][here]]
+** [[https://github.com/jwiegley/dot-emacs][jwiegley]]
+* Sean to jwiegley re: developing his privacy blocker
+** The technical challenge is to modify xwidget-webkit to enable an [[https://www.djcbsoftware.nl/code/mu/mu4e.html][mu4e]] feature on Macs
+*** the patch adds a [[https://developer.apple.com/documentation/safariservices/creating_a_content_blocker][content blocking]] API
+** could theoretically allow adblocking from ELisp
+** the work is in [[https://github.com/seanfarley/emacs][a fork]]
+* Working in C
+** jwiegley has never touched the C source in Emacs
+** Sean: [[https://github.com/etaoins/arret][Arrêt]] is a strongly-typed Lisp written in Rust
+*** one alternative: [[http://blog.veitheller.de/Carp.html][Carp]], a compiled Lisp without garbage collection but with a Rust-like borrow checker
+** Someone made a binding system for [[https://github.com/ubolonton/emacs-module-rs/][making Emacs modules in Rust]]
+   - used to make bindings for [[https://www.thestrangeloop.com/2018/tree-sitter---a-new-parsing-system-for-programming-tools.html][tree-sitter]], a parsing framework designed for editors
+* RMS policy is to never have Emacs on Linux be less featureful than proprietary platforms
+** [[https://news.ycombinator.com/item?id=13011185][hacker news on the controversy]]
