@@ -141,7 +141,7 @@
    - Ian: I think sachac does that
 ** Ezequiel: [[https://gtoolkit.com/][Glamorous Toolkit]]
    - looks like the only kind of software that would him switch from emacs/org-mode
-   - links are bidirecvtion and you get document transclusion
+   - links are bidirectional and you get document transclusion
    - if you need mind maps, it is worth it
 ** Gaurav: [[https://www.youtube.com/watch?v=RvWic15iXjk][How to Use Roam to Outline a New Article in Under 20 Minutes]]
 ** [[https://www.murilopereira.com/how-to-open-a-file-in-emacs/][How to Open a File in Emacs]] new post by Murilo Pereira
