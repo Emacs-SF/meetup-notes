@@ -1,0 +1,168 @@
+#+TITLE: Jan 9 2021 Online Hangout: org-mode GTD focus
+
+* Ian: [[https://www.workclean.com/][Work Clean]]
+** given up on GTD
+*** [[https://www.calnewport.com/blog/2012/12/21/getting-unremarkable-things-done-the-problem-with-david-allens-universalism/][Cal Newport critique]]
+** "Mise en Place"
+   - everything is planned (night before)
+   - based on chef's work
+   - more labor-intensive, must be honest
+   - but reduces stress
+   - organized into levels
+   - one task always front burner
+   - immersive vs. system tasks (uses tags for that)
+   - Cal Newport is an advocate, [[https://www.calnewport.com/blog/2009/11/20/a-study-hacks-primer/][blogs]] on study habits
+** timeboxing
+*** no longer uses org-pomodoro
+    - monitors how long he's spent working on something in the agenda,
+      and if it looks too long, stops the clock and takes a break
+    #+begin_src elisp
+      ;; see tasks in the clock table to level 4, and see time elapsed
+      ;; for the current task in the clock table
+      (setq org-agenda-clockreport-parameter-plist
+      (quote (:link t :maxlevel 4)))
+      (setq org-clock-report-include-clocking-task t)
+    #+end_src
+** Olga
+   - timeboxing is great
+   - likes "active timestamp" feature, shows the steps she took
+** Ashish
+   - look for "Deep Work" podcasts
+* Jeff: Syncing Org with Online GTD Apps
+** Introduction
+*** Online GTD apps
+**** General categories
+*** Why use them?
+**** Legacy pre-org
+**** Better online/app support
+**** collaboration with others
+** Emacs support
+*** often one-way (import only)
+*** often dated
+*** sometimes there is a non-Org package with more features (e.g. RTM)
+*** one (Habitica) uses org extensively under the hood but does not advertise it
+
+** Details
+
+ | Service            | Package      | Bidirectional | Last Updated | Notes                        |
+ |--------------------+--------------+---------------+--------------+------------------------------|
+ | Todoist            | todoist      | yes           |         2020 |                              |
+ | Trello             | org-trello   | yes           |         2020 | Nice YouTube videos          |
+ | Remember the Milk  | org-rtm      | no            |         2016 | simple-rtm has more features |
+ | Basecamp           | org-camp     | no            |         2011 | probably obsolete, [[https://github.com/math0ne/emacs-org-basecamp][non-MELPA]] |
+ | Google Calendar    | org-gcal     |               |         2020 |                              |
+ | Google Tasks       | org-gtasks   | yes?          |         2020 | [[https://github.com/JulienMasson/org-gtasks][non-MELPA]]                    |
+ | Any CalDAV service | org-caldav   | yes           |         2020 | calendar entries only?       |
+ | (includes gcal)    |              |               |              |                              |
+ | Outlook            | org-outlook  | no            |         2016 | injects VB scripts?          |
+ | ToodleDo           | org-toodledo |               |         2014 | original version sachac :)   |
+ | Habitica           | habitica     | no            |         2020 | uses org but is not org?     |
+
+** Storage services
+*** DropBox
+**** also, DropBox Paper?
+*** NextCloud
+
+** Syncing generally
+*** data model vs everything-is-text
+**** need for UUIDs?
+*** reconciliation
+**** [[https://code.librehq.com/qhong/crdt.el/][CRDT]] etc.?
+*** org-caldav has a great discussion of these issues in README
+
+** Discussion
+*** Oscar wrote his own CalDAV synchronizer
+    - doesn't try to sync changes on each side
+*** syncthing - pretty popular. people use it with Orgzly
+*** [[https://www.reddit.com/r/emacs/comments/dn0ar3/introduction_to_organice_using_org_mode_from_a/][organice]] is an online alternative to things like Orgzly
+*** Mike, Olga - [[https://workflowy.com/hi/][flowy]] "could be a gateway drug" to org
+    - though [[https://www.reddit.com/r/emacs/comments/66k17k/is_there_orgmode_workflowy_integration_package/][it does not have org integration]]
+*** Ashish
+**** [[https://keep.google.com/u/0/][Google Keep]], supports notes and todos
+**** [[https://caldavsynchronizer.org/][caldavsynchronizer]] - an OSS CalDAV plugin for Outlook
+*** Gaurav - [[https://github.com/pimutils/vdirsyncer][vdirsyncer]] may be "missing piece". Syncs calendars and contacts
+
+* Open Discussion
+** Ezequiel - ADHD
+*** [[http://bettermess.com/adhd-to-gtd/][ADHD to GTD]] is a good blog series on the subject
+*** Oscar: doesn't exist. Too much focus was deadly for our ancestors.
+    - Constant change of attention = better situational awareness.
+      Must overcome for modern world.
+*** use full screen, noise-cancelling headphones
+*** Olga: "deep work" playlist, likes soundtracks (movies and games).
+   - Clocking in is good. How do I measure productivity by music?
+   - Horizon Zero Dawn and God of War are fantastic
+   - Nutcracker is 80-90m; Swan Lake is ~2h15m.
+   - Black Panther and West World soundtracks are great and are 90+m
+   - Gaurav: [[https://www.youtube.com/watch?v=jadxTFqyhRM][this Age of Empires soundtrack]] and [[https://open.spotify.com/playlist/0Ik3HiGzmGgo7HhaVehxRq][Epic Coding]] for focus
+   - Oscar: Assassin's Creed and Sim City
+**** Ian suggestions 
+***** [[https://open.spotify.com/playlist/2xrZt3dVxTcX7g81wFMIBR?si=Uv4IB_KyRi2zfqXq1y6Gdg][Laurel Canyon]] (60's folk rock),
+***** [[https://wfmu.org/][WFMU]] has great commercial-free programs
+***** there is a [[https://www.reddit.com/r/emacs/comments/3g3vo1/writing_a_spotify_client_in_elisp_in_16_minutes][spotify controller for emacs]], could be a starting point to measure effectiveness
+****** Gaurav: [[https://github.com/danielfm/spotify.el][this one]]?
+****** Ezequiel: [[https://www.emacswiki.org/emacs/mpris-dbus.el][MPRIS]] (Media Player Remote Interfacing Specification)
+       - and alphapapa's [[https://github.com/alphapapa/unpackaged.el#track-metadata-from-mpris-supporting-media-player][metadata extractor]]
+**** Mike's coding music suggestions (no vocals):
+***** video game soundtracks
+****** Spaceplan
+****** Fez
+****** Total Annihilation
+****** Supreme Commander
+****** Empire Earth
+****** Pikmin
+****** Jewel Quest
+****** Vector TD
+***** movie soundtracks
+****** Enders Game
+****** Tron
+****** Tomb Raider
+****** Lord of the Rings
+***** Instrumental Music Artists
+****** Pat Metheny
+****** Buckethead
+****** Hiroshima
+****** Andreas Vollenweider
+****** Fourplay
+
+******* George: studies on attention at NASA.
+****** Oscar: you need to know what you want to do first so you can measure it
+      - Gaurav: I forget to tag on/off
+****** music player control
+******* spotify control module in elisp
+******* there is also MPRIS which does some kind of music control. And dbus.
+****** Ashish (and Gaurav) likes org-roam
+       - putting stuff in there keeps it out of his head, which is good.
+       - Ian : what is the advantage? Oscar: back-links give context, live,
+         as you scan related documents.
+** Olga: [[https://lauravanderkam.com/][Laura Vanderkam]], commonly featured in Cal NewPort's work, has great resources
+   - new book [[https://www.amazon.com/New-Corner-Office-Successful-People-ebook/dp/B088QLCNJB][The New Corner Office: How the Most Successful People Work from Home]]
+   - big advocate of time logs, every 15m (!)
+   - Ian: I think sachac does that
+** Ezequiel: [[https://gtoolkit.com/][Glamorous Toolkit]]
+   - looks like the only kind of software that would him switch from emacs/org-mode
+   - links are bidirecvtion and you get document transclusion
+   - if you need mind maps, it is worth it
+** Gaurav: [[https://www.youtube.com/watch?v=RvWic15iXjk][How to Use Roam to Outline a New Article in Under 20 Minutes]]
+** [[https://www.murilopereira.com/how-to-open-a-file-in-emacs/][How to Open a File in Emacs]] new post by Murilo Pereira
+*** some discussion of Lisp
+**** Ezequiel
+     - [[https://www.quicklisp.org/beta/][quicklisp]]
+     - Peter Seibel is teasing us with [[https://twitter.com/peterseibel/status/1346226308506796034][a second edition of Practical Common Lisp]]
+*** Olga: did anyone have any reaction to the statement:
+    #+begin_quote
+    It’s hard to contest that Neovim’s achievement happened because of its approachable development process focused on maintainability and velocity, while in contrast, it could be argued that current progress in Emacs happens despite its development process.
+    #+end_quote
+
+* Young-Il: diagrams
+  - using org-mode to generate HTML containing a nice diagram (in dot)
+  - png vs svg (doesn't work on Mac for some reason for him) vs ditaa
+  - Ben: use =org-display-inline-images= to see result
+** Mike demonstrates svgbob
+  - turns ascii drawings into real sketches
+  - also shows [[https://ctan.math.illinois.edu/graphics/pgf/contrib/circuitikz/doc/circuitikzmanual.pdf][circuitikz]] and [[https://www.openscad.org/][openscad]] (and scad-mode to view!)
+  - =artist-mode= to generate the ascii art in the first place
+*** Ashish: You may use files from [[https://www.asciiart.eu/][ascii-art archives]] and edit with artist mode
+
+* [[https://www.youtube.com/watch?v=43Dg5zYPHTU][New video]] from [[https://protesilaos.com/][Protesilaos Stavrou]] on new trends in completion frameworks
+  - Embark, Consult, Orderless
