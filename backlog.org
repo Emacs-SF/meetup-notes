@@ -1,0 +1,79 @@
+* Ideas for future discussions
+** Emacs Lisp
+*** Edebug
+*** Profiling
+*** Test coverage
+*** Error Messages, Flycheck, etc.
+*** Asynchronous processing
+- Chaining HTTP requests
+*** Timers
+*** Package Management
+**** use-package
+**** quelpa
+**** straight.el
+*** Working with collections
+**** maps in elisp
+**** dash.el
+** Desktop Notifications
+** Completion frameworks
+*** Ivy
+*** Company
+*** Helm
+*** Selectrum
+*** Ido
+** Auto-expansion
+*** Dabbrev
+*** Hippie-expand
+*** Yasnippet
+** Window Management
+*** EXWM
+*** StumpWM
+*** i3
+** Emacs in OSX
+** Emacs in Windows
+** EAF (Emacs Application Framework)
+** PDF
+*** org-ref
+*** org-noter
+** Org-mode
+*** Org-roam
+*** LaTeX
+*** Babel
+** Web browsing
+** Search
+** Programming languages
+*** LSP
+** Chat
+*** IRC
+*** Telegram
+** Email
+*** notmuch
+*** Gnus
+*** mu4e
+** Emacs distributions
+*** Spacemacs
+*** Doom
+*** Prelude
+*** Ergoemacs
+** Theming
+** Hydra & Transient
+** Version Control
+- Magit
+- Ediff
+** Math in Emacs
+- Calc
+- Octave
+** Encryption and secrets
+** Shells and terminal emulators
+- eshell
+** FileTree
+*** Treemacs
+*** Neotree
+*** Direx
+** Emacs for Vimmers, Evil-mode
+*** Spacemacs
+*** Doom
+*** Evil-collection
+** TRAMP
+** Buffer management
+- iBuffer
