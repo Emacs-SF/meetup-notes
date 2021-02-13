@@ -27,9 +27,9 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 **** 2021-01-09 jitsi.org, topics: Online Hangout VI: org-mode GTD focus
 - [[file:meetups/2021/2021-01-09.org][1/9 meeting notes]]
 *** Prior year archives (reverse chronological order)
-- [[file:meetups/2017/index.org][2020]]
-- [[file:meetups/2017/index.org][2019]]
-- [[file:meetups/2017/index.org][2018]]
+- [[file:meetups/2020/index.org][2020]]
+- [[file:meetups/2019/index.org][2019]]
+- [[file:meetups/2018/index.org][2018]]
 - [[file:meetups/2017/index.org][2017]]
 
 
