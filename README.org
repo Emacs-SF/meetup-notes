@@ -19,18 +19,18 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - and more
 *** Planned Meetups
 **** 2021-03-05 virtual location TBD, topics: posframes, magit-trasient, elisp
-*** Recent Meetups
-**** 2021-01-09 jitsi.org, topics: Online Hangout VI: org-mode GTD focus
-- [[file:meetups/2021/2021-01-09.org][1/9 meeting notes]]
-**** 2021-01-27 jitsi.org, topics: Emacs completion packages, Emacs
-- [[file:metups/2021/2021-01-27.org][1/27 meeting notes]]
+*** Recent Meetups (reverse chronological order)
 **** 2021-02-12 jitsi.org, topics: Org-roam, org-roam, Emacs
 - [[file:meetups/2021/2021-02-12.org][2/12 meeting notes]]
-*** Prior year archives
-- [[file:meetups/2017/index.org][2017]]
-- [[file:meetups/2017/index.org][2018]]
-- [[file:meetups/2017/index.org][2019]]
+**** 2021-01-27 jitsi.org, topics: Emacs completion packages, Emacs
+- [[file:metups/2021/2021-01-27.org][1/27 meeting notes]]
+**** 2021-01-09 jitsi.org, topics: Online Hangout VI: org-mode GTD focus
+- [[file:meetups/2021/2021-01-09.org][1/9 meeting notes]]
+*** Prior year archives (reverse chronological order)
 - [[file:meetups/2017/index.org][2020]]
+- [[file:meetups/2017/index.org][2019]]
+- [[file:meetups/2017/index.org][2018]]
+- [[file:meetups/2017/index.org][2017]]
 
 
 
