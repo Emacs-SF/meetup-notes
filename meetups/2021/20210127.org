@@ -1,1 +1,306 @@
-* TBD 1/27
+#+TITLE: Jan 27 2021 discussion of emacs, org-mode, org-roam and similar packages
+* Jan 27 2021 discussion of emacs, org-mode, org-roam and similar packages
+** meetup chat (before meeting, condensed)
+*** Mike Wright
+Kicking off discussion of possible topics--here are some links to consider before meeting:
+> https://github.com/the-ted/org-mind-map
+> https://github.com/org-roam/org-roam
+> https://github.com/Kungsgeten/org-brain
+feel free to suggest others
+
+** jitsi.org video call - Mike's meeting notes
+*** Brian Wood
+discussed org-mode and time tracking.
+*** Mike Wright 
+- discussion: consensus seems to be that org-roam is better documented/supported
+than org-brain or org-mind-map (or just of more interest to this meeting's attendees).
+Also, having online meeting attendee limits isn't really needed.
+- sent online meeting URL to meetup.com chat for waitlist people, and lurkers :-)
+- demo: (after 1 week of use) org-roam, [[https://github.com/org-roam/org-roam-server][org-roam-server]], hierarchies, cross-linking, filtering view
+- will schedule next online meetup for a Friday morning in February; topic: completion packages
+(no attendee limits)
+*** Ag Ibragimov
+- demo: (after 2 weeks of use) org-roam, org-roam-server, capture templates, backlinks, daily notes, db clearing/rebuilding
+- book discussion: Smart Note Taking
+- [[https://smile.amazon.com/gp/product/B06WVYW33Y/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1][How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking – for Students, Academics and Nonfiction Book Writers]]
+- [[https://github.com/org-roam/org-roam/blob/master/org-roam-protocol.el][org-roam protocol]] e.g., to edit local files linked-to from org-roam-server graph display in browser
+- capture text from browser into org-roam
+- commercial alternative to org-roam: [[https://obsidian.md/][obsidian.md]]
+*** Ezequiel Birman
+- uses Roam for work, obsidian.md for personal use
+*** Jeff Trull
+- ein [[https://millejoh.github.io/emacs-ipython-notebook/][Emacs IPython Notebook]]
+*** Sacha Chua 
+
+- demo: transcript editing for EmacsConf
+- mentioned a new thing: code-cells related to Jupyter Notebooks.
+*** Garav Jain
+- gkroam
+*** Ethan Edwards
+- demo'ed using org-roam to organize comics
+*** others
+- [[https://foambubble.github.io/foam/][Foam]] is a personal knowledge management and sharing system inspired by Roam Research, built on Visual Studio Code and GitHub.
+
+** jitsi.org video call chat (copy/pasted/condensed)
+Salar Rahmanian
+quality not quantity
+18:36
+Ezequiel Birman
+Hi, just came in! Still finishing dinner but definitely listening
+There is such a thing like oral tradition but it is true that for me too, I can deal better with the world around me if I keep a written record
+18:46
+Ian
+Hi everybody, just observing tonight, glad to be able to hear these presentations.
+18:54
+Ethan
+My dad uses obsidian
+18:54
+Pierce Wang
+yeah! I've recommended Obsidian to my parents (they don't use Emacs unfortunately)
+18:54
+Ag
+obsidian.md
+18:54
+Pierce Wang
+that and Roam Research as well
+18:55
+Ethan
+My dad has to use Roam for his job, but obsidian for personal use.
+18:55
+Ezequiel Birman
+For propietary software maybe second brain and Roam Research, The Glamorous Toolkit, although solving a broader problem, is MIT licensed. Whatabout Codex?
+yup
+18:58
+Pierce Wang
+Would anyone here happen to have seen some of the EmacsConf2020 talks by Leo Vivier? he's a co-maintainer of org-roam and he had a couple talks about org files and org-roam
+18:59
+Ethan
+The archives are probably on youtube
+18:59
+Pierce Wang
+on the EmacsConf website! all there
+18:59
+Ethan
+oh, there too  😃
+18:59
+yes, I viewed some org-roam videos on youtube by Leo
+18:59
+Salar Rahmanian
+https://emacsconf.org/2020/talks/
+19:01
+Ethan
+https://orgmode.org/worg/org-contrib/org-protocol.html
+19:03
+Jeff Trull
+Now I understand why a favorite dish from a local French place is "Hachis Parmentier"
+19:03
+Ezequiel Birman
+I tried a few org-protocol plug-ins a few years ago but at that time they were kind of broken. I should try again.
+beautiful
+19:05
+Ethan
+Yeah, that's really cool, I had no idea you could do that
+19:06
+Pierce Wang
+^! I'll definitely be checking out org-protocol
+19:07
+Ethan
+Can you click on those?
+19:08
+Ezequiel Birman
+it is an svg, i guess not
+19:08
+Jeff Trull
+No, it's graphviz I think
+Might be able to improve its appearance though, with some extra control info
+19:09
+configure a different graphviz layout engine, like circo
+19:09
+Ezequiel Birman
+How about exporting org-roam graph to a text based format like html or pdf? I mean in a non-graphical way
+19:14
+https://notes.alexkehayias.com/org-roam/
+has exporting to html notes
+19:18
+Sacha Chua
+https://github.com/zainab-ali/pair-tree.el
+ has a clickable SVG for visualizing cons cells. Somebody should make something like that for mindmapping Org Mode files =)
+19:18
+Pierce Wang
+Sacha! Hello!
+19:19
+Sacha Chua
+Hello Pierce, all!
+19:19
+Jeff Trull
+Hi Sacha, we were in the same meetups today 😃
+19:19
+Salar Rahmanian
+which other meetups? 😃
+19:20
+Sacha Chua
+Jeff: I'm guiltlessly sneaking into this one thanks to the link from the meetup comments. =)
+19:20
+Jeff Trull
+Emacs Berlin!
+19:20
+Salar Rahmanian
+nice
+19:20
+Jeff Trull
+There was one in Singapore too supposedly
+19:20
+Sacha Chua
+I've been keeping a list of upcoming meetups at 
+https://www.emacswiki.org/emacs/Usergroups
+ and 
+https://emacslife.com/calendar/
+and they're now the first heading in Emacs News
+19:21
+Salar Rahmanian
+cool thanks
+slightly off topic what is everyone using on their iphones to view and do some light editing of their org files?
+19:22
+Pierce Wang
+ah beorg works pretty well for me! ^
+19:22
+Ethan
+I found beorg yesterday, I've yet to download it and try it out though.
+19:23
+Salar Rahmanian
+I tried it for a day and didn't take to it, maybe I should try again
+19:23
+Pierce Wang
+for less task-centric things, though, organice is pretty good too I think
+19:23
+Ethan
+I never got organice to work
+19:23
+Ezequiel Birman
+I just rememebered the existence of 
+https://github.com/JeffreyBenjaminBrown/hode
+19:23
+Greg Coladonato
+Yes! Anki!!
+19:24
+Sacha Chua
+I remember the Remembrance Agent, which looked at the 100 words or so around your cursor and suggested stuff that was relevant. That would be pretty neat too. =)
+I hear sometimes people keep index nodes that link to a bunch of other nodes to make things a little easier to find
+19:31
+Pierce Wang
+thanks for this event everyone! sorry I have to head out early--have to head to a recording session tonight. Looking forward to the next one!
+19:33
+Ethan
+Socrates
+Random topic ^ heh
+19:37
+Sacha Chua
+Hmm... I should figure out a workflow for taking my Android share -> Orgzly 
+inbox.org
+ -> Syncthing stuff into org-roam.
+19:39
+Greg Coladonato
+Hey Ag, where could i find out more about how to connect If This Then That to save a link to every youtube video I like to a file on the web?
+OK have to jump. Thanks for the presentation!
+19:45
+Ezequiel Birman
+Thanks for your presentation
+19:54
+Ag
+https://github.com/agzam/.spacemacs.d
+19:55
+Ezequiel Birman
+Does anyone know what is 
+https://twitter.com/AthensResearch
+ about?
+19:55
+Ag
+@iLemming
+19:55
+Ezequiel Birman
+They have a discord but all those greek names confuse me
+YES it was me
+I mean, about ADHD
+19:56
+Sacha Chua
+I've seen a few people posting their Zettelkasten slipboxes online. 
+https://doubleloop.net/2020/08/21/how-publish-org-roam-wiki-org-publish/
+ looks interesting.
+19:56
+Jeff Trull
+That was a really good conversation Ezequiel, it triggered a lot of thoughts
+19:57
+Ezequiel Birman
+Sometimes I feel like I need a third brain
+19:57
+Sacha Chua
+Baader-Meinhof phenomenon
+19:59
+Ezequiel Birman
+I am feeling the same. Everything now seems about knowledge representation
+YES!
+Thank you Sacha
+19:59
+Sacha Chua
+I'm editing subtitles for EmacsConf. =)
+Want to see?
+20:04
+Ezequiel Birman
+Wow, thanks
+20:04
+Ag
+Yah!
+20:04
+Sacha Chua
+I'm starting to get the hang of writing helm sources =)
+20:10
+Jeff Trull
+I fixed a bug in one! It was kind of scary 😃
+What was the source you were making?
+20:14
+Sacha Chua
+One for opening or linking to my sketches
+20:15
+Jeff Trull
+oh neat
+20:16
+Sacha Chua
+How can we help with spreading the word?
+People tend to be reasonable at self-organizing
+20:20
+Ezequiel Birman
+I am already muted 😃 Maybe someone is willing to manage a Twitter account for this group?
+20:20
+Sacha Chua
+so if it's getting to be too big, you could say, hey, hop onto a different meet if this is getting  too laggy
+20:20
+Ezequiel Birman
+I am going to bed. Thank you all!
+20:23
+Jeff Trull
+Goodnight!
+20:23
+Gaurav Jain
+https://github.com/Kinneyzhang/gkroam
+20:30
+Sacha Chua
+There was another new thing: code-cells
+It says you can use it to open Jupyter notebooks in Emacs.
+Haven't looked at it yet.
+20:33
+Will check it out
+20:34
+Ethan
+https://github.com/astoff/code-cells.el
+20:35
+Jeff Trull
+Well this is my second Emacs meetup today so I think I'll sign off 😃
+Thanks Mike for organizing
+20:35
+Sacha Chua
+Thanks for hosting! =)
+20:36
+😃
+Type a message
+---
+

@@ -23,7 +23,7 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 **** 2021-02-12 jitsi.org, topics: Org-roam, org-roam, Emacs
 - [[file:meetups/2021/20210212.org][2/12 meeting notes]]
 **** 2021-01-27 jitsi.org, topics: Emacs completion packages, Emacs
-- [[file:metups/2021/20210127.org][1/27 meeting notes]]
+- [[file:meetups/2021/20210127.org][1/27 meeting notes]]
 **** 2021-01-09 jitsi.org, topics: Online Hangout VI: org-mode GTD focus
 - [[file:meetups/2021/20210109.org][1/9 meeting notes]]
 *** Prior year archives (reverse chronological order)
