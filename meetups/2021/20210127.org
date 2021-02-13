@@ -2,12 +2,13 @@
 * Jan 27 2021 discussion of emacs, org-mode, org-roam and similar packages
 ** meetup chat (before meeting, condensed)
 *** Mike Wright
+#+BEGIN_EXAMPLE
 Kicking off discussion of possible topics--here are some links to consider before meeting:
 > https://github.com/the-ted/org-mind-map
 > https://github.com/org-roam/org-roam
 > https://github.com/Kungsgeten/org-brain
 feel free to suggest others
-
+#+END_EXAMPLE
 ** jitsi.org video call - Mike's meeting notes
 *** Brian Wood
 discussed org-mode and time tracking.
@@ -42,6 +43,7 @@ Also, having online meeting attendee limits isn't really needed.
 - [[https://foambubble.github.io/foam/][Foam]] is a personal knowledge management and sharing system inspired by Roam Research, built on Visual Studio Code and GitHub.
 
 ** jitsi.org video call chat (copy/pasted/condensed)
+#+BEGIN_EXAMPLE
 Salar Rahmanian
 quality not quantity
 18:36
@@ -303,4 +305,5 @@ Thanks for hosting! =)
 😃
 Type a message
 ---
+#+END_EXAMPLE
 
