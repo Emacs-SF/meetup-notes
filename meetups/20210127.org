@@ -1,0 +1,25 @@
+#+TITLE: Org-Brain, Org-Roam, Org-Mindmap
+
+* Call for Topics
+** Brian Wood: time-tracking is very different from Roam, how to separate?
+   - Mike W: just keep in different files
+* Org-Roam
+** Ag: who has actually tried it?
+   - Mike, Pierce W., Ag
+   - Ag: I need to write! The freedom to use your faculties to accumulate knowledge.
+     You cannot learn anything without writing. Unwritten knowledge does not exist.
+** Mike W
+*** Demo
+    - showing hardware information he's accumulating
+    - using org-roam server and sqlite for backlinks
+** Ag
+*** Built a org-roam database on the history of potatoes in France with his daughter
+*** Does a quick demo of org-roam and backlinks
+    - he can generate links directly from a web page
+    - uses org-protocol somehow to link to org from the mindmap displayed by the server
+*** Likes to use [[https://jblevins.org/projects/deft/][deft]] for searching org notes
+*** There is also a note-taking app called Obsidian
+    - uses Markdown
+** Ethan Edwards
+*** organizes his comic books in org
+* sachac: editing subtitles for EmacsConf videos
