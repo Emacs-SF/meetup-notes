@@ -1,0 +1,16 @@
+* Emacs SF - Friday, March 19, 2021, 10:30am (PDT) -0700 UTC
+** Title: Retro Emacs, Lightning Talks, and General Emacs Discussion
+** Location (online): [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]]
+** Who: Mike Wright, Jeff Trull, and attendees TBD (16 RSVPs as of 3/18)
+** Presentations
+*** Jeff Trull: Retro Emacs
+The Emacs manual says "The first Emacs was a set of macros written in 1976 at MIT by RMS for the editor TECO." 
+In my talk I will explain what this means, what TECO is, and what the earliest versions of Emacs provided to its users. 
+Many concepts in Emacs to this day derive from the needs of this early time; I will connect the solutions of that time to the architecture of today. 
+There will also - hopefully - be a live demo of both TECO and Emacs circa 1980 on an emulated TOPS-20.
+** Lighting Talks
+*** TBD
+** Discussion
+*** TBD
+
+
