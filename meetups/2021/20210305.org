@@ -5,7 +5,7 @@
 ** Presentations
 *** Mike W.: Transient demo
 **** video
-TBD
+[[https://youtu.be/zLTG7Bp0FtI][Transient Demo Mike]]
 **** related gists
 - original transients demo: - [[https://gist.github.com/wrightmikea/b33601f9d97be504b526b65df796804c]]
 - cleaned up version: [[https://gist.github.com/wrightmikea/4c6bfc57a72a5dd1d1b85993924d177e]]
@@ -13,32 +13,32 @@ TBD
 - (to be given in future meeting due to technical difficulties with screen sharing)
 *** Mike W.: Hydra demo
 **** video
-TBD
+[[https://youtu.be/ccMFeDO5gOs][Hydra Demo Mike]]
 **** related gists
 - Nested Hydra demo: [[https://gist.github.com/wrightmikea/31536eefe20b444f492aea7a31c9497a]] 
 *** Leo V.: Hydra demo
 **** video
-TBD
+[[https://youtu.be/WBCZR1vhuJM][Hydra Demo Leo]]
 *** Leo V.: magit forge - github issues, pull-requests
 **** video
-TBD
+[[https://youtu.be/pXjCRpLY9Ts][Magit Demo Leo]]
 *** Mike W.: Dmenu (and tmm-menu) demo
 **** video
-TBD
+[[https://youtu.be/QZ1KL7kZqoI][Dmenu Demo Mike]]
 **** related gists
 - dmenu demo: [[https://gist.github.com/wrightmikea/d88279b89ff87be85a920e365f84e7b2]]
 - tmm-menu demo: [[https://gist.github.com/wrightmikea/b5ec6c10229f604bb07c88eef9294cfd]]
 **** notes:
 Ag's question answered: Mike uses Arch Linux with LXDE, which uses the default Openbox Window Manager.
-*** Ag I.: Magit dired-log demo
+*** Ag I.: Posframes, Magit dired-log demo
 **** video
-TBD
+[[https://youtu.be/FSitofUaAkc][Posframes Demo Ag]]
 *** Ag I.: gh-notify, gh-review
 **** video
-TBD
-*** Ag I.: Spacemaces "transients" layout
+[[https://youtu.be/fOIPkB0oxeE][gh-notify Demo Ag]]
+*** Ag I.: System-wide hydras, Hammersppon, Spacemaces "transients" layout
 **** video
-TBD
+[[https://youtu.be/LpL1xeSVWTk][Hammerspoon Demo Ag]]
 ** Discussion
 Ag: Spacemacs "transients" layout
 [[https://develop.spacemacs.org/doc/DOCUMENTATION.html#transient-states]]
