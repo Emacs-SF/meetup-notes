@@ -1,1 +1,87 @@
-* TBD 2/12
+* Emacs SF - February 12, 2021
+** Title: Discussion of emacs in general and completion frameworks in particular
+** Location (online): https://meet.jit.si/EmacsCompletionEmacsSF20210212T1000
+** Who: Jeff Trull, Mike Wright, Leo Vivier, Ag Ibragimov, and 33 other attendees.
+** Presentations
+*** Leo Vivier: org-roam "2.0" changes
+[[https://www.orgroam.com/]]
+**** simplified; ~2000 code lines removed
+**** overhaul side-buffer backlinks
+**** use magit transient menus
+**** emphasis on non-hierarchical notes
+*** Leo Vivier: org-roam completions
+**** demo bibtex completion
+[[https://github.com/org-roam/org-roam-bibtex]]
+** Discussion
+*** Ivy
+[[https://github.com/abo-abo/swiper/blob/master/ivy.el]]
+*** Company-mode
+[[https://company-mode.github.io/]]
+*** find-file
+[[https://www.gnu.org/software/emacs/manual/html_node/eintr/Find-a-File.html]]
+*** Ido - Interactively Do Things
+[[https://www.emacswiki.org/emacs/InteractivelyDoThings]]
+*** Consult
+[[https://github.com/minad/consult]]
+*** Projectile
+[[https://github.com/bbatsov/projectile]]
+*** Helm
+[[https://github.com/emacs-helm/helm]]
+*** Selectrum
+[[https://github.com/raxod502/selectrum]]
+**** README opinionated but entertaining
+**** limitations of integration
+**** Ivy integration good
+**** orderless
+[[https://github.com/oantolin/orderless]]
+**** prescient
+[[https://github.com/raxod502/prescient.el]]
+*** pdftools - mainstream; see reddit discussions
+[[https://github.com/politza/pdf-tools]]
+[[https://github.com/politza/pdf-tools/issues/659]] - new maintainer
+*** orgize - Rust library for manipulating .org files
+[[https://docs.rs/orgize/0.8.4/orgize/]]
+**** Leo Vivier's Emacs config
+[[https://github.com/zaeph/.emacs.d]]
+*** hippie-expand
+[[https://www.emacswiki.org/emacs/HippieExpand]]
+*** sync org mode files
+[[https://www.reddit.com/r/emacs/comments/8shxp9/orgzly_sync/]]
+*** org-roam
+**** org-roam questions 
+[[https://github.com/org-roam/org-roam#getting-help]]
+**** org-roam videos
+[[https://www.youtube.com/user/Zaeph]]
+*** Ivy-posframe
+[[https://github.com/tumashu/ivy-posframe]]
+**** float menu 
+**** child x-window
+**** child frame slower
+**** magit-transient is buffer oriented; faster; different
+**** future of emacs leverage wayland
+**** hydra-posframe
+**** transient-posframe
+**** separate frame?
+*** Company-posframe
+[[https://github.com/tumashu/company-posframe]]
+*** Which-key-posframe 
+[[https://github.com/yanghaoxie/which-key-posframe]]
+**** laggy (busy modeline?)
+**** emacs profiler not great for memory leaks or performance tuning
+*** "Teaching an old Bovine Gnu Tricks: What's next for Emacs?" - Jeffrey Walsh (LCA 2021 Online)
+[[https://www.youtube.com/watch?v=LPwr8WeE8jU]]
+*** Future meeting logistics/topics
+**** next meetup in two weeks (Friday March 5th)
+[[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210305.org]]
+**** posframes
+**** Emacs SF Wiki Backlog Page mentions elisp; feel free to suggest more topics
+[[https://github.com/Emacs-SF/meetup-notes/wiki/Backlog]]
+**** Leo will help set up better video recording for next meetup (like Emacs Paris)
+**** Ag suggested trying to get package maintainers to speak, e.g. embark dev
+**** Emacs research group?
+**** sync Emacs buffers
+**** elisp, debugger, package development
+**** profiling
+**** Effort underway to federate Emacs meetup groups and share content
+
+
