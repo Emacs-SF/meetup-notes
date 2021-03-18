@@ -1,1 +1,82 @@
-* TBD 3/5
+* Emacs SF - Friday, March 5, 2021, 10am (PST) -0800 UTC
+** Title: Emacs Lisp and menu packages: dmenu, hydra, posframe, transient, etc.
+** Location (online): [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]] (new)
+** Who: Mike Wright, Leo Vivier, Ag Ibrhamov, Jeff Trull, and TODO attendees
+** Presentations
+*** Mike W.: Transient demo
+**** video
+TBD
+**** related gists
+- original transients demo: - [[https://gist.github.com/wrightmikea/b33601f9d97be504b526b65df796804c]]
+- cleaned up version: [[https://gist.github.com/wrightmikea/4c6bfc57a72a5dd1d1b85993924d177e]]
+*** Howard: Hydra demo
+- (to be given in future meeting due to technical difficulties with screen sharing)
+*** Mike W.: Hydra demo
+**** video
+TBD
+**** related gists
+- Nested Hydra demo: [[https://gist.github.com/wrightmikea/31536eefe20b444f492aea7a31c9497a]] 
+*** Leo V.: Hydra demo
+**** video
+TBD
+*** Leo V.: magit forge - github issues, pull-requests
+**** video
+TBD
+*** Mike W.: Dmenu (and tmm-menu) demo
+**** video
+TBD
+**** related gists
+- dmenu demo: [[https://gist.github.com/wrightmikea/d88279b89ff87be85a920e365f84e7b2]]
+- tmm-menu demo: [[https://gist.github.com/wrightmikea/b5ec6c10229f604bb07c88eef9294cfd]]
+**** notes:
+Ag's question answered: Mike uses Arch Linux with LXDE, which uses the default Openbox Window Manager.
+*** Ag I.: Magit dired-log demo
+**** video
+TBD
+*** Ag I.: gh-notify, gh-review
+**** video
+TBD
+*** Ag I.: Spacemaces "transients" layout
+**** video
+TBD
+** Discussion
+Ag: Spacemacs "transients" layout
+[[https://develop.spacemacs.org/doc/DOCUMENTATION.html#transient-states]]
+emacs keypress down/up missing
+mac command switch (hold command down) hard to implement in emacs
+linux exwm can remap key but is experimental
+Mac OS X Hammerspoon - fork of Marvel Thor's Hammer (Mjølnir)
+[[https://www.hammerspoon.org/]]
+Leo: keyboard mapping
+[[https://www.x.org/releases/current/doc/man/man1/setxkbmap.1.xhtml]]
+qmk [[https://qmk.fm/]]
+solution: hardware, xkb shiftmodes
+[[https://en.wikipedia.org/wiki/X_keyboard_extension]]
+Ag: kinesis keyboard
+Leo: resolve merge conflict using magit
+ediff a-b both
+smerge (alternate tool)
+Mike: Emacs SF 
+- wiki: [[https://github.com/Emacs-SF/meetup-notes/wiki]]
+- blog: [[https://emacs-sf.github.io/]]
+Future meetups:
+Jeff: Retro Emacs 1976-1980s emulator history
+Ag: old timers / speakers?
+Leo: roam -> transient
+Ag: athena research OS beta
+Ag: speaker
+Mike: elisp development
+Leo: content license
+Thursday evening meetups maybe (Jeff?)
+Leo: federated emacs groups, content
+Leo: energize the emacs community
+emacs conf 2021 (coming this fall)
+roam 2.0 under development
+SVG in emacs?
+Leo: recordings will be available to edit in 24 hours
+*** Next meetup
+March 19th 10:30am PDT UTC-7 "Retro Emacs, Lightning Talks, and General Emacs Discussion"
+[[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210319.org]]
+
+
+
