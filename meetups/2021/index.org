@@ -1,9 +1,37 @@
-** 2021 meetups
-*** 2021-01-xx online jitsi.org
-**** [[file:20210109.org][1/9 meeting notes]]
-*** 2021-01-27 online jitsi.org
+* 2021 meetups 
+
+** Planned (chronological order)
+
+*** 2021-03-19T1030-0700 Friday online fosshost.org (note daylight savings time change and new half-past start time)
+**** title: Retro Emacs, Lightning Talks, and General Emacs Discussion
+**** online: [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]]
+**** [[file:20210319.org][3/19 meeting notes]] TODO
+
+*** 2021-04-02T10:30-0700 Friday online fosshost.org
+**** title: Emacs Lisp - Coding a Minor Mode, Lightning Talks, and Discussion
+**** online: [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]]
+**** [[file:20210402.org][4/02 meeting notes]] TODO
+
+** Past (reverse chronological order)
+
+*** 2021-03-05T10:00-0800 Friday online fosshost.org (note URL change)
+**** title: Emacs Lisp and menu packages: dmenu, hydra, posframe, transient, etc.
+**** online: [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]]
+**** [[file:20210305.org][3/5 meeting notes]] updated without video links
+
+*** 2021-02-12 Friday 10:00am PT online jistsi.org
+**** title: Discussion of emacs in general and completion frameworks in particular
+**** online: https://meet.jit.si/EmacsCompletionEmacsSF20210212T1000
+**** [[file:20210212.org][2/12 meeting notes]] updated (no video)
+
+*** 2021-01-27 Wednesday 06:30pm PT online jitsi.org
+**** title: discussion of emacs, org-mode, org-roam and similar packages
+**** online: https://meet.jit.si/...
 **** [[file:20210127.org][1/27 meeting notes]]
-*** 2021-02-12 online jitsi.org
-**** [[file:20210212.org][2/12 meeting notes]]
-*** 2021-03-05 TBD
-**** [[file:20210305.org][3/5 meeting notes]]
+
+*** 2021-01-09 Saturday 11:00am PT online jitsi.org
+**** title: Online Hangout VI: org-mode GTD focus
+**** online: https://meet.jit.si/...
+**** [[file:20210109.org][1/9 meeting notes]]
+
+
