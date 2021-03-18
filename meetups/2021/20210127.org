@@ -12,16 +12,37 @@ feel free to suggest others
 ** jitsi.org video call - Mike's meeting notes
 *** Brian Wood
 discussed org-mode and time tracking.
+#+BEGIN_EXAMPLE
+Brian Wood: time-tracking is very different from Roam, how to separate?
+Mike W: just keep in different files
+#+END_EXAMPLE
+
 *** Mike Wright 
 - discussion: consensus seems to be that org-roam is better documented/supported
 than org-brain or org-mind-map (or just of more interest to this meeting's attendees).
 Also, having online meeting attendee limits isn't really needed.
 - sent online meeting URL to meetup.com chat for waitlist people, and lurkers :-)
 - demo: (after 1 week of use) org-roam, [[https://github.com/org-roam/org-roam-server][org-roam-server]], hierarchies, cross-linking, filtering view
+showed accumulated microcontroller information, using org-roam server for visualization, sqlite enabled backlinks
 - will schedule next online meetup for a Friday morning in February; topic: completion packages
 (no attendee limits)
 *** Ag Ibragimov
-- demo: (after 2 weeks of use) org-roam, org-roam-server, capture templates, backlinks, daily notes, db clearing/rebuilding
+**** org-roam, who has actually tried it?
+Mike W., Pierce W., Ag I
+**** Built a org-roam database on the history of potatoes in France with his daughter
+**** Does a quick demo of org-roam and backlinks
+    - he can generate links directly from a web page
+    - uses org-protocol somehow to link to org from the mindmap displayed by the server
+**** Likes to use [[https://jblevins.org/projects/deft/][deft]] for searching org notes
+**** There is also a note-taking app called Obsidian
+    - uses Markdown
+.
+**** writing is thinking
+Ag: "I need to write! The freedom to use your faculties to accumulate knowledge.
+You cannot learn anything without writing. Unwritten knowledge does not exist."
+**** demo
+- (after 2 weeks of use) org-roam, org-roam-server, capture templates, backlinks, daily notes, db clearing/rebuilding
+**** discusssion
 - book discussion: Smart Note Taking
 - [[https://smile.amazon.com/gp/product/B06WVYW33Y/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1][How to Take Smart Notes: One Simple Technique to Boost Writing, Learning and Thinking – for Students, Academics and Nonfiction Book Writers]]
 - [[https://github.com/org-roam/org-roam/blob/master/org-roam-protocol.el][org-roam protocol]] e.g., to edit local files linked-to from org-roam-server graph display in browser
@@ -32,7 +53,6 @@ Also, having online meeting attendee limits isn't really needed.
 *** Jeff Trull
 - ein [[https://millejoh.github.io/emacs-ipython-notebook/][Emacs IPython Notebook]]
 *** Sacha Chua 
-
 - demo: transcript editing for EmacsConf
 - mentioned a new thing: code-cells related to Jupyter Notebooks.
 *** Garav Jain
