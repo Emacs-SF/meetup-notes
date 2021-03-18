@@ -18,8 +18,11 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - elisp programming
 - and more
 *** Planned Meetups
-**** 2021-03-05 virtual location TBD, topics: posframes, magit-trasient, elisp
+**** 2021-03-19 online fosshost.org, "Retro Emacs, Lightning Talks, and General Emacs Discussion"
+**** 2021-04-02 online fosshost.org, "Emacs Lisp - Coding a Minor Mode, Lightning Talks, and Discussion"
 *** Recent Meetups (reverse chronological order)
+**** 2021-03-05 online fosshost.org, "Emacs Lisp and menu packages: dmenu, hydra, posframe, transient, etc."
+- [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210305.org][3/5 meeting notes]]
 **** 2021-02-12 jitsi.org, topics: Org-roam, org-roam, Emacs
 - [[file:meetups/2021/20210212.org][2/12 meeting notes]]
 **** 2021-01-27 jitsi.org, topics: Emacs completion packages, Emacs
