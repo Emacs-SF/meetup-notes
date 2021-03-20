@@ -11,8 +11,114 @@
 The Emacs manual says "The first Emacs was a set of macros written in 1976 at MIT by RMS for the editor TECO." 
 Jeff explains what this means, what TECO is, and what the earliest versions of Emacs provided to its users. 
 Many concepts in Emacs to this day derive from the needs of this early time;
-Jeff connected the solutions of that time to the architecture of today. 
-A live demo of both TECO and Emacs circa 1980 on an emulated TOPS-20.
+Jeff gave live demo of TECO, "Video TECO", and Emacs circa 1980 on an emulated TOPS-20.
+**** 1965-1975
+      - batch processing to teletypes
+      - slow communication, expensive machines
+      - line editors
+      - TECO
+   #+CAPTION: Ken Thompson (seated) with Dennis Ritchie, 1972
+   [[./thompson_ritchie_1972.jpg]]
+
+**** Line-Oriented TECO
+***** Basics
+     - a "line editor", like ed(1), the standard editor
+     - make changes by entering commands at the terminal
+     - other commands show you what you have so far
+***** Popularity
+     - it had some programmability in the form of macros
+     - macros also add some basic control structures
+     - "Q registers" (36) can store either integers or strings, including macro code
+       - they also have a stack for temporaries
+     - hackers wrote their own macros, a bit of a competition
+***** Demo
+     - "buffer" was literal
+     - cursor movement and numeric arguments
+       - numeric args are "prefixed" to the command
+         (sound familiar?)
+     - "typing" lines to the terminal
+     - searching
+       - string args are suffixed
+     - chaining commands with numeric arguments
+***** Video TECO Demo
+
+**** 1970-1980
+***** teletypes to terminals
+      - communication getting a little faster
+      - uP revolution and CRT mass production reducing costs
+      - command editing and history
+      - fancy stuff like graphics characters, blinking, bold
+      - your "terminal window" emulates these - most likely the DEC VT100
+   #+CAPTION: Digital Equipment Corporation VT100
+   [[./vt100.jpg]]
+***** exploiting the new technology
+      - display editors
+        - use extra screen real estate to show portion of file in memory
+      - screen update time limited by communication speed
+        - use terminal ESC sequences to do minimal updates
+        - compatibility an issue: curses arrives (for Rogue!) 1980, via BSD
+        - TECO gets (many, forking) upgrades
+***** TECO improvements
+     - MANY forks. Emacs is arguably one.
+     - RMS one of those who wrote macros, and then went further
+     - MIT version most advanced; RMS worked on in parallel with Emacs
+       - added real-time display, variables, and macro key binding
+
+**** EMACS is born (late 70s)
+***** The big insight
+      - every character is a command, executed immediately
+***** Differences from today
+     - the customization language is TECO
+     - the minibuffer is not the same as the "echo area"
+     - set mark with C-@
+     - help is C-_
+     - C-h same as C-b
+     - string args to commands supplied as "suffixes" separated by ESC
+***** Similarities
+****** Basic features
+       - yank and kill
+       - point and mark
+       - M-x to run command by name
+       - "buffer pointer" becomes "point"
+       - apropos
+****** Modes
+       - info
+       - autofill
+       - abbrev
+       - languages (no C, though)
+****** TAGS
+***** Demo
+      - info
+      - help
+      - apropos
+      - TECO in minibuffer
+
+**** Final thoughts
+   - if TECO + a set of macros = Emacs, then Emacs + a set of
+     packages/settings = a new editor?
+
+**** Resources
+   [[http://www.goodmath.org/blog/2010/11/30/the-glorious-horror-of-teco/][The Glorious Horror of TECO]]
+   [[https://rcsri.org/library/70s/TOPS10-TECO.pdf][A manual for one of the many TECOs]]
+   [[http://sciteco.sourceforge.net/][SciTECO Online - TECO (with real-time display) in a web browser]]
+   [[https://web.archive.org/web/20110723033542/http://www.burlingtontelecom.net/~ashawley/gnu/emacs/doc/emacs-1978.html][An Introduction to the Emacs Editor (1978)]]
+   [[http://bitsavers.informatik.uni-stuttgart.de/pdf/dec/teco/MobyMunger_%233part2_Nov79.pdf][Stallman describing EMACS in the "Moby Munger" (1979, p42)]]
+   [[https://www.gnu.org/software/emacs/emacs-paper.html][RMS lecture on Emacs, 1981]]
+   [[https://www.gnu.org/software/emacs/emacs-paper.html][Buttery Smooth Emacs (history of display code)]]
+   [[https://www.finseth.com/craft/craft.pdf][The Craft of Text Editing]]
+   [[http://twenex.org/][Get your own TOPS-20 account]]
+**** Next: the era of forks (a taster for a future talk)
+***** PCs become more powerful
+      - or at least, as powerful as minicomputers were in the 70s
+      - Scribble, Brief, Epsilon
+***** Lisp as extension language
+      - Beginning with Multics Emacs (1978)
+***** The rise of Unix
+      - Gosling Emacs
+      - and from there, GNU Emacs proper
+      - then XEmacs
+
+
 ** Announcements
 - updated [[https://github.com/Emacs-SF/meetup-notes][meeting notes]] on [[https://github.com/Emacs-SF][github]]
 - updated [[https://github.com/Emacs-SF/meetup-notes/wiki][wiki]] pages (added footer with links)
@@ -27,17 +133,6 @@ A live demo of both TECO and Emacs circa 1980 on an emulated TOPS-20.
 *** Pretty Hyrda Menus - Leo Vivier
 ** Discussion
 ** Wrap-up
-** Links
-- [[http://www.goodmath.org/blog/2010/11/30/the-glorious-horror-of-teco/][The Glorious Horror of TECO]]
-- [[https://rcsri.org/library/70s/TOPS10-TECO.pdf][A manual for one of the many TECOs]]
-- [[https://web.archive.org/web/20110723033542/http://www.burlingtontelecom.net/~ashawley/gnu/emacs/doc/emacs-1978.html][An Introduction to the Emacs Editor (1978)]]
-- [[http://bitsavers.informatik.uni-stuttgart.de/pdf/dec/teco/MobyMunger_%233part2_Nov79.pdf][Stallman describing EMACS in the "Moby Munger" (1979)]]
-- [[https://www.gnu.org/software/emacs/emacs-paper.html][RMS lecture on Emacs, 1981]]
-- [[https://www.gnu.org/software/emacs/emacs-paper.html][Buttery Smooth Emacs (history of display code)]]
-- [[https://www.finseth.com/craft/craft.pdf][The Craft of Text Editing]]
-- [[http://twenex.org/][Get your own TOPS-20 account]]
-Nick Econopouly
-- https://rcsri.org/library/70s/TOPS10-TECO.pdf
 Mike Wright
 gist for Nested Hydra Menus:
 - https://gist.github.com/wrightmikea/31536eefe20b444f492aea7a31c9497a
