@@ -133,7 +133,12 @@ Jeff gave live demo of TECO, "Video TECO", and Emacs circa 1980 on an emulated T
 *** Pretty Hyrda Menus - Leo Vivier
 ** Discussion
 ** Wrap-up
+** Links
 Mike Wright
+IBM 5100 - small monitor ca. 1975
+- [[https://en.wikipedia.org/wiki/IBM_5100]]
+IBM 2250 Vector Graphics Terminal with Light Pen ca. 1971
+- [[http://www.columbia.edu/cu/computinghistory/2250.html]]
 gist for Nested Hydra Menus:
 - https://gist.github.com/wrightmikea/31536eefe20b444f492aea7a31c9497a
 yasnippet:
