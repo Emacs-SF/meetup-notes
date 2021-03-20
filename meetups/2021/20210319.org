@@ -1,16 +1,1074 @@
 * Emacs SF - Friday, March 19, 2021, 10:30am (PDT) -0700 UTC
 ** Title: Retro Emacs, Lightning Talks, and General Emacs Discussion
-** Location (online): [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]]
-** Who: Mike Wright, Jeff Trull, and attendees TBD (16 RSVPs as of 3/18)
+** Location (online): [[https://bbb.emacsverse.org/b/mic-4uy-qlr-iwf]]
+** Who: Jeff Trull, Leo Vivier, Mike Wright and 20+ attendees 
+** Logistics
+*** next meetup
+- Thursday 1 April 2021 at 10am PDT UTC-7
+- [[https://www.meetup.com/Emacs-SF/events/276954899/][Emacs Lisp - Coding a minor mode; lispy mode; Lightning Talks and Discussion]]
 ** Presentations
 *** Jeff Trull: Retro Emacs
 The Emacs manual says "The first Emacs was a set of macros written in 1976 at MIT by RMS for the editor TECO." 
-In my talk I will explain what this means, what TECO is, and what the earliest versions of Emacs provided to its users. 
-Many concepts in Emacs to this day derive from the needs of this early time; I will connect the solutions of that time to the architecture of today. 
-There will also - hopefully - be a live demo of both TECO and Emacs circa 1980 on an emulated TOPS-20.
+Jeff explains what this means, what TECO is, and what the earliest versions of Emacs provided to its users. 
+Many concepts in Emacs to this day derive from the needs of this early time;
+Jeff gave live demo of TECO, "Video TECO", and Emacs circa 1980 on an emulated TOPS-20.
+**** 1965-1975
+      - batch processing to teletypes
+      - slow communication, expensive machines
+      - line editors
+      - TECO
+   #+CAPTION: Ken Thompson (seated) with Dennis Ritchie, 1972
+   [[./thompson_ritchie_1972.jpg]]
+
+**** Line-Oriented TECO
+***** Basics
+     - a "line editor", like ed(1), the standard editor
+     - make changes by entering commands at the terminal
+     - other commands show you what you have so far
+***** Popularity
+     - it had some programmability in the form of macros
+     - macros also add some basic control structures
+     - "Q registers" (36) can store either integers or strings, including macro code
+       - they also have a stack for temporaries
+     - hackers wrote their own macros, a bit of a competition
+***** Demo
+     - "buffer" was literal
+     - cursor movement and numeric arguments
+       - numeric args are "prefixed" to the command
+         (sound familiar?)
+     - "typing" lines to the terminal
+     - searching
+       - string args are suffixed
+     - chaining commands with numeric arguments
+***** Video TECO Demo
+
+**** 1970-1980
+***** teletypes to terminals
+      - communication getting a little faster
+      - uP revolution and CRT mass production reducing costs
+      - command editing and history
+      - fancy stuff like graphics characters, blinking, bold
+      - your "terminal window" emulates these - most likely the DEC VT100
+   #+CAPTION: Digital Equipment Corporation VT100
+   [[./vt100.jpg]]
+***** exploiting the new technology
+      - display editors
+        - use extra screen real estate to show portion of file in memory
+      - screen update time limited by communication speed
+        - use terminal ESC sequences to do minimal updates
+        - compatibility an issue: curses arrives (for Rogue!) 1980, via BSD
+        - TECO gets (many, forking) upgrades
+***** TECO improvements
+     - MANY forks. Emacs is arguably one.
+     - RMS one of those who wrote macros, and then went further
+     - MIT version most advanced; RMS worked on in parallel with Emacs
+       - added real-time display, variables, and macro key binding
+
+**** EMACS is born (late 70s)
+***** The big insight
+      - every character is a command, executed immediately
+***** Differences from today
+     - the customization language is TECO
+     - the minibuffer is not the same as the "echo area"
+     - set mark with C-@
+     - help is C-_
+     - C-h same as C-b
+     - string args to commands supplied as "suffixes" separated by ESC
+***** Similarities
+****** Basic features
+       - yank and kill
+       - point and mark
+       - M-x to run command by name
+       - "buffer pointer" becomes "point"
+       - apropos
+****** Modes
+       - info
+       - autofill
+       - abbrev
+       - languages (no C, though)
+****** TAGS
+***** Demo
+      - info
+      - help
+      - apropos
+      - TECO in minibuffer
+
+**** Final thoughts
+   - if TECO + a set of macros = Emacs, then Emacs + a set of
+     packages/settings = a new editor?
+
+**** Resources
+   [[http://www.goodmath.org/blog/2010/11/30/the-glorious-horror-of-teco/][The Glorious Horror of TECO]]
+   [[https://rcsri.org/library/70s/TOPS10-TECO.pdf][A manual for one of the many TECOs]]
+   [[http://sciteco.sourceforge.net/][SciTECO Online - TECO (with real-time display) in a web browser]]
+   [[https://web.archive.org/web/20110723033542/http://www.burlingtontelecom.net/~ashawley/gnu/emacs/doc/emacs-1978.html][An Introduction to the Emacs Editor (1978)]]
+   [[http://bitsavers.informatik.uni-stuttgart.de/pdf/dec/teco/MobyMunger_%233part2_Nov79.pdf][Stallman describing EMACS in the "Moby Munger" (1979, p42)]]
+   [[https://www.gnu.org/software/emacs/emacs-paper.html][RMS lecture on Emacs, 1981]]
+   [[https://www.gnu.org/software/emacs/emacs-paper.html][Buttery Smooth Emacs (history of display code)]]
+   [[https://www.finseth.com/craft/craft.pdf][The Craft of Text Editing]]
+   [[http://twenex.org/][Get your own TOPS-20 account]]
+**** Next: the era of forks (a taster for a future talk)
+***** PCs become more powerful
+      - or at least, as powerful as minicomputers were in the 70s
+      - Scribble, Brief, Epsilon
+***** Lisp as extension language
+      - Beginning with Multics Emacs (1978)
+***** The rise of Unix
+      - Gosling Emacs
+      - and from there, GNU Emacs proper
+      - then XEmacs
+
+
+** Announcements
+- updated [[https://github.com/Emacs-SF/meetup-notes][meeting notes]] on [[https://github.com/Emacs-SF][github]]
+- updated [[https://github.com/Emacs-SF/meetup-notes/wiki][wiki]] pages (added footer with links)
+- uploaded videos with subtitiles (still editing subtitles) to be made public on [[https://www.youtube.com/channel/UCFk8kgNu_bqsRZewxMGqkzQ][youtube]]
+- uploaded gists (linked to from [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210305.org][3/5 meeting notes]])
+- updating [[https://emacs-sf.github.io/][blog]] and [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210319.org][today's (3/19) meeting notes]] (this file)
+- feedback? use [[https://github.com/Emacs-SF/meetup-notes/discussions][discussions]]
+- past/future meetups: [[https://www.meetup.com/Emacs-SF/][meetup.com]]
 ** Lighting Talks
-*** TBD
+*** Nested Hydra Menus Demo - Mike Wright
+*** A slight detour into Yasnippet
+*** Pretty Hyrda Menus - Leo Vivier
 ** Discussion
-*** TBD
+** Wrap-up
+Mike Wright
+gist for Nested Hydra Menus:
+- https://gist.github.com/wrightmikea/31536eefe20b444f492aea7a31c9497a
+yasnippet:
+- https://github.com/joaotavora/yasnippet
+hydra:
+- https://github.com/abo-abo/hydra
+Jeff Trull
+links as an org gist - probably less painful (but still ugly)
+- https://gist.github.com/jefftrull/70d42b2827cd07a28424ef5cc091cb4c
+Sacha Chua
+- https://emacsconf.org/2020/talks/07 is also related
+Leo Vivier
+- https://github.com/dustinlacewell/pretty-hydra/blob/master/pretty-hydra.el ?
+Sacha Chua
+- https://github.com/jerrypnz/major-mode-hydra.el
+Leo Vivier
+- https://emacsconf.org/2020/talks/07/
+Joe
+https://github.com/abo-abo/hydra/wiki/Helm
+
+** Online Chat
+#+BEGIN_EXAMPLE
+Sa
+Sacha Chua
+(offline)
+10:34 AM
+Great
+
+Sa
+Sacha Chua
+(offline)
+10:35 AM
+Sorry, folks! There was a last-minute domain name change we forgot to sort out.
+
+Sa
+Sacha Chua
+(offline)
+10:35 AM
+Yaaaay!
+
+He's here!
+
+(Could've kept the old one working... ;b)
+
+Mi
+Mike Wright
+10:36 AM
+trying to join on a different laptop...
+
+Ti
+Titus
+(offline)
+10:41 AM
+I hadn't signed up either.
+
+Sa
+Sacha Chua
+(offline)
+10:42 AM
+My Twitter scheduled posts are working too, so I posted a link to the meetup page. (Yay run-at-time!)
+
+Jo
+Joe
+10:42 AM
+Caught my attention!
+
+Ma
+maxxcan
+10:42 AM
+hello everybody
+
+Jo
+Joe
+10:43 AM
+It's 17:43 UTC,
+19:43 Israel time
+
+Ma
+maxxcan
+10:44 AM
+18:30 on London, Brussells or Madrid
+
+Ma
+maxxcan
+10:47 AM
+I am agree with any date on evening
+
+Mi
+Michael Wright
+10:48 AM
+welcome everyone
+
+Le
+Leo Vivier
+10:50 AM
+Presentation: Retro Emacs 1980, Jeff Trull
+
+Ma
+maxxcan
+10:51 AM
+there is a TECO simulator I think
+
+Le
+Leo Vivier
+10:54 AM
+oops
+
+Le
+Leo Vivier
+10:54 AM
+(Don't mind my comments!)
+
+Le
+Leo Vivier
+10:54 AM
+(They're to help us with the timestamps in the presentations. :) )
+
+Jo
+Joe
+10:55 AM
+sed, yes
+
+Le
+Leo Vivier
+10:56 AM
+This is where the concept of registers in Emacs comes from, by the way. :)
+
+Ma
+maxxcan
+10:57 AM
+xahlee, mic on
+
+Le
+Leo Vivier
+10:57 AM
+@xahlee: I did mute you; sorry!
+
+Ch
+Charlie McMackin
+11:02 AM
+Am I understanding right that the `T` command would print to paper output?
+
+Le
+Leo Vivier
+11:03 AM
+I think so, yes.
+
+Ma
+maxxcan
+11:04 AM
+The people think that Emacs o Vim ar difficult. They don't know TECO
+
+Ma
+maxxcan
+11:06 AM
+I want a TECO tutorial
+
+Fi
+fitzsim
+11:07 AM
+is there line continuation?
+
+Fi
+fitzsim
+11:07 AM
+or are those two lines?
+
+Ma
+maxxcan
+11:09 AM
+I forgetted that in 70's years haven't monitors yet
+
+Fi
+fitzsim
+11:09 AM
+in the USE example there were two lines
+
+Fi
+fitzsim
+11:09 AM
+thanks!
+
+Mi
+Michael Wright
+11:09 AM
+some 1970's computers had monitors. They were very small or very expensive
+
+Mi
+Michael Wright
+11:10 AM
+IBM 5100 for example; or Vector graphics terminals with light pens
+
+Le
+Leo Vivier
+11:10 AM
+[blur maybe, -4min to -1min]
+
+Ma
+maxxcan
+11:11 AM
+@Michael Wright. Thanks.
+
+Ma
+maxxcan
+11:12 AM
+is this similar to unix ed?
+
+Jo
+Joe
+11:13 AM
+How to insert RET?
+
+Ma
+maxxcan
+11:13 AM
+that computer is on the Superman 3 movie :)
+
+Le
+Leo Vivier
+11:13 AM
+@Joe: Just <RET>, I'd assume; Jeff mentioned that he needs to escape the mode to forward the commands.
+
+Xa
+xahlee
+11:14 AM
+leo, thx.
+
+Le
+Leo Vivier
+11:14 AM
+No worries. :)
+
+Jo
+Joe
+11:16 AM
+oh, yeah $$ is like comint-send-input
+
+Le
+Leo Vivier
+11:20 AM
+FYI: I'm cooking, so I'm not going to be able to field questions for the next 10'!
+
+Ma
+maxxcan
+11:20 AM
+where are these pdfs ?
+
+Xa
+xahlee
+11:21 AM
+i think jeff gonna show the links in the end.
+
+Ma
+maxxcan
+11:21 AM
+xahlee, ok, thanks
+
+Da
+David Bremner
+(offline)
+11:21 AM
+C-@ still works to set mark
+
+Jo
+Joe
+11:22 AM
+Lisp mode?
+
+Xa
+xahlee
+11:23 AM
+wonder when was Meta introduced. was it on the VT100 or later?
+
+Ro
+Robin Templeton
+11:24 AM
+earlier i think. wikipedia says it was added to SAIL terminals in 1970
+
+Ro
+Robin Templeton
+11:25 AM
+(and vt100 was released years later, with a few predecessors)
+
+Ma
+maxxcan
+11:25 AM
+xahlee I don't know but the VT100 haven't the key META
+
+Ma
+maxxcan
+11:26 AM
+maybe Jeff know that
+
+Jo
+Joe
+11:26 AM
+ah, he's now talking about M-x...
+
+Fi
+fitzsim
+11:28 AM
+can you open a Lisp file?
+
+Sa
+Sacha Chua
+11:29 AM
+[discussion: Mike and Leo]
+
+Le
+Leo Vivier
+11:30 AM
+[cut -20s, maybe]
+
+Le
+Leo Vivier
+11:31 AM
+[discussion: Mike and Leo]
+
+Sa
+Sacha Chua
+11:32 AM
+[discussion: Nick and Leo]
+
+Le
+Leo Vivier
+11:32 AM
+(Sorry!)
+
+Fi
+fitzsim
+11:32 AM
+just to see Lisp mode
+
+Ma
+maxxcan
+11:33 AM
+I have two question. The origin of META key. and when introduce Lisp
+
+Le
+Leo Vivier
+11:33 AM
+[cut onwards]
+
+Le
+Leo Vivier
+11:33 AM
+[sorry; blur onwards]
+
+Ch
+Charlie McMackin
+11:33 AM
+can you try writing lisp? does it already have easy way to match parens / close them
+
+?
+
+Da
+David Bremner
+(offline)
+11:33 AM
+Is there a similar site where people can play with Multics Emacs? only 2 years later, but I feel much nicer implementation
+
+Fi
+fitzsim
+11:34 AM
+nice!
+
+Ch
+Charlie McMackin
+11:35 AM
+does it have tab completion? or some kind of completion when in `M-X`?
+
+Fi
+fitzsim
+11:35 AM
+(format t "Hello World~%")
+
+Jo
+Joe
+11:35 AM
+(insert "foo") ;; maybe?
+
+Ni
+Nick Econopouly
+11:35 AM
+Sorry about apparently being an hour late... Got my timezones wrong. This is looking really cool
+
+Ch
+Charlie McMackin
+11:35 AM
+nice
+
+Ma
+maxxcan
+11:35 AM
+matching parens yeah
+
+Fi
+fitzsim
+11:36 AM
+inferior-lisp?
+
+Jo
+Joe
+11:36 AM
+lol
+
+Ni
+Nick Econopouly
+11:36 AM
+mind=blown
+
+Fi
+fitzsim
+11:36 AM
+this'll be some Common Lisp pre-cursor or something
+
+Ro
+Robin Templeton
+11:37 AM
+re: introduction of lisp, multics emacs (by bernie greenberg(?)) introduced lisp; iirc it was both implemented and extended in lisp, like zmacs or hemlock
+
+Ro
+Robin Templeton
+11:37 AM
+maclisp specifically
+
+Le
+Leo Vivier
+11:37 AM
+[discussion: Jeff, Mike, Leo]
+
+Da
+David Bremner
+(offline)
+11:37 AM
+@robin right, I used it as an undergrad
+
+Fi
+fitzsim
+11:38 AM
+version 165, we've gone backward
+
+Sk
+skreutzer
+11:38 AM
+No such popular concept of selling software as a product yet, maybe
+
+Ma
+maxxcan
+11:38 AM
+ok, Emacs is different of GNU/EMacs
+
+Le
+Leo Vivier
+11:38 AM
+[oops, small]
+
+Le
+Leo Vivier
+11:42 AM
+Any question?
+
+Fi
+fitzsim
+11:42 AM
+Spectacular presentation!
+
+Le
+Leo Vivier
+11:42 AM
+[End of presentation]
+
+Xa
+xahlee
+11:43 AM
+jeff, when was the key or term Meta introduced?
+
+Ni
+Nick Econopouly
+11:43 AM
+I only have one eye, be respectful
+
+Le
+Leo Vivier
+11:43 AM
+,)
+
+Xa
+xahlee
+11:44 AM
+^_~
+
+Je
+Jeff Trull
+11:45 AM
+OK my resources in org format:
+
+[[http://www.goodmath.org/blog/2010/11/30/the-glorious-horror-of-teco/][The Glorious Horror of TECO]] (ed. repaired link)
+[[https://rcsri.org/library/70s/TOPS10-TECO.pdf][A manual for one of the many TECOs]]
+[[https://web.archive.org/web/20110723033542/http://www.burlingtontelecom.net/~ashawley/gnu/emacs/doc/emacs-1978.html][An Introduction to the Emacs Editor (1978)]]
+[[http://bitsavers.informatik.uni-stuttgart.de/pdf/dec/teco/MobyMunger_%233part2_Nov79.pdf][Stallman describing EMACS in the "Moby Munger" (1979)]]
+[[https://www.gnu.org/software/emacs/emacs-paper.html][RMS lecture on Emacs, 1981]]
+[[https://www.gnu.org/software/emacs/emacs-paper.html][Buttery Smooth Emacs (history of display code)]]
+[[https://www.finseth.com/craft/craft.pdf][The Craft of Text Editing]]
+[[http://twenex.org/][Get your own TOPS-20 account]]
+
+Le
+Leo Vivier
+11:45 AM
+[Non-presentation: Anouncements]
+
+Sa
+Sacha Chua
+11:46 AM
+Yay notes!
+
+Fi
+fitzsim
+11:46 AM
+I think the first link in the org format got broken
+
+Je
+Jeff Trull
+11:47 AM
+re: "meta", that was lisp machine terminology I think - the TECO manuals call it "AltMode" if you can believe that
+
+R
+R Primus
+11:47 AM
++1 nested hydras
+
+Ma
+maxxcan
+11:47 AM
+@Jeff the first link is wrong. The format I think
+
+Fi
+fitzsim
+11:47 AM
+AltMode, that's really funny
+
+Ni
+Nick Econopouly
+11:47 AM
+https://rcsri.org/library/70s/TOPS10-TECO.pdf
+
+those are org mode links
+
+Le
+Leo Vivier
+11:48 AM
+Anki
+
+Je
+Jeff Trull
+11:48 AM
+@Charlie McMackin pretty sure it has completion; not sure if driven by tab or not
+
+Ch
+Charlie McMackin
+11:49 AM
+thanks
+
+Je
+Jeff Trull
+11:49 AM
+@Robin Templeton thank you for the great perspective, wish I had consulted you ;)
+
+Je
+Jeff Trull
+11:49 AM
+re: those links, that's org format. I can try to clean them up for the chat window
+
+Je
+Jeff Trull
+11:50 AM
+otherwise hoover up the org text and paste into emacs, then click?
+
+Ma
+maxxcan
+11:50 AM
+Jeff Trull. Thanks for the presentation. I love it
+
+Fi
+fitzsim
+11:50 AM
+I think just the beginning of the first org link didn't make it into the chat
+
+Le
+Leo Vivier
+11:50 AM
+[Presentation: Nested hydras, Michael Wright]
+
+Ma
+maxxcan
+11:51 AM
+fitzsim is this: https://rcsri.org/library/70s/TOPS10-TECO.pdf
+
+Ch
+Charlie McMackin
+11:51 AM
+(Jeff Trull's video is still prime on my screen... if that's unintentional)
+
+Je
+Jeff Trull
+11:51 AM
+hmmm
+
+Le
+Leo Vivier
+11:51 AM
+@Charlie You can resize the ratio on your end.
+
+Je
+Jeff Trull
+11:52 AM
+yeah why is my face the only one I see lol
+
+Le
+Leo Vivier
+11:52 AM
+Drag'n'drop, or put your cursor in between the videos.
+
+Le
+Leo Vivier
+11:52 AM
+[Extra topic for current presentation: yasnippet quick demo]
+
+Cu
+Curt
+11:52 AM
++1 for more yas-snippets
+
+Le
+Leo Vivier
+11:53 AM
+@Jeff: I'm not putting on my webcam to save all of you from seeing me eat. :o)
+
+Ma
+maxxcan
+11:53 AM
+I don't understand hydra yet
+
+Le
+Leo Vivier
+11:54 AM
+@maxxcan: Think of it as a tool to design UI and quick menus for running commands.
+
+Ma
+maxxcan
+11:54 AM
+@Leo many streaming make money eating to audience
+
+Je
+Jeff Trull
+11:54 AM
+links as an org gist - probably less painful (but still ugly) https://gist.github.com/jefftrull/70d42b2827cd07a28424ef5cc091cb4c
+
+Ma
+maxxcan
+11:54 AM
+streamers
+
+Le
+Leo Vivier
+11:55 AM
+Thanks, Jeff!
+
+Sa
+Sacha Chua
+11:55 AM
+https://emacsconf.org/2020/talks/07 is also related
+
+Fi
+fitzsim
+11:55 AM
+Thanks Jeff, it was "The Glorious Horror of TECO" that was missing; it's in the gist
+
+Jo
+Joe
+11:55 AM
+:color keyword
+
+Je
+Jeff Trull
+11:56 AM
+so weird. I've been having trouble saving region in org. I position at the first link and it misses part of it somehow
+
+R
+R Primus
+11:56 AM
+Tanks
+
+Le
+Leo Vivier
+11:56 AM
+[End of presentation]
+
+[Question time]
+
+[Question: Nick]
+
+Ma
+maxxcan
+11:57 AM
+Thanks Sacha
+
+Sa
+Sacha Chua
+11:57 AM
+You should totally check out pretty-hydra's toggle support
+
+Le
+Leo Vivier
+11:58 AM
+@Sacha: https://github.com/dustinlacewell/pretty-hydra/blob/master/pretty-hydra.el ?
+
+Fi
+fitzsim
+11:59 AM
+(not sure how to do mentions in BBB)
+
+Jo
+Joe
+11:59 AM
+How possible would it be to turn evil-mode into a hydra for learning purposes?
+
+Fi
+fitzsim
+11:59 AM
+Jeff, that happens for me too if I select with mouse, interesting
+
+Le
+Leo Vivier
+11:59 AM
+(Just @name; it doesn't do anything, though.)
+
+Fi
+fitzsim
+11:59 AM
+in vanilla Emacs 24.5.1
+
+Le
+Leo Vivier
+11:59 AM
+[Question: Nick]
+
+Sa
+Sacha Chua
+12:01 PM
+I use the pretty-hydra from https://github.com/jerrypnz/major-mode-hydra.el
+
+Sa
+Sacha Chua
+12:01 PM
+It does columns automatically too
+
+Sa
+Sacha Chua
+12:02 PM
+Can't demo, am supposed to be playing with chalk right now
+
+Fi
+fitzsim
+12:04 PM
+Jeff, it's because point is on the URL human-readable text
+
+Je
+Jeff Trull
+12:04 PM
+@fitzsim ahhh
+
+Fi
+fitzsim
+12:05 PM
+not at the start of the URL itself; so you have to be super careful to click on the prior line
+
+Je
+Jeff Trull
+12:05 PM
+I just switched into fundamental-mode
+
+Fi
+fitzsim
+12:05 PM
+yeah
+
+Ch
+Charlie McMackin
+12:05 PM
+"circumflex" works, "caret" is also common
+
+(fyi)
+
+Fi
+fitzsim
+12:05 PM
+it makes sense to put point there for org, I guess
+
+Ma
+maxxcan
+12:06 PM
+Leo, are you still eating?
+
+Le
+Leo Vivier
+12:07 PM
+Yes!
+
+Le
+Leo Vivier
+12:07 PM
+[Discusssion]
+
+Sa
+Sacha Chua
+12:11 PM
+Stacking of hydras can also be simplified with macros
+
+Ma
+maxxcan
+12:11 PM
+@sacha what is the improve with pretty-hydra?
+
+Sa
+Sacha Chua
+12:11 PM
+And the emacsconf talk I linked to earlier has a presentation on logically linking these sorts of things together
+
+Sa
+Sacha Chua
+12:12 PM
+Pretty-hydra makes defining or adding commands in columns easier, and it also supports showing toggle indicators.
+
+Ma
+maxxcan
+12:12 PM
+ok.
+
+Ma
+maxxcan
+12:13 PM
+it's easy use different language with hydra? english and/or spanish for example
+
+Sa
+Sacha Chua
+12:14 PM
+It's totally language-agnostic, you can use whatever descriptions and keys you want
+
+Ma
+maxxcan
+12:14 PM
+Sacha Chua, but only one at time. no?
+
+Le
+Leo Vivier
+12:14 PM
+https://emacsconf.org/2020/talks/07/
+
+Jo
+Joe
+12:14 PM
+This looks like it might be relevant: https://github.com/abo-abo/hydra/wiki/Helm
+
+R
+R Primus
+12:15 PM
+For future reference, can links be posted in the 'shared notes' section?
+
+Je
+Jeff Trull
+12:15 PM
+I do have a question re: future talks
+
+Je
+Jeff Trull
+12:15 PM
+good one @R Primus
+
+Ch
+Charlie McMackin
+12:16 PM
+are you able to compare and contrast paredit?
+
+Je
+Jeff Trull
+12:16 PM
+Nice wonderful, Leo
+
+Welcome to Emacs-SF!
+
+For help on using BigBlueButton see these (short) tutorial videos.
+
+To join the audio bridge click the phone button. Use a headset to avoid causing background noise for others.
+
+This server is running BigBlueButton.
+
+Je
+Jeff Trull
+12:18 PM
+We can just blend it in, that's cool
+
+Sa
+Sacha Chua
+12:18 PM
+Maxxcan: it's all up to you. No built-in i18n, if that's what you're wondering
+
+Je
+Jeff Trull
+12:19 PM
+true
+
+Je
+Jeff Trull
+12:20 PM
+that sounds great. I would attend.
+
+Fi
+fitzsim
+12:20 PM
+I have to drop now
+
+Amazing talk Jeff, thank you
+
+Ch
+Charlie McMackin
+12:20 PM
+Indeed, Nashville here
+
+Fi
+fitzsim
+12:21 PM
+thanks to the hosts too
+#+END_EXAMPLE
+
+
 
 
