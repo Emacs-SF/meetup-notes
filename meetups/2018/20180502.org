@@ -101,11 +101,11 @@ Export with C-c C-e R R, then load file in browser
 
 *** Harry's Notes
 **** page 1
-[[../images/20180502/calc-talk-speaker-notes-scan-1.jpeg]]
+[[../../images/20180502/calc-talk-speaker-notes-scan-1.jpeg]]
 **** page 2
-[[../images/20180502/calc-talk-speaker-notes-scan-2.jpeg]]
+[[../../images/20180502/calc-talk-speaker-notes-scan-2.jpeg]]
 **** page 3
-[[../images/20180502/calc-talk-speaker-notes-scan-3.jpeg]]
+[[../../images/20180502/calc-talk-speaker-notes-scan-3.jpeg]]
 ** Post-Presentation Discussion
 We veered off pretty far, into math and category theory
 *** Mike's notes:
