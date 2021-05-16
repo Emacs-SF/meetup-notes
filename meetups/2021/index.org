@@ -14,6 +14,10 @@
 
 ** Past (reverse chronological order)
 
+*** 2021-04-29 Thursday online
+**** title: Emacs Lisp: Foundational Utility Packages
+**** [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210429.org][4/29 meeting notes]]
+
 *** 2021-03-05T10:00-0800 Friday online fosshost.org (note URL change)
 **** title: Emacs Lisp and menu packages: dmenu, hydra, posframe, transient, etc.
 **** online: [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]]

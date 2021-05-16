@@ -1,0 +1,254 @@
+#+TITLE: Emacs Lisp: Foundational Utility Packages
+#+DATE: 29 April 2021
+
+* Introduction
+- looking for speakers and topics
+  - put ideas in wiki at https://github.com/Emacs-SF/meetup-notes/wiki/Backlog
+- may reintroduce in-person meetups in 4-6 weeks pending CDC guidelines
+  - probably outdoor at first (coffee.el)
+- Yuri Tricys introduces himself; blogs at https://cloudnine.github.io
+* Jeff Trull: a tour of some base packages
+** cl - Common Lisp emulation
+    - Common Lisp is much more complicated and powerful than Emacs Lisp
+*** History
+    - dates back to 1986 and cl.el (now deprecated)
+    - rewritten as cl-lib.el for 24.3
+*** Exclusions
+**** CLOS - Common Lisp Object System
+      - but see [[https://www.gnu.org/software/emacs/manual/html_mono/eieio.html][eieio]] instead
+**** Common Lisp Streams
+      - reminiscent of C++ iostream
+*** Examples
+**** Generalized variables
+     - Treating non-variables like variables, basically
+***** setf extensions
+       Did you know you can do this:
+       #+begin_src elisp
+         (let ((foo '(a b c)))
+           (setf (car foo) 'bar)
+           foo)
+       #+end_src
+
+       cl-lib adds this same functionality to other things e.g.:
+
+       #+begin_src elisp
+         (with-temp-buffer
+           (setf (buffer-name) "made up buffer name")
+           (buffer-name))
+       #+end_src
+
+       or:
+
+       #+begin_src elisp
+         (let ((foo "dusty"))
+           (setf (substring foo 1 3) "ir")
+           foo)
+       #+end_src
+
+       notice the macro name setf did not change - cl-lib created
+       a "setf handler" for buffer-name and substring. You can do
+       this yourself too, with elisp's own [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Generalized-Variables.html][generalized variables]] facility.
+
+***** cl-symbol-macrolet
+      Defines a macro that looks like a symbol:
+      #+begin_src elisp
+        (let ((foo "antidisestablishmentarianism"))
+          (cl-symbol-macrolet ((action (substring foo 4 7)))
+            ;; action is replaced with (substring foo 4 7)
+            ;; wherever it appears:
+            (setf action "re"))
+            ;; you would typically use action in multiple places
+          foo)
+      #+end_src
+
+**** Blocks
+***** Non-local exit
+      #+begin_src elisp
+        (cl-block foo
+          (if (> (caddr (decode-time)) 22)
+              ;; premature-exit - too late in the day for this
+              ;; we could also add an optional result after "foo"
+              (cl-return-from foo))
+          ;; perform other work
+          (message "ALERT"))
+      #+end_src
+***** Loop
+      - A /very/ sophisticated mechanism. From the elisp manual:
+      #+begin_quote
+      The cl-loop macro essentially creates a mini-language within
+      Lisp that is specially tailored for describing loops
+      #+end_quote
+      #+begin_src elisp
+        ;; an example from the elisp manual
+        ;; it searches for the square root of 729
+        (cl-loop for x from 1 to 100
+                 for y = (* x x)
+                 until (>= y 729)
+                 finally return (list x (= y 729)))
+      #+end_src
+
+*** In Summary
+    - Your feelings about this are probably the same as your
+      feelings about Common Lisp.
+    - Commonly used in my installed packages.
+*** Other Feedback
+    - Sacha uses ~cl-defun~ for its ~&key~ (keyword parameter) support, likes ~cl-loop~
+    - Young-il: is it lexically scoped? (answer: sometimes, since this is still elisp?)
+      - This is one of the biggest differences between Common Lisp and elisp
+      - The other is the package concept, which provides namespacing
+    - Harold Carr : dynamic scoping in the original lisp [[http://jmc.stanford.edu/articles/lisp/lisp.pdf][was a bug (in McCarthy's view)]].
+** subr-x: part of Emacs, but sort of secret?
+    - Candidates for future inclusion in "dumped" Emacs binary via
+      subr.el
+    - Nice explanation in [[https://emacs.stackexchange.com/questions/27146/why-is-emacs-code-so-unorganized/27155#27155][this StackOverflow answer]]
+    - Deliberately undocumented (in the manual) per [[https://lists.gnu.org/archive/html/emacs-devel/2014-01/msg01006.html][emacs-devel]]
+*** Examples
+**** string-trim
+      - This seems to be one of the most popular functions
+      - Defaults to whitespace
+      #+begin_src elisp
+        (string-trim "  some text$$$" "[ ]*" "[$]*")
+      #+end_src
+
+**** thread-first/thread-last
+      - an idea from Clojure (per [[https://yoo2080.wordpress.com/2014/02/23/threading-macros-from-dash-for-emacs-lisp/][this blog post]])
+      - allows rewriting deeply nested expressions as a pipeline
+      - each form is supplied as the first arg of the following form
+      #+begin_src elisp
+        (+ (- (* 5 4) 2) 3)
+        ;; vs
+        (thread-first
+            5
+          (* 4)
+          (- 2)
+          (+ 3))
+      #+end_src
+
+      - it's a macro, though, so the resulting expression is evaluated
+        only after it is completely constructed - gives some options.
+*** In Summary
+    - This code has a funny status - I blame the lack of namespacing.
+    - It's used in a lot of packages despite being undocumented
+    - maybe avoid?
+*** Discussion
+    - we had some disagreement on whether subr-x should be avoided or embraced
+** dash.el: list handling
+   - an independent, installable package
+   - advertises itself as "no -cl required"
+   - heavily influenced by Clojure
+   - functions start with a dash
+*** built-in "competitor", [[https://endlessparentheses.com/new-on-elpa-and-in-emacs-25-1-seq-el.html][seq]]
+    - the two maintainers [[https://github.com/magnars/dash.el/issues/179][seem pretty friendly]] though
+    - lacks "anaphoric" functionality
+*** Examples
+**** Partition
+     #+begin_src elisp
+       (-partition 2 '("dog" "cat" "pig" "cow" "elephant"))
+     #+end_src
+
+     #+RESULTS:
+     | dog | cat |
+     | pig | cow |
+
+     compare vs seq:
+     #+begin_src elisp
+       (seq-partition '("dog" "cat" "pig" "cow" "elephant") 2)
+     #+end_src
+
+     #+RESULTS:
+     | dog      | cat |
+     | pig      | cow |
+     | elephant |     |
+
+**** Threading
+     same as Clojure (or so I'm told):
+     #+begin_src elisp
+       (->
+           5
+         (* 4)
+         (- 2)
+         (+ 3))
+     #+end_src
+
+**** Anaphoric variants
+     Accept expressions using placeholders instead of functions
+     Compare:
+     #+begin_src elisp
+       (-map-when
+        (lambda (x) (evenp x))  ;; predicate
+        (lambda (x) (+ x 1))    ;; transform
+        '(1 2 3 4))
+     #+end_src
+
+     vs:
+     #+begin_src elisp
+       (--map-when (evenp it) (+ it 1) '(1 2 3 4))
+     #+end_src
+     a bit more compact
+*** Optimization
+    - for a fun post about optimizing Emacs Lisp, see [[http://www.wilfred.me.uk/blog/2017/07/29/optimising-dash-el/][this one]]
+      where Wilfred Hughes experiments on Dash.
+*** In Summary
+    - maybe use seq where possible, dash if you want advanced stuff?
+** s.el: Strings
+    - Same author as dash
+    - functions start with "s-"
+*** Examples
+**** Splitting
+     #+begin_src elisp
+       (s-split ",[ ]*" "pig, cow, elephant,dog")
+     #+end_src
+**** Trimming
+     - as in subr-x but only whitespace
+     #+begin_src elisp
+       (s-trim "  some text ")
+     #+end_src
+**** Threading
+     - you heard that right. Example from docs:
+     #+begin_src elisp
+       (s-with "   hulk smash   " s-trim s-upcase)
+     #+end_src
+*** In summary
+    - Looks pretty good to me
+    - Better than using undocumented stuff from subr-x
+    - Are there any built-in alternatives?
+** f.el: Files
+    Inspired by dash and s
+*** Examples
+**** Path manipulation
+     #+begin_src elisp
+       (f-canonical "~/path/to/real/../file")
+     #+end_src
+**** File properties
+     #+begin_src elisp
+       (f-directory? "~")
+     #+end_src
+**** Globbing
+     #+begin_src elisp
+       (f-glob "~/oss/emacs/*")
+     #+end_src
+
+**** Reading and Writing
+     #+begin_src elisp
+       (length (f-read-text "~/.config/emacs/init.el"))
+     #+end_src
+** Discussion
+   Mike Wright points out two additional base-type libraries, both by Wilfred Hughes:
+   - [[https://github.com/Wilfred/ht.el][ht]] for hash tables
+   - [[https://github.com/Wilfred/loop.el][loop.el]] for lighter weight loops
+* Mike Wright: Anaphora
+   - see Roland Walker's [[https://github.com/rolandwalker/anaphora][library]]
+** Discussion
+   - Charlie: I don't think there's any capability for multiple "its"
+* Sean Farley: dynamic module for controlling Mac events
+** Sidebar on async support
+   - Mike Wright uses something that displays updated [[https://ctan.org/pkg/circuitikz?lang=en][CircuitTikz]] diagrams in a window asynchronously
+   - Two libraries: [[https://github.com/skeeto/emacs-aio][emacs-aoi]], and [[https://github.com/jwiegley/emacs-async][emacs-async]] from jwiegley
+     - Sean F. investigated, says they are built on sentinels and process filters
+     - Process filter may be the best current async abstraction
+* Common Lisp discussion
+  - [[https://github.com/lem-project/lem][Lem]] is a Lisp editor written in Common Lisp
+    - similarly, [[https://www.gnu.org/software/mit-scheme/documentation/stable/mit-scheme-user/Edwin.html][Edwin]] is a Scheme editor written in Scheme (based on a fork of Emacs 18)
+  - Sean F: Grammarly runs Lisp, see [[https://www.grammarly.com/blog/engineering/running-lisp-in-production/][post]]
+* Mike W demos "something cool" - modeline-mini-mode
+  - Sean F points out doom-modeline
