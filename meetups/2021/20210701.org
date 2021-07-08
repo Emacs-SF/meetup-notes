@@ -1,0 +1,174 @@
+#+title: Emacs Lisp: Macros and Quoting
+
+* Introduction
+- We are falling behind on the videos
+  - doing our best, sorry for the delay
+- Looking for speakers and topics
+  - put ideas in wiki at https://github.com/Emacs-SF/meetup-notes/wiki/Backlog
+- Do we have any lightning talks?
+  - (please let there be lightning talks)
+* Macros and Quoting
+  :PROPERTIES:
+  :header-args: :results verbatim
+  :END:
+   - I'm no expert, so please interrupt with questions and comments
+** Evaluation
+   - the E in REPL
+   - basic form: ~(F X Y ...)~
+     - eval args X Y recursively, call function F
+     - BUT the evaluation of the arguments may be delayed by "quoting"
+       - F gets exactly what you typed, instead
+     - Also F may not be a function
+       - in which case args might not be evaluated
+   - An [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Evaluation.html][entire chapter]] is devoted to this in the manual
+** Basic Quoting
+*** Delaying Evaluation
+    - arguments are normally evaluated before function is called
+
+    #+begin_src elisp
+      (set foo2 "bar")   ;; Symbol's value as variable is void: foo2
+    #+end_src
+
+    #+begin_src elisp
+      (set (quote foo) "bar")  ;; foo is not evaluated en route to set
+                               ;; quote is a "special form" (a primitive)
+                               ;; there are 23 known to the interpreter
+                               ;; this one delays evaluation of its arg
+    #+end_src
+
+    #+begin_src elisp
+      (set 'foo "bar")         ;; another way to say (quote foo)
+    #+end_src
+
+*** Other Ways to Delay Evaluation
+    #+begin_src elisp
+      (setq foo "bar")         ;; shorthand for (set (quote foo) ...
+                               ;; setq is a special form
+    #+end_src
+
+    #+begin_src elisp
+      (setf foo "bar")         ;; setf is a macro (for "generalized variables")
+                               ;; all macro args are supplied unevaluated
+    #+end_src
+
+*** Fine Control over List Quoting
+**** evaluating some but not all list elements
+
+     #+begin_src elisp
+       (setq foo '(1 2 3))
+     #+end_src
+
+     #+begin_src elisp
+       `(+ 1 (+ 2 3))              ;; backtick: same as regular quote
+     #+end_src
+
+     #+begin_src elisp
+       `(+ 1 ,(+ 2 3))             ;; comma says "evaluate me"
+     #+end_src
+
+     #+begin_src elisp
+       (eval `(+ 1 ,(+ 2 3)))      ;; explicit evaluation!
+     #+end_src
+**** splicing in elements
+     #+begin_src elisp
+       (setq foo '(1 2 3 4))
+       `(9 8 ,@(cddr foo) 7 6)     ;; evaluate and flatten
+     #+end_src
+
+   - Ag points out ~results: verbatim~ and ~raw~
+   - Howard Abrams helps the host improve his org-babel by setting these for the entire talk via a heading property
+
+*** Quoting Functions
+**** this is apparently only ever done for [[https://emacs.stackexchange.com/questions/3595/when-to-sharp-quote-a-lambda-expression][historical reasons]]
+
+    #+begin_src elisp
+      (function (lambda () "bar")) ;; marks as function
+    #+end_src
+
+    #+begin_src elisp
+      (lambda () "bar")            ;; but so does this *shrug*
+    #+end_src
+
+    #+begin_src elisp
+      #'(lambda () "bar")          ;; the "read syntax"
+    #+end_src
+
+**** If you really don't want the byte-compiler to see it:
+     #+begin_src elisp
+       '(lambda () "bar")
+     #+end_src
+
+** Macros
+*** Basic Info
+    - Macros receive unevaluated argument forms
+    - Macros "return" an expansion, which is then evaluated
+
+    #+begin_src elisp
+      (defmacro prepend-typeinfo (expr)
+        ;; remember the kind of expression this came from
+        (cond ((stringp expr)   `(cons "s" ,expr))  ;; must allow evaluation
+              ((functionp expr) `(cons "f" ,expr))
+              ((integerp expr)  `(cons "i" ,expr))
+              ((listp expr)     `(cons "l" ,expr))))
+      ;; examples
+      (prepend-typeinfo 42)
+      (prepend-typeinfo (+ 1 2 3))
+      (prepend-typeinfo (lambda () "foo"))
+    #+end_src
+
+*** Examining the Expansion
+    #+begin_src elisp
+      (setq foo '(1 2 3))
+      (setf (cadr foo) 7)
+      foo
+    #+end_src
+
+    - aside: if you want to add your own "generalized variables" that work with setf, see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Adding-Generalized-Variables.html][the docs]]
+
+    #+begin_src elisp
+      (macroexpand '(setf (cadr foo) 7))
+    #+end_src
+
+    - Jeff Bowman notes that ~pp-macroexpand-expression~ will give you a pretty-printed version
+
+** Discussion
+   - Ag asks if macros should generally be avoided.
+     - Howard agrees on the grounds that it changes the syntax of the language
+     - Libraries provide a lot of ~define-*~ macros you can use
+   - Does edebug support macro debugging?
+   - Howard used them for delaying evaluation for a long time, as part of a presentation
+     - worked when "when [he] finally got it working"
+   - Howard: use-package is a macro, which allows total control over evaluation order
+
+* Lightning Talks
+** Young-Il: proliferation of functionality and keybindings
+   - likes hydras but too many keystrokes ultimately
+   - use "super" a.k.a. "command" prefix keys to keep it to two
+   - Sean: on Macs, the "function" (Fn) key can be interpreted as "hyper"
+   - Ag: any key can be a modifier key. [[https://karabiner-elements.pqrs.org/][Karabiner]] (Mac) can allow you to do this.
+     - e.g. a single press of ~s~ gives the letter; holding it and pressing something else gives super-whatever
+   - Ag: talks about vim and its rules of modality that are very logical
+   - Howard: turn some of the key chords into sequences with a "leader key" or keys, see for example [[https://github.com/noctuid/general.el][General]]
+   - Ag: vim-style bindings follow a logical progression; [[https://github.com/emacs-evil/evil-collection][evil-collection]] provides similar bindings in places Evil was not specifically written to support
+   - Yisrael Dov: Except for frequently (20x/day) used key combinations, what's the point? Use M-x, discoverable.
+   - Young-Il: org-mode frustratingly coopting C-* bindings, others do too
+     - Ag: Spacemacs adds "modal" bindings based on, literally, major /modes/ that provide a different dimension
+       (demos something built on Hammerspoon that uses home row vim keys for everything, but their function
+        differs depending on what has focus)
+     - Yisrael Dov: i3 has modality
+     - discussion about how to make this happen globally. Ag advocates for exwm. But he switched to stumpwm
+       because exwm can hang if Emacs does.
+    - Young-Il: my fundamental problem is I get new packages and need to squeeze their new bindings into my system
+      - Howard suggests using a fuzzy matcher (like [[https://github.com/oantolin/orderless][orderless]]) with M-x [I use helm for this - Ed.]
+      - Ag points out which-key and in particular ~which-key-dump-bindings~ to get "bindings starting with prefix"
+* Howard Abrams: new selection frameworks (discussion)
+   - he likes [[https://github.com/raxod502/selectrum][selectrum]] and [[https://github.com/minad/consult][consult]] and is switching there from ivy
+   - Ag points out that ivy was created because helm was too heavyweight
+   - [[https://www.youtube.com/watch?v=lfgQC540sNM][Emacs-Elements on selectrum, etc.]]
+   - Ag asks about [[https://github.com/oantolin/embark][embark]]
+   - Young-Il and Jeff T offer praise for [[https://www.youtube.com/watch?v=43Dg5zYPHTU][Prot on a the same topic]]
+   - Tony Aldon ([[https://www.youtube.com/watch?v=F1IXixEhQwk&list=PLGMx7bOKMJTxx2Vx155xbiOrb38Lp3nt1][Inside Emacs]]) has great short talks as well 
+   - And we like [[https://www.youtube.com/channel/UCAiiOTio8Yu69c3XnR7nQBQ][System Crafters]]
+* Digression on Clojure and Clojurescript
+  - and Lisps in general
+  - popular essays [[http://curtclifton.net/papers/MoseleyMarks06a.pdf][Out of the Tar Pit]] and [[http://paulgraham.com/avg.html][Beating the Averages]]

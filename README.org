@@ -21,7 +21,9 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 **** 2021-03-19 online fosshost.org, "Retro Emacs, Lightning Talks, and General Emacs Discussion"
 **** 2021-04-02 online fosshost.org, "Emacs Lisp - Coding a Minor Mode, Lightning Talks, and Discussion"
 *** Recent Meetups (reverse chronological order)
-**** 2021-04-29 online fooshost.org, "Emacs Lisp: Foundational Utility Packages"
+**** 2021-07-01 online foss.org, "Emacs Lisp: Macros and Quoting"
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210701.org][7/1 meeting notes]]
+**** 2021-04-29 online fosshost.org, "Emacs Lisp: Foundational Utility Packages"
 - [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210429.org][4/29 meeting notes]]
 **** 2021-03-05 online fosshost.org, "Emacs Lisp and menu packages: dmenu, hydra, posframe, transient, etc."
 - [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210305.org][3/5 meeting notes]]
