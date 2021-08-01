@@ -96,9 +96,6 @@
       (set-process-filter my-process #'my-process-filter)
     #+end_src
 
-**** Use in compilation-mode: compilation-filter-hook
-     - allows you to rewrite compilation output, apply overlays, etc.
-
 **** Only runs when nothing else is happening
      - Emacs is still basically single-threaded
      #+begin_quote
@@ -108,6 +105,11 @@
       Output), and in functions which send data to processes (see Input to Processes).
       This minimizes the problem of timing errors that usually plague parallel programming.
      #+end_quote
+
+**** Use in compilation-mode: compilation-filter-hook
+     - allows you to rewrite compilation output, apply overlays, etc.
+
+**** also used to do async code block execution in org-mode via [[https://code.orgmode.org/bzg/org-mode/commit/53fd5b774e23406ed351bdb166ab35edd0c44892][this recent commit]]
 
 *** Process Sentinels
 **** catches signals and process exits
