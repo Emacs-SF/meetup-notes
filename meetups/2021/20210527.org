@@ -1,0 +1,225 @@
+#+TITLE: Cracking Open compilation-mode
+
+* Emacs Lisp Track
+** The Goal: Provide an online space for sharing of ELisp coding ideas
+   - Most online meetups focus on Emacs usage
+** Implementation
+*** Meet once per month
+*** Have at least one presentation - preferably more
+    - I will be presenter of last resort
+*** Discuss anything that comes to mind
+** ELisp streamers
+*** System Crafters
+*** Geoffrey Lessel
+*** Sacha Chua
+*** Who else should I be following?
+** Do we have other topics for today?
+   - straight.el
+
+* Compilation Mode
+** Overview
+*** Runs a command
+*** Displays output as it arrives
+*** Identifies errors and warnings
+*** Keys for navigating between errors, jumping to code
+*** One of the oldest modes in Emacs IIRC
+*** Demo
+** Uses several interesting parts of the Emacs API
+*** processes
+    - for running and monitoring the compilation
+*** regexp
+    - for identifying errors and file locations
+*** text properties
+    - for setting the "face" of e.g. compilation command lines,
+      line and column numbers, etc.
+*** overlays
+    - for highlighting errors 
+*** timers
+    - for cancelling temporary effects (chiefly highlighting)
+*** derived modes
+    - grep, linters, unit tests...
+** Regular Expressions
+*** Largely the same as POSIX
+    - differences seem to be related to backtracking and "greedy" constructs
+
+    #+begin_src elisp
+      (string-match "[a-z_]+p$" "eolp")   ;; is this a predicate?
+    #+end_src
+
+*** Very commonly used for navigation
+   #+begin_src elisp
+     (with-current-buffer "test.cpp"
+       ;; temporarily move point to end of match
+       (re-search-forward "\\(int\\|float\\|double\\|void\\)[[:blank:]]+[[:word:]_]+("))
+   #+end_src
+
+   #+begin_src elisp
+     (with-current-buffer "test.cpp"
+       ;; highlight matched region instead (from font-lock)
+       (highlight-regexp "\\(int\\|float\\|double\\|void\\)[[:blank:]]+[[:word:]_]+("))
+   #+end_src
+
+**** There are other functions based on "syntax classes" that are probably more efficient
+     - forward/backword-word/sexp/symbol/whitespace etc.
+
+*** In compilation-mode
+**** identifying different elements of the output
+     - types of messages (info, warning, error)
+     - references to file locations
+**** uses "rx" syntax
+     - maxxcan recommends a nice tutorial [[https://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/][here]]
+** Processes
+*** Run asynchronously, redirect output to buffer
+   #+begin_src elisp :results none
+     (setq my-process
+           (make-process
+            :name "my-process"
+            :buffer "my-process-buffer"
+            :command '("tail" "-f" "/var/log/auth.log")))
+   #+end_src
+
+*** Process Filters
+**** Allow you to intercept process output before it is inserted
+
+    #+begin_src elisp :results none
+      (defun my-process-filter (proc string)
+        (with-current-buffer (process-buffer proc)
+          (let ((filtered
+                 (if (string-match "dbus-daemon\\[[[:digit:]]+\\]: \\[system\\] Would reject" string)
+                     "dbus is unhappy again\n"
+                   string)))
+            (save-excursion
+              (goto-char (process-mark proc))
+              (insert filtered)
+              (set-marker (process-mark proc) (point))))))
+
+      (set-process-filter my-process #'my-process-filter)
+    #+end_src
+
+**** Use in compilation-mode: compilation-filter-hook
+     - allows you to rewrite compilation output, apply overlays, etc.
+
+**** Only runs when nothing else is happening
+     - Emacs is still basically single-threaded
+     #+begin_quote
+      Output from a subprocess can arrive only while Emacs is waiting: when
+      reading terminal input (see the function waiting-for-user-input-p), in
+      sit-for and sleep-for (see Waiting), in accept-process-output (see Accepting
+      Output), and in functions which send data to processes (see Input to Processes).
+      This minimizes the problem of timing errors that usually plague parallel programming.
+     #+end_quote
+
+*** Process Sentinels
+**** catches signals and process exits
+**** per the manual
+     #+begin_quote
+       A sentinel runs only while Emacs is waiting (e.g., for terminal input, or for time
+       to elapse, or for process output). This avoids the timing errors that could result
+       from running sentinels at random places in the middle of other Lisp programs.
+     #+end_quote
+     - it's the single-threaded event loop model
+     - Mike suggests looking at ~list-timers~ and ~list-threads~ to see what asynchronous
+       stuff is running in your Emacs
+
+     #+begin_src elisp :results none
+       (defun my-process-sentinel (process event)
+         (message (format "Process %s had event '%s'" process event)))
+
+       (set-process-sentinel my-process #'my-process-sentinel)
+
+     #+end_src
+
+**** compilation-mode uses it for messages
+
+** Text Properties
+*** Part of the text itself
+    - you can even have text properties in a string outside of a buffer
+*** Most common use is for faces but there are [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Special-Properties.html][many]]
+    - read-only
+    - pointer for the mouse when hovering
+    - keymap to be used when point is there
+    - and on and on
+*** Typically used for static properties
+    - things reflecting attributes of the text itself, e.g. for font-lock
+      (demo face-at-point)
+*** compilation-mode uses:
+    - navigate on mouse click
+    - info/warning/error counts in modeline
+    - coloring warnings and errors in the process output
+
+** Overlays
+*** *Not* part of the text
+    - do not affect search results, for example
+    - mainly affect appearance
+*** Easy to add and remove
+    - defined on regions
+    - easy to find and delete (no change to text)
+    - therefore used more for dynamic properties
+*** See [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2020/20200903.org][September 2020 Lightning talk]]
+*** compilation-mode usage
+    - temporary highlighting of error regions
+    - little arrow showing line of error
+
+** Timers
+*** run code after a period of time, possibly repeatedly
+*** As usual with async elisp, many limitations
+    #+begin_quote
+    ...timers can run within a Lisp program only when the program calls
+    a primitive that can wait...
+    #+end_quote
+*** used by compilation-mode to cancel error highlight overlay
+    - i.e. to make the highlighting temporary
+*** simple example
+    #+begin_src elisp :results none
+      (run-with-timer 3 nil
+                      (lambda () (message "3 seconds have passed")))
+    #+end_src
+
+** Derived Modes
+*** code reuse for major modes
+*** typically one of text-mode, prog-mode, or special-mode
+    - special-mode is typically for formatted display of read-only data
+      e.g. bart-mode (demo)
+*** compilation-mode wraps define-derived-mode to add more shortcuts
+    #+begin_src elisp
+      (define-compilation-mode hs-lint-mode "HLint"
+        "Mode for check Haskell source code."
+        (set (make-local-variable 'compilation-process-setup-function)
+             'hs-lint-process-setup)
+        (set (make-local-variable 'compilation-disable-input) t)
+        (set (make-local-variable 'compilation-scroll-output) nil)
+        (set (make-local-variable 'compilation-finish-functions)
+             (list 'hs-lint-finish-hook))
+        )
+    #+end_src
+*** Examples
+    - grep-mode, elisp byte compilation
+    - Emacs-SF member and Scheme RFI editor Arthur Gleckler [[https://speechcode.com/blog/validate-html][validates HTML]] this way
+      - his lightning talk on the subject is [[https://www.youtube.com/watch?v=Rv0vV4un4vc&t=1785s][here]]
+
+** Wrapping Up
+*** Comments/Observations
+    - Yisrael Dov suggests (face-remap-add-relative 'default  :height 2.0 )
+      to increase default font size for presentations (to fix small minibuffer font)
+    - R Primus suggests [[http://ergoemacs.org/emacs/emacs_minibuffer_font_size.html][this post by Xah Lee]] for the same purpose
+    - Discussion re: Emacs security
+
+* Straight.el (and package management generally)
+** General Discussion
+  - uses GitHub
+  - Howard Abrams: it supplies version pinning, which is nice
+    - someone noted this is a Git commit, not a "version" per se
+  - [[https://github.com/quelpa/quelpa][Quelpa]] is kind of similar though hews more to the ELPA/MELPA infrastructure
+  - Mike W. used to profile startup using [[https://github.com/jschaf/esup][ESUP]]
+  - You can use Guix to manage Emacs packages
+    - this is the approach David Wilson (of System Crafters) uses - see for example [[https://www.youtube.com/watch?v=9G0JNliwg-w][this video]]
+    - maxxcan uses it for everything
+** Links
+   - a [[https://countvajhula.com/2020/12/27/turn-your-emacs-d-into-an-emacs-distribution-with-straight-el/][recent post from Emacs-SF member Sid Kasivajhula]]
+   - a [[https://www.reddit.com/r/emacs/comments/f5sdt2/should_i_switch_from_packageel/][Reddit discussion on tradeoffs]]
+
+* Mike W: Menu items to increase/decrease volume and screen brightness
+  - does a hydra that calls ~shell-command~, which runs ~xrandr~
+  - Howard: are you switching from ~hydra~ to ~transient~?
+    - Mike W: doing my own (!!!), a Haskell based backend with an SVG GUI and Emacs keybindings
+      - Also using it to make an open source CAD thing

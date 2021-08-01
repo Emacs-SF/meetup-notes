@@ -23,6 +23,8 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 *** Recent Meetups (reverse chronological order)
 **** 2021-07-01 online foss.org, "Emacs Lisp: Macros and Quoting"
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210701.org][7/1 meeting notes]]
+**** 2021-05-27 online foss.org, "Emacs Lisp: Cracking Open compilation-mode"
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210527.org][5/27 meeting notes]]
 **** 2021-04-29 online fosshost.org, "Emacs Lisp: Foundational Utility Packages"
 - [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210429.org][4/29 meeting notes]]
 **** 2021-03-05 online fosshost.org, "Emacs Lisp and menu packages: dmenu, hydra, posframe, transient, etc."
