@@ -1,0 +1,99 @@
+#+TITLE: Emacs Hacking Night Kickoff
+#+DATE: 25 January 2024
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+OPTIONS: TOC:nil
+* Logistics
+- bathroom
+- water
+- wifi: see wall
+- it's OK to bring food (but we must clean up)
+- We need someone to let people in
+* Our Host: Walk SF
+- Pedestrian Advocacy
+- See website at https://walksf.org/
+* Group Updates
+** +666+ 667 members
+#+BEAMER: \pause
+** Thank you Bhaskar Mookerji for being number 666 and for coming tonight
+#+BEAMER: \pause
+** Still looking for more meetup runners in other geographies (Oakland, South Bay)
+- or here in SF for that matter, if you are excited about a specific topic
+* Hiring
+[[https://twitter.com/stylewarning/status/1748391641151635841][IDE development for Common Lisp and Coalton (Twitter)]]
+* This Meetup Series
+** Goals
+- Deep dive into ELisp programming
+- Expert oriented
+- A combination of "lightning talk" and longer presentation formats
+- Requests for help, including code reviews
+- Demos
+* This Meetup Series
+** Topics
+- General programming techniques: style, libraries, testing, packing, performance
+- Modes
+- Specific features of Emacs
+  - completing-read
+  - display-buffer-alist
+  - buffer-visibility-spec
+  - text properties
+- Macros
+- Advice
+- Hooks
+- libraries (dash, s.el, cl-lib, etc.)
+  - more libraries from this page: https://xenodium.com/modern-elisp-libraries/
+- hacking org-mode
+- Your idea here:
+* Tonight
+Hopefully every time we will get some lightning talks. We have two pre-arranged:
+- Jen-Chieh Shen, packaging
+- Jeff Trull, unit tests with ert
+but hopefully there will be more. Do you feel inspired?
+
+* Charles Choi: Custom transient menus in various places (isearch, dired, ...)
+- [[https://github.com/positron-solutions/transient-showcase][positron-solutions/transient-showcase: Example forms for transient UIs in Emacs]]
+- [[http://yummymelon.com/devnull/highlighting-with-isearch.html][Transient menu for isearch (blog post)]]
+- [[http://yummymelon.com/devnull/enhancing-dired-sorting-with-transient.html][Transient menu for Dired sorting with GNU ls (blog post)]]
+- [[https://github.com/kickingvegas/cclisp/blob/b3fecd262b92cb3af77c4178224b159d7ed73463/cc-avy.el][Transient menu for Avy]]
+- [[http://yummymelon.com/devnull/personalizing-emacs-doc-navigation.html][Unify keybindings for different documentation modes (blog post)]]
+- [[http://yummymelon.com/devnull/enhancing-navigation-in-emacs-view-mode.html][Unify keybindings for different modes when view-mode is enabled]]
+* Jeff Trull: Unit testing with ERT and el-mock
+** ert basic usage
+#+begin_src elisp
+  (defun jet-stupid-mul (a b)
+          42)
+
+  (ert-deftest mul-test ()
+    "Basic usage"
+    (should (= 42 (jet-stupid-mul 6 7))))  ;; it works!
+
+  (ert-deftest mul-test-2 ()
+    "Advanced usage"
+    (should (= 36 (jet-stupid-mul 6 6))))  ;; oops
+#+end_src
+** mocks
+#+begin_src elisp
+  (require 'el-mock)
+
+  (defun jet-today ()
+      (substring (current-time-string) 0 3))
+
+  (ert-deftest today-basic ()
+    "Simple usage of jet-today"
+    (should (string= "Thu" (jet-today))))    ;; fragile
+
+  (ert-deftest today-improved ()
+    "Simple usage of jet-today"
+    (with-mock
+      (stub current-time-string => "Fri Nov  1 15:59:49 2019")
+      (should (string= "Fri" (jet-today)))))
+
+#+end_src
+
+** Extended Example
+- taken from ox-keynote
+** Alternatives
+*** buttercup
+*** ecukes
+** New package for ert results
+- https://www.reddit.com/r/emacs/s/f61RCskE4K
+* Jen-Chieh Shen: packaging with Eask
