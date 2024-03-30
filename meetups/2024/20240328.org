@@ -1,0 +1,83 @@
+#+TITLE: Elisp Hacking Night: Org-Mode
+
+* Logistics
+- We are hybrid tonight, for the first time in a couple of years, with an unknown number of remote participants.
+  It's gonna get /crazy/. Please be patient.
+- In person:
+  - bathroom key to right of office entrance
+  - I need a volunteer to let in latecomers
+  - Speakers and microphones off on personal laptops, except (maybe) for the presenter
+- Remote:
+  - Please mute yourself unless you are speaking. I anticipate mysterious feedback we will need to track down.
+  - If you have headphones please use them
+  - How we will handle the multiple microphones vs. people's individual laptops is TBD
+  - BBB (Big Blue Button) experts please identify yourselves in the chat
+
+* News
+** New Emacs version 29.3
+- Emergency security release
+- locking down evaluating things (arbitrary lisp in Org files, LaTeX preview, MIME content in Gnus) when loaded
+  - org-mode is affected
+** New Elisp video
+- Gavin Freeborn, [[https://www.youtube.com/watch?v=1y__2IK-aLM][Learn Emacs Lisp in 30 Minutes]]. An intro for people who know other Lisps.
+- Positronics, [[https://www.youtube.com/watch?v=D8391afYiRs][Elisp Idiosyncracies]]
+** Streamers
+- System Crafters, [[https://www.youtube.com/watch?v=O6hMwJfaXV8][Code Dive: Project.el in in Emacs]]. Goes into how it works at the ELisp level.
+- LCOLONQ, on [[https://www.twitch.tv/lcolonq][Twitch]] Tuesdays and Fridays, I don't know what coffee he is drinking but it's strong. Fun.
+
+* Presentations
+** Charles Choi: Running SQL on org tables
+http://yummymelon.com/presentations/org-sql-tables/org-sql-table.html
+** Jeff Trull: org-mode exporters
+# memo to self: C-x n s org-narrow-to-subtree
+*** Learning
+I'm giving only the briefest of introductions because there are great resources out there -
+e.g. [[https://www.reddit.com/r/emacs/comments/swvbmm/you_want_to_write_a_custom_org_backend_lets_write/][Tony Aldon's Reddit post]] on the subject. Instead, I'm going to quickly skim the code
+of one particular exporter and note some interesting parts.
+*** ox-gfm
+- An exporter for "Github Flavored Markdown"
+- There is an actual Markdown spec but many nonstandard extensions have been created. This is one of the most popular.
+- Extra features: code highlighting via source blocks, strike-through, better tables
+  - mostly these seem to simply replace HTML with corresponding GFM structures that aren't in plain MD.
+*** Derived Exporters
+- ~org-export-define-derived-backend~ saves time for backends that are largely the same as an existing one
+- "like X, except for the following parts of the org file"
+- ~gfm~ inherits from ~md~ which inherits from ~html~
+- ~gfm~ overrides 8 transcoders of ~md~
+*** org-element
+- Exporter transcoders are supplied with AST nodes you can interrogate with ~org-element-*~ functions
+- Look at ~org-gfm-src-block~ and ~org-gfm-strike-through~
+- helpful for understanding exporter behavior:
+
+#+begin_src elisp :results none
+(pp-eval-expression '(org-element-parse-buffer)) ; in any org buffer
+#+end_src
+
+- run ~~ in an org buffer to see AST
+  - very helpful for understanding exporter behavior
+** Jeff Trull: an exporter for Keynote
+*** Motivation
+- Beamer output viewed as unprofessional (at least with the themes I chose)
+- Corporate presentation standards
+- Reentering text is tedious and unproductive
+*** Design Considerationss
+**** Translate things into features of equal power
+- plots in Org become plots in Keynote (not images of gnuplot output)
+- table formulas translated faithfully where possible (vs. copying cell contents)
+- Inline LaTeX becomes Keynote "formula" (not image)
+**** Keynote format changes frequently and RE is incomplete
+- Solution: generate Applescript, then run it, like we do with LaTeX
+**** Applescript API is stable but incomplete
+- Solution: script UI actions
+  - yes, it's fragile
+**** Which slide template to use?
+- Need mechanism for users to specify defaults, override per-slide
+- Need "smart" approach for when unspecified
+- Which "text item" (box) should we use?
+- What if we run out of space?
+- Side-by-side layout?
+
+I am still feeling my way through many issues.
+
+*** Demo (video) of prototype
+
