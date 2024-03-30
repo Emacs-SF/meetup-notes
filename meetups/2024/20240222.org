@@ -1,0 +1,218 @@
+#+TITLE: Emacs Hacking Night II
+#+DATE: 22 February 2024
+#+LATEX_CLASS_OPTIONS: [aspectratio=169]
+#+OPTIONS: TOC:nil
+* Logistics
+- bathroom: to right, on left side of hallway. Take a key from right side of door
+- water
+- wifi: see wall
+- it's OK to bring food (but we must clean up)
+* Our Host: Walk SF
+- Pedestrian Advocacy
+- See website at https://walksf.org/
+* Group Updates
+** 672 members
+** Still looking for more meetup runners in other geographies (Oakland, South Bay)
+- we used to do coffee.el in Oakland also, and a few times in Walnut Creek, thanks to a member there
+- we had a few (very well attended!) meetups in Mountain View
+- come to think of it SF is fine too if you have a series idea and a venue
+* This Meetup Series
+** Goals
+- Deep dive into ELisp programming
+- Expert oriented
+- A combination of "lightning talk" and longer presentation formats
+- Requests for help, including code reviews
+- Demos
+* This Meetup Series
+** Topics
+- General programming techniques: style, libraries, testing, packing, performance
+- Modes
+- Specific features of Emacs
+  - completing-read
+  - display-buffer-alist
+  - buffer-invisibility-spec  (tonight!)
+  - text properties
+- Macros
+- Advice
+- Hooks
+- hacking org-mode
+- Your idea here:
+
+* New Prot videos
+- display-buffer-alist [[https://www.youtube.com/watch?v=1-UIzYPn38s][Control where buffers are displayed]]
+- [[https://www.youtube.com/watch?v=4Gg9PThHYZI][Emacs Package Maintenance]]
+
+* Tonight
+** Libraries for ELisp coders (discussion)
+- Bozhidar Batsov [[https://emacsredux.com/blog/2024/02/19/replacing-dash-el-with-built-in-emacs-apis/][Replacing dash.el with Built-in Emacs APIs]]
+- more libraries from this page: https://xenodium.com/modern-elisp-libraries/
+- System Crafters (2023) [[https://www.youtube.com/watch?v=RQ6p5l6sRAI][Exploring Useful Libraries for Emacs Lisp]]
+** Charles Choi: transient menus for calc
+- [[https://github.com/kickingvegas/casual][Casual - a Transient interface for Calc repo]]
+- [[https://melpa.org/#/cc-isearch-menu][cc-isearch-menu - Transient menu for isearch]]
+- [[https://github.com/kickingvegas/cclisp/blob/main/cc-avy.el][cc-avy.el - Transient menu for Avy]]
+** Radon Rosborough: advanced use cases for advice and el-patch
+- [[https://github.com/radian-software/el-patch][el-patch]] for maintaining patches on packages you use through updates
+- advice hackery, and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Core-Advising-Primitives.html#index-add_002dfunction][add-function]]
+** Jeff Trull: buffer-invisibility-spec (lightning talk)
+** Jeff Trull: an in-buffer parsing framework (code review)
+*** Concept
+For my [[https://github.com/jefftrull/tspew][tspew]] compiler error parser I found that I was making a whole bunch of ad-hoc parsers,
+and they rapidly became unmaintainable as I added more and more corner case handling.
+
+I needed a clean and consistent way to identify different portions of text like:
+
+- a function signature
+- a type signature
+- specific keywords
+- expressions parenthesized in different ways (square, curly, angle, etc.)
+
+I needed to be able to build higher-level parsers out of lower-level ones, e.g.
+
+=function signature => type + symbol + parenthesized expression + optional attribute=
+
+where I'd already defined "type" and "symbol" and so forth.
+
+*** Why not tree-sitter?
+- I was unable to figure out how to use it on just a portion of a buffer, or to say
+"parse using this start rule" etc.
+
+*** Basic implementation ("Parsers")
+
+- Follow the pattern of motion functions like ~forward-word~, ~skip-syntax-forward~ etc.
+- Exploit syntax tables where useful (e.g. angle brackets for ~forward-sexp~)
+- A successful parse "consumes" (moves point past the end of) the text parsed and returns t
+- Failing parse leaves point where it was and returns nil
+- Callers must remember the starting point, if they need it
+
+#+begin_src elisp
+(defun tspew--parse-ref-modifier ()
+  "Parse a pointer, ref, or rvalue ref"
+  (and (looking-at-p "\\*\\|&\\|&&")
+       (progn
+         (skip-syntax-forward "_")   ;; returns a count, not t/nil
+         t)))
+
+(defun tspew--parse-cv ()
+  "Parse the const or volatile keywords"
+  (and (or (looking-at-p "const\\s ") (looking-at "volatile\\s "))
+       (progn
+         (skip-syntax-forward "w")
+         (skip-syntax-forward " ")
+         t)))
+
+#+end_src
+
+*** Parser Generators
+
+- To reduce repetition, make functions accepting parameters that *return* parsers
+
+#+begin_src elisp
+
+(defun tspew--parser-keyword (kwd)
+  "Create a parser for a pre-selected keyword.
+It requires - and consumes - trailing whitespace"
+  (lambda ()
+    (and (looking-at-p (concat kwd "\\s "))   ;; trailing whitespace required
+         (progn
+           (forward-char (length kwd))
+           (skip-syntax-forward " ")
+           t))))
+#+end_src
+
+*** Parser Combinators
+
+I need to be able to handle "one or more", "optional", "alternative" etc.
+
+#+begin_src elisp
+(defmacro tspew--parser-alternative (&rest parsers)
+  "Create a parser that attempts to parse one of several input parsers,
+passing if any do"
+  `(lambda ()
+     (let ((start (point)))
+       ;; this whole thing is a macro because of this - "or" is not a function, so we cannot "apply" it.
+       ;; instead we build the expression through a macro
+       (if (or ,@(mapcar (lambda (p) (list 'funcall p)) parsers))
+           t
+         (goto-char start)
+         nil))))
+#+end_src
+
+Then I can say e.g.
+
+#+begin_src elisp
+; return a parser for either const/volatile or */&/&&
+(tspew-parser-alternative #'tspew--parse-cv #'tspew--parse-ref-modifier)
+
+#+end_src
+
+*** Grammar Shorthand
+
+Writing out ~tspew-parser-XXX~ all the time quickly grew tedious and I nerd sniped myself into writing a grammar macro:
+
+#+begin_src elisp
+
+;; syntactic sugar for combinators - a grammar constructor
+;; implementation first
+(defun tspew--parser-grammar-expand (grammar)
+  "Recursive function implementation of tspew--parser-grammar.
+You can call this to see the exact form produced by the grammar, pre-expansion"
+  (if (not grammar)
+      (lambda () t)     ;; pass and consume no input
+    (cond
+     ((stringp grammar)
+      `(tspew--parser-keyword ,grammar))    ;; interpret as keyword
+     ((not (listp grammar))
+      grammar)                              ;; unknown, just pass through (future extension?)
+     ((or (equal (car grammar) 'function)   ;; the name of a function (parser, most likely)
+          (and (symbolp (car grammar))      ;; a parser generator
+               (string-prefix-p "tspew--parser-" (symbol-name (car grammar)))))
+          grammar)                          ;; existing parser - just pass it through
+     (t (cl-case (car grammar)
+        (- (cl-assert (equal (length grammar) 2))
+           `(tspew--parser-optional ,(tspew--parser-grammar-expand (cadr grammar))))
+        (| `(tspew--parser-alternative
+             ,@(mapcar #'tspew--parser-grammar-expand (cdr grammar))))
+        (+ (cl-assert (equal (length grammar) 2))
+           `(tspew--parser-multiple ,(tspew--parser-grammar-expand (cadr grammar))))
+        (* (cl-assert (equal (length grammar) 2))
+           `(tspew--parser-optional
+             (tspew--parser-multiple ,(tspew--parser-grammar-expand (cadr grammar)))))
+        (<> (cl-assert (equal (length grammar) 3))
+            `(tspew--parser-alternating ,(tspew--parser-grammar-expand (cadr grammar))
+                                        ,(tspew--parser-grammar-expand (caddr grammar))))
+        (t ;; it's a list, so it's the default - a sequential parser
+         `(tspew--parser-sequential ,@(mapcar #'tspew--parser-grammar-expand grammar))))))))
+#+end_src
+
+and then the callable (macro) interface:
+
+#+begin_src elisp
+  (defmacro tspew--parser-grammar (grammar)
+    "Create a parser from combinators using shorthand."
+    (tspew--parser-grammar-expand grammar))
+#+end_src
+
+which allows me to write:
+
+#+begin_src elisp
+(defun tspew--parser-builtin-int-type ()
+  "Parse a builtin C++ integral type (int/char with modifiers),
+with trailing whitespace"
+  (tspew--parser-grammar
+   (| ( (- "unsigned") "char")
+      ( (* (| "long" "short" "unsigned")) "int"))))
+#+end_src
+
+- Question: I had to separate out the logic into a function because I could not figure out recursive macros. Has anyone else faced this problem?
+
+*** Conclusion
+OK maybe I got carried away? But I don't know what the "best practices" are for this kind of thing. What do *you* think?
+**** Audience Feedback
+- you *can* use tree-sitter on a portion of the buffer. Just narrow (see docs).
+- use cl-find to solve the "map over or, which is a macro" problem
+- reconsider thing-at-point (and isearch-forward-thing-at-point)
+- Macros: look at macrostep package for visualizing expansion process
+- Macros: should be able to do recursive macros. Just need to let Emacs do its recursive expansion and make judicious use of quasiquote (backtick)
+  - that said many people take my approach of putting everything in a function that the macro calls
+

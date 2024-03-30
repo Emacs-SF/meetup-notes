@@ -21,8 +21,12 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 **** 2021-03-19 online fosshost.org, "Retro Emacs, Lightning Talks, and General Emacs Discussion"
 **** 2021-04-02 online fosshost.org, "Emacs Lisp - Coding a Minor Mode, Lightning Talks, and Discussion"
 *** Recent Meetups (reverse chronological order)
+**** 2024-03-28 hybrid (BBB), Emacs Lisp Hacking Night: Org-Mode
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240328.org][3/28 meeting notes]]
+**** 2024-02-22 Emacs Lisp Hacking Night II
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240222.org][2/22 meeting notes]]
 **** 2024-01-25 Emacs Lisp Hacking Night
-- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240125.org][1/25 meeting notes]]
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240125.org][1/25 meeting notes]
 **** 2021-07-01 online foss.org, "Emacs Lisp: Macros and Quoting"
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210701.org][7/1 meeting notes]]
 **** 2021-05-27 online foss.org, "Emacs Lisp: Cracking Open compilation-mode"
