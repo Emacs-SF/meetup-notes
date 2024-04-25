@@ -26,7 +26,7 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 **** 2024-02-22 Emacs Lisp Hacking Night II
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240222.org][2/22 meeting notes]]
 **** 2024-01-25 Emacs Lisp Hacking Night
-- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240125.org][1/25 meeting notes]
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240125.org][1/25 meeting notes]]
 **** 2021-07-01 online foss.org, "Emacs Lisp: Macros and Quoting"
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210701.org][7/1 meeting notes]]
 **** 2021-05-27 online foss.org, "Emacs Lisp: Cracking Open compilation-mode"
