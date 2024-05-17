@@ -1,0 +1,80 @@
+#+TITLE: Elisp Hacking Night: Testing
+
+* News
+** New Elisp video
+- Anand Tamariya, [[https://lifeofpenguin.blogspot.com/2024/04/circle-packing-animation-in-gnu-emacs.html][Circle Packing Animation in GNU Emacs]]
+  - SVG manipulation. I love a good visualization.
+** Streamers
+- Xah Lee is back and coding ELisp live on YT, see [[https://www.youtube.com/watch?v=MM8sNbNHX_E][his latest]] on keyboard layout mapping
+  - looks like he's been quite active lately
+  - Member of this group :)
+
+* Presentations
+# Note to self: turn on recording!
+** Charles Choi: Testing Transient Menus
+[[http://yummymelon.com/presentations/testing-transient-menus/testing-transient.html][slides]]
+** Radon Rosborough: Test Design Examples from Apheleia
+*** Integration Tests
+- managing asynchronous code
+*** Unit Tests
+- Buttercup testing framework
+- edit distance algorithm
+- verifying that point ends up at the desired spot
+- making failure messages more useful
+** Jeff Trull: el-mock
+# Note to self: C-x n s org-narrow-to-subtree
+*** Mocks
+- Sometimes function behavior depends on non-parameters, i.e. a global variable, an external function etc.
+- To produce a predictable test result you need to /temporarily/ control those externalities
+
+*** Example
+
+#+begin_src elisp :results silent
+  (defun jet/nice-timestamp ()
+    (let ((components (split-string (current-time-string))))
+      (format "%s %s %s"
+       (nth 2 components)
+       (nth 1 components)
+       (nth 4 components))))
+#+end_src
+
+*** Naive Test
+
+#+begin_src elisp :results silent
+  (ert-deftest timestamp-basic ()
+    "Simple usage, flaky results"
+    (should (string= "24 Apr 2024" (jet/nice-timestamp))))  ;; it worked yesterday!
+#+end_src
+
+*** With a Stub
+
+#+begin_src elisp :results silent
+  (require 'el-mock)
+
+  (ert-deftest timestamp-improved ()
+    "Always the same day"
+    (with-mock
+     (stub current-time-string => "Thu Apr 24 16:21:15 2024")
+     (should (string= "24 Apr 2024" (jet/nice-timestamp)))))
+#+end_src
+
+*** Advanced
+- A *mock* is like a stub but checks its arguments
+
+#+begin_src elisp :results silent
+  (ert-deftest timestamp-cts-checkargs ()
+    (with-mock
+      (mock (current-time-string) => "Thu Apr 24 16:21:15 2024")
+       (should (string= "24 Apr 2024" (jet/nice-timestamp)))))
+#+end_src
+
+- Same as the previous *stub*, but will give an error if any arguments are supplied.
+  - You can also require particular arguments
+  - It appears that it also checks that it is called at least once (have not tried it)
+
+*** Installing
+- There's an ancient version on the Emacs Wiki but I suggest getting it off MELPA.
+*** History
+- Originally by the author of "elisp expectations" (2012), which became "ert expectations",
+  now maintained by someone else (updated 2022).
+

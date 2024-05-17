@@ -1,0 +1,116 @@
+#+TITLE: Elisp Hacking Night: Concurrency
+
+* In Memorium
+Long-time member Sean Farley passed away two weeks ago. 
+
+** Bio
+Sean was from Louisiana and attended the Louisiana School for Math, Science, and the Arts,
+followed by LSU. He studied applied mathematics in grad school, and had a varied career
+including being one of the principal Mercurial maintainers.
+
+** Contributions
+
+Sean participated in many open source projects, including Doom Emacs, Lem, mu4e,
+emacs-tree-sitter, and many others (141 PRs of which 6 are still open).
+
+Some talks you can find online include:
+
+- [[https://www.youtube.com/watch?v=_AKDqw6li58&t=145s][CuPy A NumPy compatible Library for the GPU (PyBay 2019)]]
+- [[https://www.youtube.com/watch?v=GxMAPW9_LsA][Emacs as a Python IDE]]
+- [[https://www.youtube.com/watch?v=SjFQiMNwThg][A Hodgepodge of Emacs]]
+- [[https://youtu.be/Rv0vV4un4vc?t=141][untitled - mu4e hacks]]
+
+The last three are from this meetup.
+
+** Mental Health
+Sean had some significant challenges to overcome in life but open source work - and
+Emacs in particular - was always a refuge for him. That's probably true of many people
+in our community.
+
+Some things can't be fixed with code. If you're struggling, reach out to someone.
+
+[[../../images/sean_pybay.png]]
+
+* Presentations
+# Note to self: turn on recording!
+We have a big chonky presentation on Concurrency but might have room for a quick one before,
+if anyone feels moved?
+
+** Karthik: working within Emacs' limitations, chaining async interactions, etc.
+
+- "just Karthik" - karthinks online, see blog at [[https://karthinks.com/]]
+- "collaborative ranting is not a problem" so do engage
+
+*** Speaker's outline
+- Emacs' event loop, quitting and signal handling, interrupts and keyboard input
+- "Push" vs "Pull" actions in Emacs
+- Elisp threads
+- Creating subprocesses: =make-process= and =make-network-process=
+  - Talking to processes: =process-send-*= and =signal-process=
+  - Listening to processes: process filters and process sentinels
+  - Demos of nontrivial process filters (gptel and Consult)
+- Elisp generators
+  - async-io, promises and channels
+  - Demo of generator-based async (elfeed-tube)
+- General guidelines for async in Emacs
+  - Don't
+  - Latency vs throughput tradeoff
+  - Garbage generation
+  - Discarding work via =while-no-input=
+    - Demo of interruptible elisp (corfu)
+  - Blocking Emacs in "Push" and "Pull" actions
+- Async recipes
+  - Async process executors
+    + =org-async=
+      Demo of org-latex-preview
+    + Process queues 
+      Demo of osm.el
+    + How not to do it
+      Demo of wombag
+  - Generic solutions
+    + emacs-async
+    + deferred.el
+    + promise
+    + emacs-aio
+    + plz.el, request and request-deferred
+  - iter2, a rewrite of elisp generators
+    + Packages built on iter2: emacs-async-await
+  - Combining sync and async results
+    - Demo of merging results (consult-web)
+- Tweaking process parameters
+  - Adjusting latency and throughput
+    - =read-process-output-max=
+    - =process-adaptive-read-buffering=
+    - =process-connection-type=
+  - General tips
+    - Reduce STDOUT, STDERR
+    - Kill with SIGPIPE
+    - Misconeption about reading process output in Emacs
+  - Reducing garbage (punted)
+- Takeaways
+  - Reading Emacs C source code
+  - Starting at the bottom
+  - The ongoing MPS effort (garbage collection rewrite)
+  - Expert systems programmers and Emacs
+- List of packages mentioned
+  - [[https://github.com/karthink/gptel][gptel]], LLM client
+  - [[https://github.com/minad/consult][Consult]], advanced completing-read commands for Emacs
+  - [[https://github.com/skeeto/emacs-aio][emacs-aio]], async/await based on generator.el
+  - [[https://andreyor.st/posts/2023-02-01-ad-hoc-async-in-emacs-lisp-via-generators/][core.async style channels]] by Andrey Listopadov
+  - [[https://github.com/karthink/elfeed-tube][elfeed-tube]], YouTube integration for Elfeed
+  - [[https://github.com/minad/corfu][Corfu]], completion-in-region interface for Emacs
+  - [[https://abode.karthinks.com/org-latex-preview/][org-latex-preview]], work-in-progress LaTeX previews update for Org 
+  - [[https://github.com/minad/osm][osm]], Open Street Maps for Emacs
+  - [[https://github.com/jwiegley/emacs-async][emacs-async]], Emacs futures: run elisp code in another Emacs process
+  - [[https://github.com/kiwanami/emacs-deferred][deferred.el]], JS-style "deferred" chains
+  - [[https://github.com/chuntaro/emacs-promise][promise]], JS-style promises
+  - [[https://github.com/alphapapa/plz.el][plz.el]], [[https://github.com/tkf/emacs-request][request]] and [[https://github.com/tkf/emacs-request/blob/master/request-deferred.el][request-deferred]] for HTTP requests
+  - [[https://github.com/doublep/iter2][iter2]], another generators implementation for Elisp
+  - [[https://github.com/chuntaro/emacs-async-await][emacs-async-await]], built on iter2
+  - [[https://github.com/armindarvish/consult-web][consult-web]], a "search-everything" multi-source search interface
+
+*** Organizer notes
+- presentation based on [[https://github.com/positron-solutions/macro-slides/][macro-slides]] from Positronics with additional code
+- neovim has good async support)
+- the way org-latex-preview picks the same font, color, and baseline as Emacs is incredible
+
