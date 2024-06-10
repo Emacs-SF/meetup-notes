@@ -27,7 +27,18 @@
 
 * Presentations
 ** Charles Choi: Running SQL on org tables
-http://yummymelon.com/presentations/org-sql-tables/org-sql-table.html
+- [[http://yummymelon.com/presentations/org-sql-tables/org-sql-table.html][Slides]]
+*** Discussion
+- Someone mentioned [[https://github.com/stuartsierra/org-mode/blob/master/contrib/lisp/orgtbl-sqlinsert.el][orgtbl-to-sqlinsert]] as an alternative
+- There's also Jonas Bernoulli's [[https://github.com/magit/emacsql][emacsql]]
+*** References
+- [[http://yummymelon.com/devnull/running-sql-queries-on-org-tables.html][nfdn: Running SQL Queries on Org Tables]]
+- [[https://gist.github.com/kickingvegas/00312e090acb57ed5f2e9a8e13f0d696][cc/org-table-to-sqlite]]
+- [[https://orgmode.org/manual/Evaluating-Code-Blocks.html][Evaluating Code Blocks (The Org Manual)]]
+- [[https://orgmode.org/manual/Library-of-Babel.html][Library of Babel (The Org Manual)]]
+- [[https://orgmode.org/manual/Noweb-Reference-Syntax.html][Noweb Reference Syntax (The Org Manual)]]
+
+
 ** Jeff Trull: org-mode exporters
 # memo to self: C-x n s org-narrow-to-subtree
 *** Learning
@@ -55,6 +66,10 @@ of one particular exporter and note some interesting parts.
 
 - run ~~ in an org buffer to see AST
   - very helpful for understanding exporter behavior
+*** Discussion
+- Charles: there is a [[https://github.com/titaniumbones/ox-slack/blob/master/ox-slack.el][Slack exporter]] based on =ox-gfm=, would be nice to insert the result into Slack window
+- Radon suggests the [[https://github.com/alpha22jp/atomic-chrome][Emacs fork of Atomic Chrome]] for this purpose
+
 ** Jeff Trull: an exporter for Keynote
 *** Motivation
 - Beamer output viewed as unprofessional (at least with the themes I chose)
