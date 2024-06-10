@@ -28,21 +28,9 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240222.org][2/22 meeting notes]]
 **** 2024-01-25 Emacs Lisp Hacking Night
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240125.org][1/25 meeting notes]]
-**** 2021-07-01 online foss.org, "Emacs Lisp: Macros and Quoting"
-- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210701.org][7/1 meeting notes]]
-**** 2021-05-27 online foss.org, "Emacs Lisp: Cracking Open compilation-mode"
-- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210527.org][5/27 meeting notes]]
-**** 2021-04-29 online fosshost.org, "Emacs Lisp: Foundational Utility Packages"
-- [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210429.org][4/29 meeting notes]]
-**** 2021-03-05 online fosshost.org, "Emacs Lisp and menu packages: dmenu, hydra, posframe, transient, etc."
-- [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210305.org][3/5 meeting notes]]
-**** 2021-02-12 jitsi.org, topics: Org-roam, org-roam, Emacs
-- [[file:meetups/2021/20210212.org][2/12 meeting notes]]
-**** 2021-01-27 jitsi.org, topics: Emacs completion packages, Emacs
-- [[file:meetups/2021/20210127.org][1/27 meeting notes]]
-**** 2021-01-09 jitsi.org, topics: Online Hangout VI: org-mode GTD focus
-- [[file:meetups/2021/20210109.org][1/9 meeting notes]]
+
 *** Prior year archives (reverse chronological order)
+- [[file:meetups/2021/index.org][2021]]
 - [[file:meetups/2020/index.org][2020]]
 - [[file:meetups/2019/index.org][2019]]
 - [[file:meetups/2018/index.org][2018]]
