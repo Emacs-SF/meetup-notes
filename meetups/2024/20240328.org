@@ -25,6 +25,9 @@
 - System Crafters, [[https://www.youtube.com/watch?v=O6hMwJfaXV8][Code Dive: Project.el in in Emacs]]. Goes into how it works at the ELisp level.
 - LCOLONQ, on [[https://www.twitch.tv/lcolonq][Twitch]] Tuesdays and Fridays, I don't know what coffee he is drinking but it's strong. Fun.
 
+* Previous Meetup on the same Subject
+See [[../2021/20210916.org][Org-mode Hacks (2021)]]
+
 * Presentations
 ** Charles Choi: Running SQL on org tables
 - [[http://yummymelon.com/presentations/org-sql-tables/org-sql-table.html][Slides]]
