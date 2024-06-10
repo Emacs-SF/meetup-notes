@@ -1,0 +1,140 @@
+#+TITLE: Emacs Lisp: Org-mode Hacks
+#+OPTIONS: TOC:nil
+#+LATEX_CLASS_OPTIONS: [svgnames]
+#+LATEX_HEADER: \usepackage{pagecolor}
+#+LATEX_HEADER: \pagecolor{black}
+#+LATEX_HEADER: \color{white}
+
+* Introduction
+- Still behind on the videos
+  - doing our best, sorry for the delay
+- Looking for speakers and topics
+  - put ideas in wiki at https://github.com/Emacs-SF/meetup-notes/wiki/Backlog
+- Do we have any lightning talks (or discussion topics)?
+  - I'm counting on you!
+
+* Jeff Trull: Clock Tables to Invoices
+** Macros
+*** Defining
+**** Inline
+
+     #+MACRO: TODAY (eval (format-time-string "%A %B %e, %Y"))
+
+     The "(eval" is a signal to the exporter that the rest is Elisp.
+
+     Now we can say that today is {{{TODAY}}}
+
+**** Via Elisp
+
+     You can also add it to `org-export-global-macros`:
+     #+begin_src elisp
+       (push (cons 'TODAY "(eval (format-time-string \"%A %B %e, %Y\"))")
+             org-export-global-macros)
+       ;; note the value is a string!
+     #+end_src
+
+**** Making It Cleaner
+
+     Macro definitions are strings and can get really long
+
+     #+begin_src elisp
+       (defmacro jet/make-org-macro (name form)
+         "Create macro name/string pair suitable for supplying to org-export-global-macros"
+         `(cons ,name ,(concat "(eval " (prin1-to-string form) ")")))
+
+       (push (jet/make-org-macro
+              'TOMORROW
+              (format-time-string "%A %B %e, %Y"
+                                  (encode-time
+                                   (decoded-time-add (decode-time)
+                                                     (make-decoded-time :day 1)))))
+             org-export-global-macros)
+     #+end_src
+
+     Tomorrow is {{{TOMORROW}}}.
+
+*** Usage Restrictions
+
+   From the manual:
+
+   #+begin_quote
+   Org recognizes macro references in following Org markup areas: paragraphs,
+   headlines, verse blocks, tables cells and lists. Org also recognizes macro
+   references in keywords, such as ‘CAPTION’, ‘TITLE’, ‘AUTHOR’, ‘DATE’, and
+   for /some back-end specific export options/.
+   #+end_quote
+
+   - This seems to mean they are only usable for text substitution
+   and not for, e.g. changing the behavior of the exporting process.
+
+   - Order of evaluation w.r.t. elisp source blocks is unclear
+     - The reference for this kind of thing appears to be the code itself
+
+** Dynamic Blocks
+   A way to run arbitrary Elisp from org, supplying parameters
+
+   #+begin_src elisp :results output silent
+     (defun org-dblock-write:emacssf-fancy (params)
+       (insert
+        ;; bold and gold *both* in the buffer and in the export
+        "@@latex:{\\color{Gold}\\textbf @@"
+        (propertize (plist-get params :text)
+                    'font-lock-face    ;; NOT "face" here
+                    '(:foreground "gold" :weight 'bold))
+        "@@latex:}@@"))
+   #+end_src
+
+# Oro en Paz, Fierro en Guerra
+#+BEGIN: emacssf-fancy :text "San Francisco"
+#+END:
+
+*** Examples
+   - Column View
+   - Clock Tables
+
+** Clock Tables
+*** Intro
+    - A summary of information from clock entries
+    - in table form
+
+*** Demo
+
+*** Elisp hooks
+**** :scope
+     - A mechanism for specifying what files or parts of files to use
+     - Normally things like "this file", "this heading", etc.
+     - Can instead supply a function returning a list of files
+       - ~buffer-file-name~ will give us same result as =file=
+**** :formula
+     - table formulas to apply after the clock table is created
+     - Round time values to nearest 5 minutes
+     - Calculate subtotals
+**** :formatter
+     - supply your own Elisp to produce the table
+     - typically used to postprocess the default result
+
+** Other Invoicing flows
+After the meeting I was made aware of some other work in this area:
+- [[https://news.ycombinator.com/item?id=19146032][one from Hacker News]]
+- [[https://list.orgmode.org/831v02u6b7.fsf@yahoo.it/T/][one from the emacs-orgmode mailing list]]
+- [[https://www.adventuresinwhy.com/post/org-mode-timekeeping/][one pointed out to me by an org-mode maintainer]]
+
+* Clock Tables to CSV to Spreadsheet (Brian Wood)
+
+* OrgMark and org-capture via HammerSpoon (Sean Farley)
+** OrgMark
+- quick demo using a separate iPad with the orgmark app
+** org-capture
+- demonstrates launching Emacs from a browser with a link to add to reading list
+  - This is done with the help of [[http://www.hammerspoon.org/][Hammerspoon]] (Mac only)
+  - see also [[https://xenodium.com/emacs-utilities-for-your-os/][Álvaro Ramírez]] on a related subject
+  - Howard Abrams discusses capturing for both Mac and Linux desktops [[https://howardism.org/Technical/Emacs/capturing-content.html][here]]
+- org-protocol
+  - e.g. roam-ref, capture-html
+  - documented [[https://orgmode.org/manual/Protocols.html][here]]
+  - Emacsclient understands them as commnad-line args when preceeded with =org-protocol://=
+  - Doom comes with a bunch of capture templates
+  - [[https://github.com/seanfarley/dotfiles/blob/main/.config/hammerspoon/emacs.lua][Sean's Hammerspoon config]]
+  - Cameron Desautels notes [[https://github.com/alphapapa/org-protocol-capture-html][alphapapa's org-protocol-capture-html]] which Sean uses
+
+
