@@ -1,0 +1,116 @@
+#+TITLE: Logging time worked for Acme Corp
+#+AUTHOR: Jeff Trull
+# prompt for note on clock-out
+#+STARTUP: lognoteclock-out
+
+# High-level structure comes from Statement of Work
+# Deeper levels come as project evolves
+# Property HOURLY_RATE varies among tasks and is inheritable
+* Project A
+  :PROPERTIES:
+  :HOURLY_RATE: 150
+  :END:
+** Gathering Requirements
+   :LOGBOOK:
+   CLOCK: [2021-09-15 Wed 11:00]--[2021-09-16 Thu 11:29] => 24:29
+   - artificially long
+   CLOCK: [2021-09-16 Thu 10:20]--[2021-09-16 Thu 10:32] =>  0:12
+   - Talking with Emacs users
+   CLOCK: [2021-09-13 Mon 09:00]--[2021-09-13 Mon 09:43] =>  0:43
+   - Meet with VP Engineering
+   CLOCK: [2021-09-13 Mon 10:00]--[2021-09-13 Mon 16:30] =>  6:30
+   - Interview users
+   :END:
+** Planning Architecture
+   :LOGBOOK:
+   CLOCK: [2021-09-14 Tue 09:30]--[2021-09-14 Tue 11:31] =>  2:01
+   - Whiteboarding with colleagues
+   :END:
+** Coding
+   :LOGBOOK:
+   CLOCK: [2021-09-14 Tue 13:15]--[2021-09-14 Tue 13:56] =>  0:41
+   - Setting up Emacs on premise
+   :END:
+** Writing Unit Tests
+** Presenting Results
+* Project B
+** Code Reviews
+   :PROPERTIES:
+   :HOURLY_RATE: 100
+   :END:
+   :LOGBOOK:
+   CLOCK: [2021-09-09 Thu 14:29]--[2021-09-09 Thu 15:45] =>  1:16
+   - Made 12 comments on PR
+   :END:
+** Finding Bugs
+   :PROPERTIES:
+   :HOURLY_RATE: 125
+   :END:
+** Fixing Bugs
+   :PROPERTIES:
+   :HOURLY_RATE: 200
+   :END:
+** Fixing Typos in Comments
+   :PROPERTIES:
+   :HOURLY_RATE: 20
+   :END:
+   :LOGBOOK:
+   CLOCK: [2021-09-09 Thu 15:50]--[2021-09-09 Thu 17:29] =>  1:39
+   - Converting "principle" to "principal" where appropriate
+   :END:
+
+
+
+   #+begin_src elisp :results silent none :exports none
+     ;; eval this code before running the clocktable below
+
+     (setq org-duration-format (quote h:mm))  ;; don't use days (undocumented variable!)
+
+     (defun jet/round-time-to-5min (time)
+       (if (zerop (length time)) ""
+         (let ((d (parse-time-string time)))
+           (format-seconds "%h:%02m" (* 60 (+ (* 5 (round (cadr d) 5)) (* 60 (caddr d))))))))
+
+     (defun jet/apply-hourly (rate time)
+       (if (or (zerop (length rate)) (zerop (length time))) ""
+         (let ((d (parse-time-string time))
+               (r (string-to-number rate)))
+           (format "%0.2f"
+                   (+ (* r (caddr d))                        ;; hour
+                      (/ (round (* (* r 100) (cadr d)) 60)   ;; minutes
+                         100.0))))))
+
+     (defun jet/format-total-at-end (ipos tables params)
+       (org-clocktable-write-default ipos tables params)
+       (save-excursion
+         (forward-line 2)
+         (org-table-kill-row)
+         (org-table-kill-row)
+         (goto-char (org-table-end))
+         (yank)
+         (yank 2))
+       (save-excursion
+         (org-table-goto-column 1)
+         (dotimes (_ 3) (org-table-move-column))))
+   #+end_src
+
+* Summary
+  :PROPERTIES:
+  :CUSTOM_ID: 2021-09-invoice
+  :END:
+#+BEGIN: clocktable :maxlevel 2 :scope buffer-file-name :properties ("HOURLY_RATE") :inherit-props t :formula "@1$1=Rate::$4='(jet/round-time-to-5min $4)::$5='(jet/apply-hourly $1 $4)" :formatter jet/format-total-at-end
+#+CAPTION: Clock summary at [2021-09-26 Sun 22:39]
+| Headline                     |    Time |       | Rate |         |
+|------------------------------+---------+-------+------+---------|
+| Project A                    |   34:36 |       |  150 |         |
+| \_  Gathering Requirements   |         | 31:55 |  150 | 4787.50 |
+| \_  Planning Architecture    |         |  2:00 |  150 |  300.00 |
+| \_  Coding                   |         |  0:40 |  150 |  100.00 |
+| Project B                    |    2:55 |       |      |         |
+| \_  Code Reviews             |         |  1:15 |  100 |  125.00 |
+| \_  Fixing Typos in Comments |         |  1:40 |   20 |   33.33 |
+|------------------------------+---------+-------+------+---------|
+| *Total time*                 | *37:31* |       |      |         |
+#+TBLFM: @1$4=Rate::$3='(jet/round-time-to-5min $3)::$5='(jet/apply-hourly $4 $3)
+#+END:
+

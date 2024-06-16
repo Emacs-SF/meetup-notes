@@ -113,7 +113,11 @@
      - supply your own Elisp to produce the table
      - typically used to postprocess the default result
 
-** Other Invoicing flows
+** References
+*** Jeff's Example
+- [[./TimeTrack.org][Time tracking log and clocktable]]
+- [[./invoice.org][Invoice skeleton]]
+*** Other Invoicing flows
 After the meeting I was made aware of some other work in this area:
 - [[https://news.ycombinator.com/item?id=19146032][one from Hacker News]]
 - [[https://list.orgmode.org/831v02u6b7.fsf@yahoo.it/T/][one from the emacs-orgmode mailing list]]

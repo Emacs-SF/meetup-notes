@@ -1,0 +1,90 @@
+#+TITLE: ELisp Hacking Night: Debugging
+
+* Emacs-SF update
+** Video backlog
+- Actual honest-to-God progress is happening
+- We have a Video Production Intern
+** Meeting Notes
+- [[https://github.com/Emacs-SF/meetup-notes/]]
+- being updated with more info as I review old videos on BBB
+- Github repo search is worth trying if you want to know if we've discussed something
+  - 5 hits on "overlay", for example
+
+* Meetups and podcasts
+- I am enjoying the Austin and org-mode meetups
+  - org-mode one was quite technical yesterday. Lots of elisp.
+
+* Topic-relevant videos and blogs
+- Jon Eskin debugs an Advent of Code package [[https://jeskin.net/blog/debugging-emacs/]]
+- A short demo by Nick Ferrier showing edebug and macrostep [[https://www.youtube.com/watch?v=odkYXXYOxpo]]
+- The manual [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugging.html]]
+- The inevitable System Crafters video https://www.youtube.com/watch?v=LfwSc-lfFxM
+
+* Presentations
+# Note to self: turn on recording!
+
+Your host kind of did one, but he's not proud of it. I hope someone feels like demoing edebug :)
+
+** Remedial Debugging (Jeff Trull)
+*** All I knew a week ago
+**** ~toggle-debug-on-error~
+Enters debugger when an error happens. Displays a stack trace.
+**** ~message~
+Puts a string of your choice in the minibuffer and also *Messages*
+
+You can get a lot done that way! Laboriously, maybe, but it "works".
+
+*** What I learned by watching the first half of System Crafters' debugging video
+**** There are all kinds of debug-on-* functions
+- toggle-debug-on-quit
+This does not mean "debug when someone tries to exit Emacs", as I had assumed.
+- debug-on-entry
+- debug-on-variable-change
+**** and variables too
+- debug-on-message
+- debug-on-event
+**** There are some helpful commands in the stack trace window
+- various kinds of stepping, similar to gdb
+- "display local variables" seems of limited utility
+
+*** Quick demo (debug-on-message)
+- shows [[https://github.com/jefftrull/tspew][his tspew error reformatting package]] failing to understand something
+- error message triggers debugger
+- ~v~ and ~.~ commands on stack frames
+*** Discussion
+- information available with the ~v~ command
+  - only does anything on let binding frames
+  - shows the local bindings, any bindings in ancestral frames, and function parameters
+- ~.~ command successfully expands frames shortened with ellipses
+
+** Demystifying Edebug (Charles Choi)
+- http://yummymelon.com/presentations/demystifying-edebug/demystifying-edebug.html
+*** Discussion
+- general agreement that edebug is confusing
+- David C. notes that there are helpful menus
+- [Jeff Trull] Léo Vivier did a talk for us on [[https://github.com/abo-abo/lispy][Lispy]] in 2021. It can be used
+  to step through code in a manner similar to edebug; might be a better UI.
+- How does edebug know the source location of a function?
+  - Radon: "almost certainly" [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Where-Defined.html][load-history]]
+  - Ag: reminds him of [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Tab-Bars.html][tab bar]] history (tabs are "window configurations")
+  - Radon mentions [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html][Winner mode]]
+- discussion of edebug-remove-instrumentation implementation
+  - calls ~mapatom~ (Radon: "you know you're in for a bad time") which iterates
+    over every interned symbol in Emacs
+  - we proceed to count the number of slots (hash table buckets) and items stored
+    (15K/53K)
+  - edebug uses the plist of a function's symbol to mark it as instrumented
+- [[https://github.com/xiongtx/eros][Eros]] ("evaluation result overlays")
+- trace buffers are not the same as the Trace execution mode
+  - both are part of edebug though
+  - trace buffers are for recording entry and exit records ("traces") free-running
+    - you can add extra information
+  - the Trace execution mode executes code, pausing after each sexp
+- Radon demos [[https://github.com/joddie/macrostep][macrostep]] (uses overlays to show macro evaluation process)
+
+** Further discussion
+- this went far afield
+- serialized representations of code
+  - a macro is an sexp that starts with the symbol 'macro
+  - Radon creates a "cursed function" whose serialized representation contains a buffer
+  - The reader is, as expected, unable to process it

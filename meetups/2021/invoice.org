@@ -1,0 +1,41 @@
+#+TITLE: Invoice
+#+AUTHOR: Jeff Trull
+#+OPTIONS: TOC:nil ^:nil
+#+LATEX_HEADER: \usepackage{pagecolor}
+#+LATEX_HEADER: \pagecolor{black}
+#+LATEX_HEADER: \color{white}
+
+# Set up useful macros
+# First, the big ones formatted for readability
+#+begin_src elisp :results output silent :exports none
+    (push (jet/make-org-macro
+           'FIRSTOFLASTMONTH
+           (format-time-string "%m/%d/%Y"
+                               (encode-time
+                                (let ((d (decoded-time-add
+                                          (decode-time)
+                                          (make-decoded-time :month -1))))
+                                  (setf (decoded-time-day d) 1)
+                                  d))))
+          org-export-global-macros)
+    (push (jet/make-org-macro
+           'LASTOFLASTMONTH
+           (format-time-string "%m/%d/%Y"
+                               (encode-time
+                                (let ((d (decode-time)))
+                                  (setf (decoded-time-day d) 1)
+                                  (decoded-time-add d
+                                                    (make-decoded-time :day -1))))))
+          org-export-global-macros)
+#+end_src
+
+# Then a simpler one done inline
+#+MACRO: NET30 (eval (format-time-string "%m/%d/%Y" (encode-time (decoded-time-add (decode-time) (make-decoded-time :day 30)))))
+
+| Service Period | {{{FIRSTOFLASTMONTH}}} - {{{LASTOFLASTMONTH}}} |
+| Payment Due    | {{{NET30}}}                                    |
+
+
+# Get the clock table from my time-tracking file
+# This is "org-link-search syntax" using a custom id property
+#+INCLUDE: "./TimeTrack.org::#2021-09-invoice" :only-contents t :lines "3-"
