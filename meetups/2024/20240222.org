@@ -216,3 +216,6 @@ OK maybe I got carried away? But I don't know what the "best practices" are for 
 - Macros: should be able to do recursive macros. Just need to let Emacs do its recursive expansion and make judicious use of quasiquote (backtick)
   - that said many people take my approach of putting everything in a function that the macro calls
 
+*** Update: Emacs has a parser framework now
+- supports Parsing Expression Grammars with [[https://elpa.gnu.org/packages/peg.html][peg]] (Stefan Monnier)
+- I should probably switch over

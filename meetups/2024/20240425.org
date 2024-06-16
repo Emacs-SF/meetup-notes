@@ -21,6 +21,12 @@
 - edit distance algorithm
 - verifying that point ends up at the desired spot
 - making failure messages more useful
+*** Repos Demonstrated
+- [[https://github.com/radian-software/apheleia][Apheleia]]
+- [[https://github.com/radian-software/dumbparens][dumbparens]]
+- [[https://github.com/radian-software/straight.el][straight.el]]
+- [[https://github.com/radian-software/radian][radian]]
+
 ** Jeff Trull: el-mock
 # Note to self: C-x n s org-narrow-to-subtree
 *** Mocks
