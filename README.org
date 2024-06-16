@@ -18,6 +18,8 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - elisp programming
 - and more
 *** Recent Meetups (reverse chronological order)
+**** 2024-06-13 hybrid (BBB), Emacs Lisp Hacking Night: Debugging
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240613.org][6/13 meeting notes]]
 **** 2024-05-16 hybrid (BBB), Emacs Lisp Hacking Night: Concurrency
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240516.org][5/16 meeting notes]]
 **** 2024-04-25 hybrid (BBB), Emacs Lisp Hacking Night: Testing
