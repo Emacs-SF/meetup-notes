@@ -35,6 +35,10 @@
 **** online: [[https://emacsbbb.fosshost.org/b/mic-4uy-qlr-iwf]]
 **** [[file:20210305.org][3/5 meeting notes]] updated without video links
 
+*** 2021-03-19 Friday online
+**** title: Retro Emacs
+**** [[https://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2021/20210319.org][3/19 meeting notes]]
+
 *** 2021-02-12 Friday 10:00am PT online jistsi.org
 **** title: Discussion of emacs in general and completion frameworks in particular
 **** online: https://meet.jit.si/EmacsCompletionEmacsSF20210212T1000

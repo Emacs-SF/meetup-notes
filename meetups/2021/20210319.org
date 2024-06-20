@@ -130,7 +130,7 @@ Jeff gave live demo of TECO, "Video TECO", and Emacs circa 1980 on an emulated T
 ** Lighting Talks
 *** Nested Hydra Menus Demo - Mike Wright
 *** A slight detour into Yasnippet
-*** Pretty Hyrda Menus - Leo Vivier
+*** Pretty Hydra Menus - Leo Vivier
 ** Discussion
 ** Wrap-up
 ** Links
