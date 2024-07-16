@@ -19,6 +19,7 @@
 - A short demo by Nick Ferrier showing edebug and macrostep [[https://www.youtube.com/watch?v=odkYXXYOxpo]]
 - The manual [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugging.html]]
 - The inevitable System Crafters video https://www.youtube.com/watch?v=LfwSc-lfFxM
+- [[https://xenodium.com/inline-previous-result-and-why-you-should-edebug/][Inline previous result and why you should edebug]] by Álvaro Ramírez
 
 * Presentations
 # Note to self: turn on recording!
@@ -62,7 +63,7 @@ This does not mean "debug when someone tries to exit Emacs", as I had assumed.
 *** Discussion
 - general agreement that edebug is confusing
 - David C. notes that there are helpful menus
-- [Jeff Trull] Léo Vivier did a talk for us on [[https://github.com/abo-abo/lispy][Lispy]] in 2021. It can be used
+- [Jeff Trull] Leo Vivier did a talk for us on [[https://github.com/abo-abo/lispy][Lispy]] in 2021. It can be used
   to step through code in a manner similar to edebug; might be a better UI.
 - How does edebug know the source location of a function?
   - Radon: "almost certainly" [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Where-Defined.html][load-history]]
@@ -81,6 +82,7 @@ This does not mean "debug when someone tries to exit Emacs", as I had assumed.
     - you can add extra information
   - the Trace execution mode executes code, pausing after each sexp
 - Radon demos [[https://github.com/joddie/macrostep][macrostep]] (uses overlays to show macro evaluation process)
+- Member David Conner has an [[https://github.com/dcunited001/zettelkasten/blob/master/cheatsheets/emacs_edebug_maps_cheatsheet.org][edebug cheatsheet]] to share
 
 ** Further discussion
 - this went far afield
