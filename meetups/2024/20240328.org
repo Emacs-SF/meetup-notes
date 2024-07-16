@@ -99,3 +99,5 @@ I am still feeling my way through many issues.
 
 *** Demo (video) of prototype
 
+* Resources
+- someone mentioned [[https://github.com/ndwarshuis/org-ml][org-ml]], which bills itself as "a functional API for org-mode" and is inspired by dash.el/s.el.

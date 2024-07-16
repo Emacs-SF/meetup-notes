@@ -241,6 +241,7 @@
 ** Discussion
    - Charlie: I don't think there's any capability for multiple "its"
 * Sean Farley: dynamic module for controlling Mac events
+- a.k.a. [[https://github.com/seanfarley/mjolmacs][mjolmacs]]
 ** Sidebar on async support
    - Mike Wright uses something that displays updated [[https://ctan.org/pkg/circuitikz?lang=en][CircuitTikz]] diagrams in a window asynchronously
    - Two libraries: [[https://github.com/skeeto/emacs-aio][emacs-aoi]], and [[https://github.com/jwiegley/emacs-async][emacs-async]] from jwiegley
