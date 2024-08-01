@@ -22,6 +22,8 @@
 - What am I, a computer scientist? It looks like it has all the normal stuff I expect.
 *** peg.el: an implementation of PEG for Emacs
 
+Appeared in ELPA some years back; an official part of Emacs starting in version 30.
+
 #+begin_src elisp
   (require 'peg)
 #+end_src
@@ -163,6 +165,51 @@ efficient as an implementation for ~(* (syntax-class XXX))~
 
 Also I found [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug=72131][a bug (72131)]].
 
+*** Discussion
+- can we write a PEG grammar for org-mode?
+
+**** LSP
+- why do we have two clients?
+- there is actually [[https://github.com/manateelazycat/lsp-bridge][a third]] (see [[https://emacsconf.org/2022/talks/lspbridge/][EmacsConf 2022 presentation]]) as well as [[https://github.com/blahgeek/emacs-lsp-booster][a "booster" package for performance]]
+- eglot, while lighter weight, does not support more than one server at a time
+
+Radon with the zinger in the chat:
+
+#+begin_quote
+i will say though that the idea of "lsp is universal protocol, editors become swappable" is complete fantasy - you try implementing your own lsp client, you find out immediately that every server has its own unhinged insistence on exactly which order you send various messages, and what configuration options have to be set xyz way
+#+end_quote
+
+They go on to say in response to a question about the N language x M server problem (paraphrasing):
+
+#+begin_quote
+It's not NxM but there's a heavy constant factor because the LSP spec is really underspecified...
+there's not a lot of competition in the editor ecosystem... Everyone uses VSCode and so everything's
+only built for VSCode, but when you get beyond that, individual language ecosystems are biased toward
+particular editors, so each client has its own peculiarities that you could fingerprint if you wanted to,
+to figure out like do we send the config before or after the init message, when does it register capabilities,
+project name vs. project path, virtual vs ... the spec is silent on the question of how exactly things
+should be set, the language servers get set around what editors want so they don't work with other editors,
+often the error handling is bad and the language server just crashes...
+#+end_quote
+
+**** Other editors and their extension languages
+- VSCode, you can do ClojureScript but it's still mostly JS
+- vim: vimscript and Lua
+- other interesting editors: [[https://zed.dev/][Zed]] and [[https://helix-editor.com/][Helix]]
+
+**** Systems and configuration
+- Radon and Jeff use [[https://frame.work/][Framework]] laptops
+- Nix, MacPorts
+- Ag likes [[https://www.reddit.com/r/emacs/comments/1e6qhpf/announcing_consultomni_a_powerful_omnisearch_and/][consult-omni]] for system search
+- Ag shows his literate dotfile configurator
+
+**** Alternative: tree-sitter
+- Writing a treesit grammar means reuse in other editors in a similar manner to LSP
+- Mickey Peterson's [[https://www.masteringemacs.org/article/combobulate-intuitive-structured-navigation-treesitter][combobulate]] (based on tree-sitter)
+- There's an attempt at org-mode parsing: [[https://github.com/milisims/tree-sitter-org][tree-sitter-org]]
+- peg.el can be useful for lightweight parsing; tree-sitter is focused on the whole buffer
+- there is a lightweight tree-sitter [[https://github.com/stsewd/tree-sitter-comment][parser for TODO comments in code]] so that may be possible actually
+
 ** Jeff Trull: thing-at-point
 *** Generalizes "things" - parseable elements in a buffer
 - words, lines, sentences
@@ -247,5 +294,19 @@ Let's make a thing called ~coord~, a comma-separated pair of coordinates in pare
 
 #+begin_src elisp
 (put 'coord 'bounds-of-thing-at-point 'jet/bounds-of-coord-at-point)
+#+end_src
+
+*** Discussion
+- Radon: symbols and their properties and cells (function, plist, variable)
+  - the approach used by ~thing-at-point~ is "fairly common" in Emacs
+  - ~helpful.el~ displays symbol plist properties by default
+  - the symbol ~symbol-plist~ itself has a plist containing two properties:
+    ~gv-expander~ and ~side-effect-free~
+  - Ankit speculates that [[https://www.gnu.org/software/hyperbole/][Hyperbole]] uses a similar mechanism
+
+Radon provides the following code for "every symbol plist property that anybody uses in Emacs":
+
+#+begin_src elisp
+(progn (setq all-keys (make-hash-table)) (mapatoms (lambda (sym) (dolist (key (map-keys (symbol-plist sym))) (puthash key t all-keys)))) (map-keys all-keys))
 #+end_src
 
