@@ -1,0 +1,312 @@
+#+TITLE: ELisp Hacking Night: Parsers
+
+* Emacs-SF update
+** Video backlog
+- Video Production Intern has signed contract, claims to be working
+** Meeting Notes
+- [[https://github.com/Emacs-SF/meetup-notes/]]
+- Github repo search is worth trying if you want to know if we've discussed something
+  - 5 hits on "overlay", for example
+- You can submit a PR with more info or to follow up on something interesting you mentioned
+
+* News
+- [[https://emacsconf.org/2024/cfp/][EmacsConf CFP]]
+- [[https://www.youtube.com/watch?v=25HBEqIPoH8&t=2280s][Automating Org Mode Tasks with Emacs Lisp]] (System Crafters)
+
+* Presentations
+
+** Jeff Trull: PEG
+*** Parsing Expression Grammars
+- not context-free but close - "simplified"
+- linear time parsers are implementable
+- What am I, a computer scientist? It looks like it has all the normal stuff I expect.
+*** peg.el: an implementation of PEG for Emacs
+
+Appeared in ELPA some years back; an official part of Emacs starting in version 30.
+
+#+begin_src elisp
+  (require 'peg)
+#+end_src
+
+**** Rules
+- strings and characters
+- the usual combinators
+
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo1"))
+    (and (peg-parse (+ [A-Z a-z]))
+         (point)))
+#+end_src
+
+**** Fancy Rules
+- syntax class: just like syntax tables
+- buffer position: beginning/end of buffer, line, word, or symbol
+- boolean guard: parse if expression is true
+
+***** syntax-class
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo1"))
+    ;; parse a word
+    (and (peg-parse (+ (syntax-class word)))
+         ;; and produce the final position as the parsing result
+         (point)))
+#+end_src
+
+***** position: eob
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo[0]"))
+    (peg-parse (and (+ (syntax-class word)) (syntax-class open)
+                    (+ [0-9]) (syntax-class close)
+                    eob)))  ;; ensure this is the last of the buffer
+#+end_src
+
+***** with-peg-rules, guard
+#+begin_src elisp
+  ;; conditional enforcement of a C++ syntax rule
+  (with-temp-buffer
+    (save-excursion (insert "vector<list<Foo> >"))
+    (let ((enforce-angle-bracket-space t))  ;; required prior to C++11
+      (with-peg-rules
+          ;; this allows us to give rules names for reuse
+          ;; identifiers start with letters but can contain numbers and underscores
+          ((identfirst (or [a-z] [A-Z]))
+           (identrest (or identfirst [digit] (char ?_)))
+           (ident (and identfirst (* identrest)))
+           ;; classnames may be followed by template parameters
+           ;; if so they need trailing whitespace EXCEPT for the top level
+           ;; or if the version of the C++ standard does not require it
+           (classname (and ident (opt (and (char ?<) classname (char ?>)
+                                           (or (+ (syntax-class whitespace))
+                                               (guard (not enforce-angle-bracket-space)))))))
+           (classname_top (and ident (opt (and (char ?<) classname (char ?>))))))
+        (peg-run (peg classname_top eob)))))
+#+end_src
+
+**** Actions
+- regular ones evaluated for side effects
+- stack actions that push/pop/combine items. Useful for making ASTs
+- safe backtracking!
+
+***** side effect
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo1"))
+    (with-peg-rules
+        ;; regular side effect: a message if a parser subexpression succeeds
+        ((digit-shouter (and (+ [digit]) (action (message "I got digits!"))))
+         (succeed-er (guard t))
+         (fail-er (guard nil)))
+      ;; the side effects only occur *if the parse as a whole succeeds and includes the subexpression*
+      ;; i.e. evaluation of the action form is deferred until the end of the parse,
+      ;; and if it remains on the stack it is executed
+      (peg-run (peg (and (+ [a-z]) digit-shouter succeed-er)))))
+#+end_src
+
+***** stack action: change of coordinate system
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "(2,3)"))
+    ;; imagine we have "window" coordinates where (x,y) are offsets from the upper left corner
+    ;; but we want regular Cartesian coordinates where the upper left is at (-30, 30)
+    ;; so (x', y') = (x-30, 30-y)
+    (with-peg-rules
+        ((number (and (opt (char ?-)) (+ [digit])))
+         (coord (and (char ?\()
+                     (substring number)   ;; derived operator: push match string on stack
+                     (char ?,)
+                     (substring number)
+                     (char ?\)))))
+      (peg-run (peg coord eob
+                    `(y x -- (cons (- (string-to-number x) 30)       ;; stack action!
+                                   (- 30 (string-to-number y))))))))
+#+end_src
+
+**** Derived Operators
+These match an enclosed expression then performs a canned action, e.g.:
+
+- (substring E) : match and push the matching text
+- (region E) : match and push the start/end positions
+- (list E) : match and push a list of items produced
+- (replace E R) : replace E with R in the buffer
+
+***** substring and list
+#+begin_src elisp
+   (with-temp-buffer
+     (save-excursion (insert "7 14 21 28 35"))
+     ;; create a list of numbers (as strings) without whitespace
+     (peg-parse (list   ;; the derived operator, not the list constructor
+                 ;; use substring to put just the numbers on the stack
+                 (and (substring (+ [digit]))
+                      (* (+ [space]) (substring (+ [digit])))))
+                eob))
+  ;; note that "list" grabbed its values from the stack, not its arguments
+#+end_src
+
+**** A Minor Disappointment
+I'm a little sad about the way the syntax classes are implemented:
+
+#+begin_src elisp
+  (cl-defmethod peg--translate ((_ (eql syntax-class)) class)
+    (let ((probe (assoc class peg-syntax-classes)))
+      (cond (probe `(when (looking-at ,(format "\\s%c" (cadr probe)))
+                      (forward-char)
+                      t))
+  	  (t (error "Invalid syntax class: %S\nMust be one of: %s" class
+  		    (mapcar #'car peg-syntax-classes))))))
+#+end_src
+
+We construct a regex and then use ~looking-at~ plus ~forward-char~?
+
+Why not use the builtin C function ~skip-syntax-forward~? It would be especially
+efficient as an implementation for ~(* (syntax-class XXX))~
+
+Also I found [[https://debbugs.gnu.org/cgi/bugreport.cgi?bug=72131][a bug (72131)]].
+
+*** Discussion
+- can we write a PEG grammar for org-mode?
+
+**** LSP
+- why do we have two clients?
+- there is actually [[https://github.com/manateelazycat/lsp-bridge][a third]] (see [[https://emacsconf.org/2022/talks/lspbridge/][EmacsConf 2022 presentation]]) as well as [[https://github.com/blahgeek/emacs-lsp-booster][a "booster" package for performance]]
+- eglot, while lighter weight, does not support more than one server at a time
+
+Radon with the zinger in the chat:
+
+#+begin_quote
+i will say though that the idea of "lsp is universal protocol, editors become swappable" is complete fantasy - you try implementing your own lsp client, you find out immediately that every server has its own unhinged insistence on exactly which order you send various messages, and what configuration options have to be set xyz way
+#+end_quote
+
+They go on to say in response to a question about the N language x M server problem (paraphrasing):
+
+#+begin_quote
+It's not NxM but there's a heavy constant factor because the LSP spec is really underspecified...
+there's not a lot of competition in the editor ecosystem... Everyone uses VSCode and so everything's
+only built for VSCode, but when you get beyond that, individual language ecosystems are biased toward
+particular editors, so each client has its own peculiarities that you could fingerprint if you wanted to,
+to figure out like do we send the config before or after the init message, when does it register capabilities,
+project name vs. project path, virtual vs ... the spec is silent on the question of how exactly things
+should be set, the language servers get set around what editors want so they don't work with other editors,
+often the error handling is bad and the language server just crashes...
+#+end_quote
+
+**** Other editors and their extension languages
+- VSCode, you can do ClojureScript but it's still mostly JS
+- vim: vimscript and Lua
+- other interesting editors: [[https://zed.dev/][Zed]] and [[https://helix-editor.com/][Helix]]
+
+**** Systems and configuration
+- Radon and Jeff use [[https://frame.work/][Framework]] laptops
+- Nix, MacPorts
+- Ag likes [[https://www.reddit.com/r/emacs/comments/1e6qhpf/announcing_consultomni_a_powerful_omnisearch_and/][consult-omni]] for system search
+- Ag shows his literate dotfile configurator
+
+**** Alternative: tree-sitter
+- Writing a treesit grammar means reuse in other editors in a similar manner to LSP
+- Mickey Peterson's [[https://www.masteringemacs.org/article/combobulate-intuitive-structured-navigation-treesitter][combobulate]] (based on tree-sitter)
+- There's an attempt at org-mode parsing: [[https://github.com/milisims/tree-sitter-org][tree-sitter-org]]
+- peg.el can be useful for lightweight parsing; tree-sitter is focused on the whole buffer
+- there is a lightweight tree-sitter [[https://github.com/stsewd/tree-sitter-comment][parser for TODO comments in code]] so that may be possible actually
+
+** Jeff Trull: thing-at-point
+*** Generalizes "things" - parseable elements in a buffer
+- words, lines, sentences
+- symbols and sexps
+- emails and urls
+- uuids
+
+Imagine anything that might come after ~forward-~
+
+#+begin_src elisp
+(require 'thingatpt)
+#+end_src
+
+**** Example
+
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo"))
+    (forward-word)
+    (point))
+#+end_src
+
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo"))
+    (forward-thing 'word)
+    (point))
+#+end_src
+
+There's also motion commands ~beginning-of-thing~ and ~end-of-thing~ that work similarly.
+
+*** Getting the thing
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo"))
+    (thing-at-point 'word))   ;; there is also "thing-at-mouse"!
+#+end_src
+
+*** Getting the boundaries of the thing
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo_"))
+    (bounds-of-thing-at-point 'word))
+#+end_src
+
+#+begin_src elisp
+  (with-temp-buffer
+    (save-excursion (insert "foo_"))
+    (bounds-of-thing-at-point 'symbol))
+#+end_src
+
+*** Writing your own thing-at-point provider
+Let's make a thing called ~coord~, a comma-separated pair of coordinates in parentheses
+
+**** Parser
+
+#+begin_src elisp
+  (defun jet/parse-coord ()
+    (with-peg-rules
+        ((number (and (opt (char ?-)) (+ [digit])))
+         (coord (and (char ?\() number (char ?,) number (char ?\)))))
+      (peg-run (peg (region coord)))))   ;; region returns (end beg) as a list
+#+end_src
+
+**** thing-at-point Provider
+
+#+begin_src elisp
+  (defun jet/bounds-of-coord-at-point ()
+    (save-excursion
+      (let ((pt (point)))   ;; remember starting point
+        (and
+         ;; find an lparen at point or to the left
+         (or (eq (char-after) ?\()
+             (search-backward "(" nil t))
+         (when-let ((c (jet/parse-coord))
+                    ((< pt (car c))))        ;; starting point is inside
+           (cons (cadr c) (car c)))))))
+#+end_src
+
+
+**** Installation
+
+#+begin_src elisp
+(put 'coord 'bounds-of-thing-at-point 'jet/bounds-of-coord-at-point)
+#+end_src
+
+*** Discussion
+- Radon: symbols and their properties and cells (function, plist, variable)
+  - the approach used by ~thing-at-point~ is "fairly common" in Emacs
+  - ~helpful.el~ displays symbol plist properties by default
+  - the symbol ~symbol-plist~ itself has a plist containing two properties:
+    ~gv-expander~ and ~side-effect-free~
+  - Ankit speculates that [[https://www.gnu.org/software/hyperbole/][Hyperbole]] uses a similar mechanism
+
+Radon provides the following code for "every symbol plist property that anybody uses in Emacs":
+
+#+begin_src elisp
+(progn (setq all-keys (make-hash-table)) (mapatoms (lambda (sym) (dolist (key (map-keys (symbol-plist sym))) (puthash key t all-keys)))) (map-keys all-keys))
+#+end_src
+
