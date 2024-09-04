@@ -13,6 +13,15 @@
 # Note to self: turn on recording!
 ** Charles Choi: Testing Transient Menus
 [[http://yummymelon.com/presentations/testing-transient-menus/testing-transient.html][slides]]
+*** Discussion
+**** Ag is playing with a new Transient-related package called [[https://github.com/licht1stein/context-transient.el][context-transient]]
+- it gives you context menus driven by Transient
+**** Radon's code suggestions
+- You could write (&rest _) to handle an arbitrary number of arguments.
+- You could use unwind-protect to ensure that advice-remove is invoked for cleanup even in case of error.
+- See call-interactively and funcall-interactively for invoking interactive commands programmatically.
+- If the goal is just to have a variable value that will not match something pre-existing by accident, you could use make-symbol for that. It's a standard approach in macros to generate variable names (gensyms) that will not conflict with user code
+
 ** Radon Rosborough: Test Design Examples from Apheleia
 *** Integration Tests
 - managing asynchronous code
