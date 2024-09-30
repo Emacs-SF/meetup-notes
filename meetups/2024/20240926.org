@@ -1,0 +1,70 @@
+#+TITLE: Potpourri Emacs
+#+DATE: 2024-09-26
+
+* News
+** Meetups
+*** Org meetup
+- I continue to love this one
+*** Emacs Berlin
+- also good and with a US-compatible time... if you work from home ;)
+*** Emacs ATX - new organizer?
+- Go give them some love
+- Next meeting October 2
+** Lispy/abo-abo?
+- Emacs News says there is a temporary fork. Is abo-abo OK?
+** We released a video again, finally
+- kickingvegas on testing transient menus
+- Editor/intern seems to have renewed interest in the project
+  - maybe not today though, it's her 21st birthday
+** Anything else? What's going on in Emacsland?
+** Future Topics
+- package management
+
+* Presentations
+** Jeff Trull: Exploring Epsilon
+*** History
+In the early 80s no one knew what kind of software to write for the new wave of
+personal computers. There were all kinds of bad ideas, like recipe software.
+(it's for the home, right?). One source of ideas was "whatever runs on a mainframe,
+but a weaker version". You can blame this on ex CS grad students. Anyway
+"Emacs clone" was pretty popular. Epsilon was one of those, written partly at
+CMU and free to all students.
+
+- See also MicroEMACS, from 1985. Linus Torvalds was still using his own fork
+  of it as of 2018
+
+*** Features (1985 version 2.01)
+**** Very small
+- 80KB
+**** Most features (and many default keybindings) we would recognize
+- multiple "windows" and buffers
+- keyboard macros
+- shell
+- self-documenting: describe-key, describe-command
+**** Limited programming model
+- "commands" are builtin and have up to two string arguments
+- you can name keyboard macros, but they don't take arguments
+- bind-key
+- you can run named commands or macros with M-x ("A-x")
+- you can save macro definitions to a file and load it in later
+  - I have not been able to get this to work
+**** Early updates
+- concurrent process buffer (January 1985) allowed simultaneous edit+compile
+- EEL (proper Lisp-like extension language) in October 1985
+
+*** A sample of the manual
+- Thanks to Steven Doerfler of Lugaru Software
+
+*** Modern Epsilon
+- On version 14
+- $250 from the Lugaru Software website
+
+*** Demo
+- basic navigation
+- defining a keyboard macro, naming it, and saving it to a file
+- We discovered that "dired" existed!
+
+** Charles Choi: Casual Editing
+** Charles Choi: Moving Things
+** Young-Il Kim: Transient for Fonts
+** Karthinks: Embark

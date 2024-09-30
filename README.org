@@ -18,6 +18,10 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - elisp programming
 - and more
 *** Recent Meetups (reverse chronological order)
+**** 2024-0926 hybrid (BBB), Potpourri
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240926.org][9/26 meeting notes]]
+**** 2024-0718 hybrid (BBB), Emacs Lisp Hacking Night: Parsers
+- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240718.org][7/18 meeting notes]]
 **** 2024-06-13 hybrid (BBB), Emacs Lisp Hacking Night: Debugging
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240613.org][6/13 meeting notes]]
 **** 2024-05-16 hybrid (BBB), Emacs Lisp Hacking Night: Concurrency
@@ -26,10 +30,6 @@ https://github.com/Emacs-SF/meetup-notes/blob/master/README.org
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240425.org][4/25 meeting notes]]
 **** 2024-03-28 hybrid (BBB), Emacs Lisp Hacking Night: Org-Mode
 - [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240328.org][3/28 meeting notes]]
-**** 2024-02-22 Emacs Lisp Hacking Night II
-- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240222.org][2/22 meeting notes]]
-**** 2024-01-25 Emacs Lisp Hacking Night
-- [[http://github.com/Emacs-SF/meetup-notes/blob/master/meetups/2024/20240125.org][1/25 meeting notes]]
 
 *** Prior year archives (reverse chronological order)
 - [[file:meetups/2021/index.org][2021]]
