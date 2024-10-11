@@ -108,9 +108,11 @@ if anyone feels moved?
   - [[https://github.com/doublep/iter2][iter2]], another generators implementation for Elisp
   - [[https://github.com/chuntaro/emacs-async-await][emacs-async-await]], built on iter2
   - [[https://github.com/armindarvish/consult-web][consult-web]], a "search-everything" multi-source search interface
+  - [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Transaction-Queues.html][tq.el]], part of Emacs for doing Transaction Queues. Karthik uses it with [[https://mpv.io/][mpv]]
+  - [[https://github.com/federicotdn/verb][verb]] is a library for doing HTTP requests directly from org-mode
 
 *** Organizer notes
-- presentation based on [[https://github.com/positron-solutions/macro-slides/][macro-slides]] from Positronics with additional code
+- presentation based on [[https://github.com/positron-solutions/dslide][dslide (formerly macro-slides)]] from Positronics with additional code
 - neovim has good async support)
 - the way org-latex-preview picks the same font, color, and baseline as Emacs is incredible
 
