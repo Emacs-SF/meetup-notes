@@ -90,7 +90,7 @@ if anyone feels moved?
 - Takeaways
   - Reading Emacs C source code
   - Starting at the bottom
-  - The ongoing MPS effort (garbage collection rewrite)
+  - The [[https://www.reddit.com/r/emacs/comments/1fcgk7e/multithreaded_garbage_collection/][ongoing MPS effort]] (garbage collection rewrite)
   - Expert systems programmers and Emacs
 - List of packages mentioned
   - [[https://github.com/karthink/gptel][gptel]], LLM client
