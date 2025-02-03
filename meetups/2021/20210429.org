@@ -232,6 +232,8 @@
      #+begin_src elisp
        (length (f-read-text "~/.config/emacs/init.el"))
      #+end_src
+** If you want to avoid external packages
+Emacs Notes has [[https://emacsnotes.wordpress.com/2023/07/22/how-to-programmatically-re-write-your-elisp-code-with-el-search-and-el-search-refactor-or-how-to-de-dash-de-s-and-de/][a discussion]] on automatic refactoring of code that uses dash and s to use native mechanisms instead
 ** Discussion
    Mike Wright points out two additional base-type libraries, both by Wilfred Hughes:
    - [[https://github.com/Wilfred/ht.el][ht]] for hash tables
